@@ -51,7 +51,8 @@ public class Shotgun : MonoBehaviour
             canShoot=false;
             if (isAnimate)
             {
-                animator.Play("GunSpin");
+                //animator.Play("GunSpin");
+                animator.Play("HingeCrack");
                 StartCoroutine(Reload());
             }
             else

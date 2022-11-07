@@ -29,7 +29,6 @@ public class RoomMaster : MonoBehaviour
     [SerializeField] AudioClip unlockSound;
     private bool shouted;
 
-
     Vector2 perimeterX;
     Vector2 perimeterZ;
     Transform player;
