@@ -19,6 +19,10 @@ public class pauseScreen : MonoBehaviour
 
     void Update()
     {
+
+    }
+
+    public void OnEscPressed() {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (Cursor.lockState == CursorLockMode.Locked)

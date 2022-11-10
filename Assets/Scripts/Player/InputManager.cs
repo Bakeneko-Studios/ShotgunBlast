@@ -12,9 +12,11 @@ public class InputManager : MonoBehaviour
     [SerializeField] MouseLook mouselook;
     [SerializeField] PlayerAction action;
     [SerializeField] Shotgun shotgun;
+    [SerializeField] pauseScreen pauseScreen;
     private PlayerInput playerInput;
     private PlayerInput.MoveActions daMove;
     private PlayerInput.CombatActions daCombat;
+    private PlayerInput.UIActions daUI;
     private Vector2 horizontalInput;
     private Vector2 mouseInput;
     void Awake() 
@@ -33,6 +35,9 @@ public class InputManager : MonoBehaviour
 
         //*Combat
         daCombat.PrimaryFire.performed += _ => shotgun.OnPrimaryFire();
+
+        //UI
+        daUI.Escape.performed += _ => pauseScreen.OnEscPressed();
     }
     void Update()
     {
