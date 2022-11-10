@@ -24,6 +24,7 @@ public class InputManager : MonoBehaviour
         playerInput = new PlayerInput();
         daMove = playerInput.Move;
         daCombat = playerInput.Combat;
+        daUI = playerInput.UI;
 
         daMove.HorizontalMove.performed += ctx => horizontalInput = ctx.ReadValue<Vector2>();
         daMove.MouseX.performed += ctx => mouseInput.x = ctx.ReadValue<float>();
@@ -51,10 +52,12 @@ public class InputManager : MonoBehaviour
     {
         daMove.Enable();
         daCombat.Enable();
+        daUI.Enable();
     }
     private void OnDisable()
     {
         daMove.Disable();
         daCombat.Disable();
+        daUI.Disable();
     }
 }

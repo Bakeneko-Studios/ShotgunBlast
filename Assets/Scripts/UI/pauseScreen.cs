@@ -11,38 +11,31 @@ public class pauseScreen : MonoBehaviour
     [SerializeField] private  GameObject userSettings; //prefab
     private GameObject UD;
 
+
     void Awake() {
         if(GameObject.Find("userSettings") == null) {
             UD = Instantiate(userSettings);
         }
     }
 
-    void Update()
-    {
-
-    }
-
     public void OnEscPressed() {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Cursor.lockState == CursorLockMode.Locked)
         {
-            if (Cursor.lockState == CursorLockMode.Locked)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Time.timeScale = 0;
-                mainPanel.SetActive(true);
-                escHide();
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
+            mainPanel.SetActive(true);
+            escHide();
+        }
+        else
+        {
+            mainPanel.GetComponent<mainPanelAnimations>().mainRetractQuick();
+            Cursor.lockState = CursorLockMode.Locked;
+            Time.timeScale = 1f;
+            foreach(GameObject panel in subPanels) {
+                panel.SetActive(false);
             }
-            else
-            {
-                mainPanel.GetComponent<mainPanelAnimations>().mainRetractQuick();
-                Cursor.lockState = CursorLockMode.Locked;
-                Time.timeScale = 1f;
-                foreach(GameObject panel in subPanels) {
-                    panel.SetActive(false);
-                }
-                escShow();
-                saveVar();
-            }
+            escShow();
+            saveVar();
         }
     }
 
