@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
-    public float sensitivity;
+    public static float sensitivity = 0.3f;
     [SerializeField] Transform playerCam;
     //[SerializeField] Transform hands;
     [SerializeField] float xClamp = 85f;    
