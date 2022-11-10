@@ -19,13 +19,15 @@ public class MouseLook : MonoBehaviour
     }
     void Update()
     {
-        transform.Rotate(Vector3.up, mouseX);
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -xClamp, xClamp);
         Vector3 targetRotation = transform.eulerAngles;
         targetRotation.x = xRotation;
-        playerCam.eulerAngles = targetRotation;
+        if(Cursor.lockState == CursorLockMode.Locked) {
+            playerCam.eulerAngles = targetRotation;
+            transform.Rotate(Vector3.up, mouseX);
+        }
         // foreach (Transform hand in hands)
         // {
         //     hand.eulerAngles = targetRotation;

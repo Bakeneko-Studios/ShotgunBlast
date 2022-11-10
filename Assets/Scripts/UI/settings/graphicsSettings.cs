@@ -7,9 +7,9 @@ using TMPro;
 
 public class graphicsSettings : MonoBehaviour
 {
-    [SerializeField] private UniversalRenderPipelineAsset _presetLow;
-    [SerializeField] private UniversalRenderPipelineAsset _presetMedium;
-    [SerializeField] private UniversalRenderPipelineAsset _presetHigh;
+    // [SerializeField] private UniversalRenderPipelineAsset _presetLow;
+    // [SerializeField] private UniversalRenderPipelineAsset _presetMedium;
+    // [SerializeField] private UniversalRenderPipelineAsset _presetHigh;
     
     [SerializeField] private TMP_Dropdown preset;
     [SerializeField] private Slider renderDistance;

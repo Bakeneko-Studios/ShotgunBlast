@@ -71,9 +71,9 @@ public class pauseScreen : MonoBehaviour
 
     public void saveVar() {
         GetComponent<graphicsSettings>().saveVar();
-        GetComponent<audioSettings>().saveVar();
+        // GetComponent<audioSettings>().saveVar();
         GetComponent<controlsSettings>().saveVar();
-        GetComponent<detailsSettings>().saveVar();
+        // GetComponent<detailsSettings>().saveVar();
         SavingSystem.SaveUser(UD.GetComponent<UserSettings>());
     }
 }
