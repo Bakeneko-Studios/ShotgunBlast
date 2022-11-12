@@ -50,7 +50,6 @@
      <Compile Include="Assets\Scripts\WorldGen\BlueRaja\StablePriorityQueueNode.cs" />
      <Compile Include="Assets\Scripts\WorldGen\BlueRaja\IPriorityQueue.cs" />
      <Compile Include="Assets\Scripts\UI\settings\controlsSettings.cs" />
-     <Compile Include="Assets\Scripts\UI\main\mainPanelAnimations.cs" />
      <Compile Include="Assets\Scripts\WorldGen\BlueRaja\StablePriorityQueue.cs" />
      <Compile Include="Assets\Input\PlayerInput.cs" />
      <Compile Include="Assets\Scripts\Save\SavedData.cs" />
@@ -84,6 +83,7 @@
      <Compile Include="Assets\Scripts\WorldGen\Prim.cs" />
      <Compile Include="Assets\Scripts\Terrain\EnemyMatrix.cs" />
      <Compile Include="Assets\Scripts\Player\GrabableItem.cs" />
+     <Compile Include="Assets\Scripts\UI\settings\settingsController.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />

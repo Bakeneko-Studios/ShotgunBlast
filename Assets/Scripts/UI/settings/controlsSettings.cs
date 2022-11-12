@@ -11,7 +11,7 @@ public class controlsSettings : MonoBehaviour
 
     [SerializeField] private GameObject controlsPanel;
 
-    void Start()
+    public void kickStart()
     {
         loadVar();
         updateSensitivity();
@@ -23,6 +23,7 @@ public class controlsSettings : MonoBehaviour
         if (controlsPanel.activeInHierarchy) {
             updateSensitivity();
         }
+        saveVar();
     }
 
     void updateSensitivity() {
@@ -35,7 +36,7 @@ public class controlsSettings : MonoBehaviour
         sensitivitySlider.value = data.sensitivityFlt;
     }
 
-    public void saveVar() {
+    void saveVar() {
         UserSettings UD = GameObject.FindGameObjectWithTag("userSettings").GetComponent<UserSettings>();
         UD.sensitivityFlt = sensitivitySlider.value;
     }

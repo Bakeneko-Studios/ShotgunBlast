@@ -5,17 +5,18 @@ using UnityEngine;
 public class pauseScreen : MonoBehaviour
 {
     [SerializeField] private GameObject mainPanel;
-    [SerializeField] private GameObject[] subPanels;
-    public GameObject[] hideOnEsc;
-
+    [SerializeField] private  GameObject settingsController; //prefab
     [SerializeField] private  GameObject userSettings; //prefab
     private GameObject UD;
+    private GameObject currentlyOpened;
 
 
     void Awake() {
         if(GameObject.Find("userSettings") == null) {
             UD = Instantiate(userSettings);
         }
+        loadSettings(true);
+        currentlyOpened = mainPanel;
     }
 
     public void OnEscPressed() {
@@ -24,56 +25,31 @@ public class pauseScreen : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
             mainPanel.SetActive(true);
-            escHide();
         }
         else
         {
-            mainPanel.GetComponent<mainPanelAnimations>().mainRetractQuick();
-            Cursor.lockState = CursorLockMode.Locked;
+            //mainPanel.GetComponent<mainPanelAnimations>().mainRetractQuick();
             Time.timeScale = 1f;
-            foreach(GameObject panel in subPanels) {
-                panel.SetActive(false);
-            }
-            escShow();
+            Cursor.lockState = CursorLockMode.Locked;
             saveVar();
+            mainPanel.SetActive(false);
+            if(currentlyOpened != mainPanel) {
+                Destroy(currentlyOpened);
+            }
         }
     }
 
-    public void menuButton(GameObject thisPanel) {
-        if(!thisPanel.activeInHierarchy) {
-            mainPanel.GetComponent<mainPanelAnimations>().mainExpand();
-            foreach(GameObject panel in subPanels) {
-                if (panel == thisPanel) {
-                    panel.SetActive(true);
-                } else {
-                    panel.SetActive(false);
-                }
-            }
-        } else {
-            mainPanel.GetComponent<mainPanelAnimations>().mainRetract();
-            foreach(GameObject panel in subPanels) {
-                panel.SetActive(false);
-            }
-        }
-        saveVar();
+    public void mainePanelButton(GameObject thatPanel) {
+        currentlyOpened = Instantiate(thatPanel, this.transform);
+        mainPanel.SetActive(false);
     }
 
-    public void escHide() {
-        foreach(GameObject hide in hideOnEsc) {
-            hide.SetActive(false);
-        }
-    }
-    public void escShow() {
-        foreach(GameObject hide in hideOnEsc) {
-            hide.SetActive(true);
-        }
+    void loadSettings(bool destory) {
+        GameObject tempSettingsController = Instantiate(settingsController, this.transform);
+        tempSettingsController.GetComponent<settingsController>().onlyLoadSettings = destory;
     }
 
     public void saveVar() {
-        GetComponent<graphicsSettings>().saveVar();
-        // GetComponent<audioSettings>().saveVar();
-        GetComponent<controlsSettings>().saveVar();
-        // GetComponent<detailsSettings>().saveVar();
         SavingSystem.SaveUser(UD.GetComponent<UserSettings>());
     }
 }

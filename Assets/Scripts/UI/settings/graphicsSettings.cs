@@ -19,7 +19,7 @@ public class graphicsSettings : MonoBehaviour
 
     private Camera cam;
 
-    void Start() {
+    public void kickStart() {
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         loadVar();
         updateGraphics();
@@ -30,6 +30,7 @@ public class graphicsSettings : MonoBehaviour
         if(graphicsPanel.activeInHierarchy) {
             updateGraphics();
         }
+        saveVar();
     }
 
     void updateGraphics() {
@@ -45,7 +46,7 @@ public class graphicsSettings : MonoBehaviour
         preset.value = data.gQualityInt;
     }
 
-    public void saveVar() {
+    void saveVar() {
         UserSettings UD = GameObject.FindGameObjectWithTag("userSettings").GetComponent<UserSettings>();
         UD.rDistanceFlt = renderDistance.value;
         UD.FOVFlt = FOV.value;
