@@ -45,6 +45,7 @@
      <Compile Include="Assets\Scripts\UI\settings\graphicsSettings.cs" />
      <Compile Include="Assets\Scripts\Player\MoveCamera.cs" />
      <Compile Include="Assets\Scripts\UI\settings\detailsSettings.cs" />
+     <Compile Include="Assets\Scripts\UI\settings\settingsController.cs" />
      <Compile Include="Assets\Scripts\WorldGen\Grid2D.cs" />
      <Compile Include="Assets\Scripts\WorldGen\BlueRaja\FastPriorityQueueNode.cs" />
      <Compile Include="Assets\Scripts\WorldGen\BlueRaja\StablePriorityQueueNode.cs" />
@@ -83,7 +84,6 @@
      <Compile Include="Assets\Scripts\WorldGen\Prim.cs" />
      <Compile Include="Assets\Scripts\Terrain\EnemyMatrix.cs" />
      <Compile Include="Assets\Scripts\Player\GrabableItem.cs" />
-     <Compile Include="Assets\Scripts\UI\settings\settingsController.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
