@@ -4,6 +4,7 @@ using UnityEngine;
 public class Pellet : MonoBehaviour
 {
     public int dmg;
+    bool collideDetect = false;
     //TODO Pellets will destory cuz when they spawn they trigger OnTriggerEnter, make a tag so that they dont get destroyed by eachother
     //void Start() {StartCoroutine(waitLife());}//? this thing destroys the pellets after 10 seconds, may conflict witht the damage
     IEnumerator waitLife()

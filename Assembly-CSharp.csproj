@@ -59,7 +59,6 @@
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Terrain\Locker.cs" />
     <Compile Include="Assets\Scripts\WorldGen\Delaunay2D.cs" />
-    <Compile Include="Assets\Scripts\Weapons\Pellet_clone_B.cs" />
     <Compile Include="Assets\Scripts\Save\SavingSystem.cs" />
     <Compile Include="Assets\Scripts\Player\Movement\PlayerMovementBill.cs" />
     <Compile Include="Assets\Scripts\Weapons\Pellet.cs" />
@@ -79,7 +78,6 @@
     <Compile Include="Assets\Scripts\UI\pauseScreen.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerAction.cs" />
     <Compile Include="Assets\Scripts\Interactable.cs" />
-    <Compile Include="Assets\Scripts\Weapons\Shotgun_clone_B.cs" />
     <Compile Include="Assets\Scripts\Save\UserSettings.cs" />
     <Compile Include="Assets\Scripts\Player\Movement\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\WorldGen\DungeonGen.cs" />
