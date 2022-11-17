@@ -45,6 +45,12 @@ public class Shotgun : MonoBehaviour
             {
                 pelletAngles[i] = Random.rotation;
                 GameObject pShot = Instantiate(pellet, bulletExit.position, cam.rotation);
+                // [!] from this exclamation mark all the way to the next exclamation mark, code is added by Bill. Delete if no want.
+                //      code to limit spread of pellets cuz original spread seems a bit unrealistic. delete if no want.
+                spreadAngle = 10f;
+                //      code that changes initial position of the pellets to the tip of the shotgun barrel. Direction is not changed. Shooting seems normal. delete if no want.
+                pShot.transform.Translate(new Vector3(0.2f,-0.2f,0.7f));
+                // [!] code above is code edited by Bill. Delete if no want.
                 pShot.transform.rotation = Quaternion.RotateTowards(pShot.transform.rotation, pelletAngles[i], spreadAngle);
                 pShot.GetComponent<Rigidbody>().AddForce(pShot.transform.forward * pelletSpeed);
             }
