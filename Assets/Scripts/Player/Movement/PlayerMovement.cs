@@ -12,8 +12,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 horizontalInput;
     private bool isGrounded;
     private bool jump;
-    private bool canDash;
-    private bool dash;
+    //private bool canDash;
+    //private bool dash;
 
    
     //Player Stats
@@ -74,32 +74,32 @@ public class PlayerMovement : MonoBehaviour
     }
     public void OnDashPressed()
     {
-        dash = true;
+        //dash = true;
     }
-    public void OnStartDash()
-    {
-        canDash = false;
-        if (horizontalInput.x>=0 && horizontalInput.y==0)
-        {
-            //Dash in the direction facing (forward)
-        }
-        if (horizontalInput.x==0 && horizontalInput.y!=0)
-        {
-            //Dash Sideways
-        }
-        if (horizontalInput.x<0 && horizontalInput.y==0)
-        {
-            //Dash Backwards
-        }
-        if (horizontalInput.x!=0 && horizontalInput.y!=0)
-        {
-            //Dash Diagonally
-        }
-    }
-    public void OnEndDash()
-    {
-        //Initiate dash cooldown timer
-        //if (touchedGroundOnce && coolDownOver)
-        //  canDash = true;
-    }
+    // public void OnStartDash()
+    // {
+    //     canDash = false;
+    //     if (horizontalInput.x>=0 && horizontalInput.y==0)
+    //     {
+    //         //Dash in the direction facing (forward)
+    //     }
+    //     if (horizontalInput.x==0 && horizontalInput.y!=0)
+    //     {
+    //         //Dash Sideways
+    //     }
+    //     if (horizontalInput.x<0 && horizontalInput.y==0)
+    //     {
+    //         //Dash Backwards
+    //     }
+    //     if (horizontalInput.x!=0 && horizontalInput.y!=0)
+    //     {
+    //         //Dash Diagonally
+    //     }
+    // }
+    // public void OnEndDash()
+    // {
+    //     //Initiate dash cooldown timer
+    //     //if (touchedGroundOnce && coolDownOver)
+    //     //  canDash = true;
+    // }
 }

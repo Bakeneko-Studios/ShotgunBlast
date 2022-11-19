@@ -887,8 +887,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   preset: {fileID: 6909752856398878017}
-  renderDistance: {fileID: 0}
-  FOV: {fileID: 0}
   graphicsPanel: {fileID: 5108728337969045640}
 --- !u!114 &3887592986182403348
 MonoBehaviour:
@@ -902,6 +900,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf2a767b25fa9d14294c5e3475b95b0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMixer: {fileID: 24100000, guid: 2a2e4ece63137bc4aa98d688fb0f1ba5, type: 2}
+  masterSlider: {fileID: 5416195508128846575}
+  musicSlider: {fileID: 5416195508483277173}
+  effectsSlider: {fileID: 5416195507628305114}
+  volumeMas: 0
+  volumeM: 0
+  volumeE: 0
   audioPanel: {fileID: 1945940927557286233}
 --- !u!114 &7432632343645455100
 MonoBehaviour:
