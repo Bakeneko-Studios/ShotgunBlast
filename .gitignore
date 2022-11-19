@@ -8,12 +8,8 @@ Library/BurstCache/JIT/
 Library/PackageCache/
 Library/ShaderCache/
 Library/ScriptAssemblies/
-UserSettings/EditorUserSettings.asset
-UserSettings/Layouts/default-2021.dwlt
-UserSettings/Layouts/CurrentMaximizeLayout.dwlt
+UserSettings
 Assembly-CSharp.csproj
-ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json
-ProjectSettings/Packages/com.unity.probuilder/Settings.json
 obj/Debug/Assembly-CSharp.csproj.AssemblyReference.cache
 
 Temp\
@@ -25,10 +21,6 @@ Library\BurstCache\JIT\
 Library\PackageCache\
 Library\ShaderCache\
 Library\ScriptAssemblies\
-UserSettings\EditorUserSettings.asset
-UserSettings\Layouts/default-2021.dwlt
-UserSettings\Layouts\CurrentMaximizeLayout.dwlt
+UserSettings
 Assembly-CSharp.csproj
-ProjectSettings\Packages\com.unity.testtools.codecoverage\Settings.json
-ProjectSettings\Packages\com.unity.probuilder\Settings.json
 obj\Debug\Assembly-CSharp.csproj.AssemblyReference.cache
