@@ -10,7 +10,7 @@ public class PlayerMovementBill : MonoBehaviour
     private Vector2 horizontalInput;
     private bool jump;
     //TODO: Dash
-    private bool dash;
+    //private bool dash;
     //float startTime;
     Rigidbody p_rigidbody;
     bool collisionState = false;
@@ -85,6 +85,6 @@ public class PlayerMovementBill : MonoBehaviour
     }
     public void OnDashPressed()
     {
-        dash = true;
+        //dash = true;
     }
 }

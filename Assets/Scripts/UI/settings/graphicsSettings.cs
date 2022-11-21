@@ -35,7 +35,7 @@ public class graphicsSettings : MonoBehaviour
     }
 
     void loadVar() {
-        SavedData data = SavingSystem.LoadUser();;
+        SavedData data = SavingSystem.LoadUser();
         preset.value = data.gQualityInt;
     }
 

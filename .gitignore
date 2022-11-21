@@ -8,8 +8,9 @@ Library/BurstCache/JIT/
 Library/PackageCache/
 Library/ShaderCache/
 Library/ScriptAssemblies/
-UserSettings/EditorUserSettings.asset
-UserSettings/Layouts/default-2021.dwlt
+UserSettings
+Assembly-CSharp.csproj
+obj/Debug/Assembly-CSharp.csproj.AssemblyReference.cache
 
 Temp\
 Logs\
@@ -20,5 +21,6 @@ Library\BurstCache\JIT\
 Library\PackageCache\
 Library\ShaderCache\
 Library\ScriptAssemblies\
-UserSettings\EditorUserSettings.asset
-UserSettings\Layouts/default-2021.dwlt
+UserSettings
+Assembly-CSharp.csproj
+obj\Debug\Assembly-CSharp.csproj.AssemblyReference.cache
