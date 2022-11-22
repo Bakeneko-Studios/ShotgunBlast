@@ -9,6 +9,8 @@ TagManager:
   - ProsArm
   - skin
   - Enemy
+  - userSettings
+  - RHand
   layers:
   - Default
   - TransparentFX

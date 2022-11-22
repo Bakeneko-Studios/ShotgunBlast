@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 7907326993923580391}
   - component: {fileID: 7907326993923580387}
   m_Layer: 0
-  m_Name: Player
+  m_Name: RBPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -382,9 +382,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05f75df82adfb23479f1ed2a03388023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {fileID: 7907326993923580389}
+  movement: {fileID: 0}
   mouselook: {fileID: 7907326993923580391}
   action: {fileID: 7907326993923580387}
+  shotgun: {fileID: 0}
+  pauseScreen: {fileID: 0}
 --- !u!114 &7907326993923580389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,8 +407,6 @@ MonoBehaviour:
   speed: 25
   jumpForce: 12
   airMultiplier: 0.25
-  dashCoolDown: 4
-  dashDistance: 5
 --- !u!114 &7907326993923580391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,10 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c091dbf5ba434c14fa9131c5ba637b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivityX: 0.5
-  sensitivityY: 0.5
   playerCam: {fileID: 3413684656594100864}
-  hands: {fileID: 3756306924175752750}
   xClamp: 80
 --- !u!114 &7907326993923580387
 MonoBehaviour:

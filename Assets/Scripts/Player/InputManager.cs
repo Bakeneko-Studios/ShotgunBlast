@@ -9,10 +9,11 @@ public class InputManager : MonoBehaviour
     //[SerializeField] PlayerMovementNew movement;//Janky RB 
     //[SerializeField] PlayerMovementBill movement;//Bill RB
 
-    [SerializeField] MouseLook mouselook;
-    [SerializeField] PlayerAction action;
-    [SerializeField] Shotgun shotgun;
-    [SerializeField] pauseScreen pauseScreen;
+    //Scripts
+    public MouseLook mouselook;
+    public PlayerAction action;
+    public Shotgun shotgun;
+    public pauseScreen pauseScreen;
     private PlayerInput playerInput;
     private PlayerInput.MoveActions daMove;
     private PlayerInput.CombatActions daCombat;
@@ -40,6 +41,10 @@ public class InputManager : MonoBehaviour
         //UI
         daUI.Escape.performed += _ => pauseScreen.OnEscPressed();
     }
+    public void enableGun()
+    {
+        daCombat.Enable();
+    }
     void Update()
     {
         movement.RecieveInput(horizontalInput);
@@ -51,7 +56,7 @@ public class InputManager : MonoBehaviour
     private void OnEnable() 
     {
         daMove.Enable();
-        daCombat.Enable();
+        //daCombat.Enable();
         daUI.Enable();
     }
     private void OnDisable()

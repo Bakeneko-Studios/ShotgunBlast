@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12378,6 +12378,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2131876056, guid: f376cc9f613210d49a8e9b507602d14f, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2142224957, guid: f376cc9f613210d49a8e9b507602d14f, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4105226425475298514, guid: f376cc9f613210d49a8e9b507602d14f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.0000001
@@ -12506,6 +12514,10 @@ PrefabInstance:
       propertyPath: reloadTime
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7821880566324228320, guid: f376cc9f613210d49a8e9b507602d14f, type: 3}
+      propertyPath: theAnimation
+      value: GunSpin
+      objectReference: {fileID: 0}
     - target: {fileID: 8479265611229764077, guid: f376cc9f613210d49a8e9b507602d14f, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -12532,14 +12544,13 @@ MonoBehaviour:
   spreadAngle: 25
   pelletSpeed: 5000
   reloadTime: 1
-  isAnimate: 1
-  exitDistance: 1
+  theAnimation: 
   pellet: {fileID: 879660532207597176, guid: fbee47f6501b43e4d9fcc3c420c95c0b, type: 3}
-  muzzleFire: {fileID: 0}
   bulletExit: {fileID: 646903320}
   cam: {fileID: 1887600032}
   animator: {fileID: 3520492534486159102}
   pelletAngles: []
+  isAnimate: 1
 --- !u!1001 &1533563907044455665
 PrefabInstance:
   m_ObjectHideFlags: 0
