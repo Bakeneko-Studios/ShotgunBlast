@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e08d9da7bbcc04ab3b031633e93f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pelletCount: 14
-  spreadAngle: 25
+  pelletCount: 26
+  spreadAngle: 16
   pelletSpeed: 5000
   reloadTime: 1
   theAnimation: HingeCrack

@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pelletCount: 14
-  spreadAngle: 15
+  spreadAngle: 10
   pelletSpeed: 5000
   reloadTime: 1
   theAnimation: GunSpin
