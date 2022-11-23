@@ -11,24 +11,18 @@ public class controlsSettings : MonoBehaviour
 
     [SerializeField] private GameObject controlsPanel;
 
-    public void kickStart()
+    void Start()
     {
-        loadVar();
+        if(SavingSystem.LoadUser() != null) {
+            loadVar();
+        }
         updateSensitivity();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (controlsPanel.activeInHierarchy) {
-            updateSensitivity();
-        }
-        saveVar();
-    }
-
-    void updateSensitivity() {
+    public void updateSensitivity() { //put on slider
         MouseLook.sensitivity = sensitivitySlider.value / 100f;
         sensitivityText.text = sensitivitySlider.value.ToString();
+        saveVar();
     }
 
     void loadVar() {

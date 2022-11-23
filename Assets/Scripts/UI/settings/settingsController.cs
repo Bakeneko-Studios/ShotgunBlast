@@ -8,10 +8,6 @@ public class settingsController : MonoBehaviour
     public bool onlyLoadSettings;
 
     void Start() {
-        if(SavingSystem.LoadUser() != null) {
-            GetComponent<graphicsSettings>().kickStart();
-            GetComponent<controlsSettings>().kickStart();
-        }
         if (onlyLoadSettings){ 
             Destroy(this.gameObject);
         }
