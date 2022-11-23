@@ -16,9 +16,11 @@ public class graphicsSettings : MonoBehaviour
 
     private Camera cam;
 
-    public void kickStart() {
+    public void Start() {
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        loadVar();
+        if(SavingSystem.LoadUser() != null) {
+            loadVar();
+        }
         updateGraphics();
     }
 
