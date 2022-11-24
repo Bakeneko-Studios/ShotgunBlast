@@ -13,14 +13,14 @@ public class PlayerMovementNew : MonoBehaviour
     private Vector2 horizontalInput;
     private bool isGrounded;
     private bool jump;
-    private bool canDash;
-    private bool dash;
+    //private bool canDash;
+    //private bool dash;
     //Player Stats
     public float speed = 10f;
     public float jumpForce = 12f;
     public float airMultiplier = 0.4f;
-    public float dashCoolDown = 4f;
-    public float dashDistance = 5f;
+    // public float dashCoolDown = 4f;
+    // public float dashDistance = 5f;
 
     void Start()
     {
@@ -80,6 +80,6 @@ public class PlayerMovementNew : MonoBehaviour
     }
     public void OnDashPressed()
     {
-        dash = true;
+        //dash = true;
     }
 }

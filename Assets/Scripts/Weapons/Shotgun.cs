@@ -9,17 +9,17 @@ public class Shotgun : MonoBehaviour
     public float spreadAngle;
     public float pelletSpeed;
     public float reloadTime;
-    public bool isAnimate;
+    public string theAnimation;
     //Effects
-    public float exitDistance = 1f;
     public GameObject pellet;
-    public GameObject muzzleFire;
+    //TODO public GameObject muzzleFire;
     //Other Stuff
     public Transform bulletExit;
-    public Transform cam;
-    public Animator animator;
+    private Transform cam;
+    private Animator animator;
     public List<Quaternion> pelletAngles;
     //Variables
+    public bool isAnimate;
     private bool canShoot;
     private WaitForSeconds reloadWait;
     void Awake()
@@ -32,9 +32,10 @@ public class Shotgun : MonoBehaviour
         reloadWait = new WaitForSeconds(reloadTime);
         canShoot = true;
     }
-    void Update()
+    void Start()
     {
-
+        cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        animator = this.GetComponent<Animator>();
     }
 
     public void FireGun()
@@ -45,14 +46,17 @@ public class Shotgun : MonoBehaviour
             {
                 pelletAngles[i] = Random.rotation;
                 GameObject pShot = Instantiate(pellet, bulletExit.position, cam.rotation);
+                // [!] from this exclamation mark all the way to the next exclamation mark, code is added by Bill. Delete if no want.
+                //      code that changes initial position of the pellets to the tip of the shotgun barrel. Direction is not changed. Shooting seems normal. delete if no want.
+                pShot.transform.Translate(new Vector3(0.2f,-0.2f,0.7f));
+                // [!] code above is code edited by Bill. Delete if no want.
                 pShot.transform.rotation = Quaternion.RotateTowards(pShot.transform.rotation, pelletAngles[i], spreadAngle);
                 pShot.GetComponent<Rigidbody>().AddForce(pShot.transform.forward * pelletSpeed);
             }
             canShoot=false;
             if (isAnimate)
             {
-                //animator.Play("GunSpin");
-                animator.Play("HingeCrack");
+                animator.Play(theAnimation);
                 StartCoroutine(Reload());
             }
             else

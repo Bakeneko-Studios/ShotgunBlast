@@ -49,6 +49,22 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &-350695427930215273
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: a15cd0db9d43e684c8ac846881622c82
+  m_EffectName: Distortion
+  m_MixLevel: 1b6ec232e7b91564183c8c69115c7dff
+  m_Parameters:
+  - m_ParameterName: Level
+    m_GUID: 40cea17cbbbc77d409a513c0d2d28fa3
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!241 &24100000
 AudioMixerController:
   m_ObjectHideFlags: 0
@@ -64,7 +80,13 @@ AudioMixerController:
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters: []
+  m_ExposedParameters:
+  - guid: 684b3db43c396dd4ba50ec744ca0d482
+    name: EffectsMix
+  - guid: d2b95b06d5d1ca1468ba7196532d3ce2
+    name: MasterMix
+  - guid: d36aedcf2bb9762479dbaaf0371eb7ac
+    name: MusicMix
   m_AudioMixerGroupViews:
   - guids:
     - 5c5dac774dc56014db51a18255d84d93
@@ -118,7 +140,7 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 981052cfdd5c6124d83803382c53a872
   m_FloatValues:
-    7f8783352ca1e8b458ec97474274cb96: -39.703533
+    7f8783352ca1e8b458ec97474274cb96: -26.404226
   m_TransitionOverrides: {}
 --- !u!244 &1648582448859192317
 AudioMixerEffectController:
@@ -149,6 +171,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -8313988513433410032}
+  - {fileID: -350695427930215273}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
