@@ -6,6 +6,7 @@ public class settingsController : MonoBehaviour
 {
     [SerializeField] private GameObject[] subPanels;
     public bool onlyLoadSettings;
+    public GameObject pointer;
 
     void Start() {
         if (onlyLoadSettings){ 
@@ -22,14 +23,10 @@ public class settingsController : MonoBehaviour
                     panel.SetActive(false);
                 }
             }
-        } else {
-            foreach(GameObject panel in subPanels) {
-                panel.SetActive(false);
-            }
+            
+            string thisButtonName = thisPanel.name.Replace("Panel","Button");
+            pointer.transform.parent = GameObject.Find(thisButtonName).transform;
+            pointer.transform.localPosition  = new Vector2(-161f,-1f);
         }
-    }
-
-    void lastOpened() { //Open the menu that was last opened.
-        //might code this later.
     }
 }

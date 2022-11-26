@@ -28,13 +28,15 @@ public class pauseScreen : MonoBehaviour
         }
         else
         {
-            //mainPanel.GetComponent<mainPanelAnimations>().mainRetractQuick();
-            Time.timeScale = 1f;
-            Cursor.lockState = CursorLockMode.Locked;
-            saveVar();
-            mainPanel.SetActive(false);
             if(currentlyOpened != mainPanel) {
+                mainPanel.SetActive(true);
                 Destroy(currentlyOpened);
+                currentlyOpened = mainPanel;
+            } else {
+                Time.timeScale = 1f;
+                mainPanel.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
+                saveVar();
             }
         }
     }
