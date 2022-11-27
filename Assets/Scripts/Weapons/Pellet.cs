@@ -3,15 +3,18 @@ using UnityEngine;
 
 public class Pellet : MonoBehaviour
 {
+    private float life = 5f;
+    public float pelletSpeed;
     public int dmg;
+    int num;
     //!bool collideDetect = false;
     //TODO Pellets will destory cuz when they spawn they trigger OnTriggerEnter, make a tag so that they dont get destroyed by eachother
     //void Start() {StartCoroutine(waitLife());}//? this thing destroys the pellets after 10 seconds, may conflict witht the damage
-    IEnumerator waitLife()
-    {
-        yield return new WaitForSeconds(5f);
-        Destroy(this.gameObject);
-    }
+    // IEnumerator waitLife()
+    // {
+    //     yield return new WaitForSeconds(life);
+    //     Destroy(this.gameObject);
+    // }
     private void OnTriggerEnter(Collider other) 
     {
 
@@ -29,5 +32,20 @@ public class Pellet : MonoBehaviour
         {
             other.gameObject.GetComponent<Dummy>().minusHP(dmg);
         }
+    }
+    private void FixedUpdate()
+    {
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), 5))
+        {
+            life = Time.deltaTime * 1f;
+        }
+    }
+    void Update()
+    {
+        if (life <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+        life -= Time.deltaTime;
     }
 }
