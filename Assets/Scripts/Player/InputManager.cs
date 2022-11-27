@@ -5,10 +5,6 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] PlayerMovement movement;//Character controller
-    //[SerializeField] PlayerMovementNew movement;//Janky RB 
-    //[SerializeField] PlayerMovementBill movement;//Bill RB
-
     //Scripts
     public MouseLook mouselook;
     public PlayerAction action;
@@ -27,13 +23,9 @@ public class InputManager : MonoBehaviour
         daCombat = playerInput.Combat;
         daUI = playerInput.UI;
 
-        daMove.HorizontalMove.performed += ctx => horizontalInput = ctx.ReadValue<Vector2>();
         daMove.MouseX.performed += ctx => mouseInput.x = ctx.ReadValue<float>();
         daMove.MouseY.performed += ctx => mouseInput.y = ctx.ReadValue<float>();
         daMove.Interact.performed += _ => action.OnEPressed();
-
-        daMove.Jump.performed += _ => movement.OnJumpPressed();
-        daMove.MouseY.performed += _ => movement.OnDashPressed();
 
         //*Combat
         daCombat.PrimaryFire.performed += _ => shotgun.OnPrimaryFire();
@@ -47,7 +39,6 @@ public class InputManager : MonoBehaviour
     }
     void Update()
     {
-        movement.RecieveInput(horizontalInput);
         mouselook.RecieveInput(mouseInput);
     }
 
@@ -56,8 +47,8 @@ public class InputManager : MonoBehaviour
     private void OnEnable() 
     {
         daMove.Enable();
-        //daCombat.Enable();
         daUI.Enable();
+        //daCombat.Enable();
     }
     private void OnDisable()
     {

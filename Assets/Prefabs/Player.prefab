@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8649613076853638562}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!212 &4245268676495377559
 SpriteRenderer:
@@ -138,14 +138,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4944231609365239287}
-  m_LocalRotation: {x: -0.0045613763, y: -0.08703635, z: 0.052136745, w: 0.9948295}
-  m_LocalPosition: {x: 0.35, y: -0.28, z: 0.68}
+  m_LocalRotation: {x: -0.0019026523, y: -0.043577887, z: 0.043577887, w: 0.99809736}
+  m_LocalPosition: {x: 0.35, y: -0.28, z: 0.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8649613077721364478}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -10, z: 6}
+  m_LocalEulerAnglesHint: {x: 0, y: -5, z: 5}
 --- !u!1 &8649613076842237343
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,6 +157,7 @@ GameObject:
   - component: {fileID: 8649613076842237340}
   - component: {fileID: 8649613076842237330}
   - component: {fileID: 8649613076842237341}
+  - component: {fileID: 1155677900765194453}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -171,13 +172,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8649613076842237343}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8649613076853638562}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8649613076842237330
 MeshFilter:
@@ -229,6 +230,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &1155677900765194453
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8649613076842237343}
+  m_Material: {fileID: 13400000, guid: f0528fa412c8f794dafafcf283ae38ef, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8649613076853638572
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,9 +253,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8649613076853638562}
-  - component: {fileID: 8649613076853638573}
+  - component: {fileID: 7961946055964912703}
   - component: {fileID: 8649613076853638561}
-  - component: {fileID: 8649613076853638563}
+  - component: {fileID: 7961946055964912700}
   - component: {fileID: 8649613076853638560}
   - component: {fileID: 4245268676769854621}
   m_Layer: 0
@@ -258,34 +273,32 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8649613076853638572}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 5, y: 0.5, z: 4}
+  m_LocalPosition: {x: 5, y: 1.45, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8649613076842237340}
   - {fileID: 8649613077721364478}
   - {fileID: 4245268676495377557}
+  - {fileID: 8649613076842237340}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!143 &8649613076853638573
-CharacterController:
+--- !u!54 &7961946055964912703
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8649613076853638572}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 50
-  m_StepOffset: 0.7
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!114 &8649613076853638561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,12 +311,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05f75df82adfb23479f1ed2a03388023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {fileID: 8649613076853638563}
   mouselook: {fileID: 8649613076853638560}
   action: {fileID: 4245268676769854621}
   shotgun: {fileID: 0}
   pauseScreen: {fileID: 0}
---- !u!114 &8649613076853638563
+--- !u!114 &7961946055964912700
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -312,19 +324,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 8649613076853638572}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bd5a9e241670bb4d83c10c84fc7c614, type: 3}
+  m_Script: {fileID: 11500000, guid: f4fa7644e40b3ce4fa3eaf832a76621c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 8649613076853638573}
-  groundMask:
+  player: {fileID: 8649613076853638562}
+  rb: {fileID: 0}
+  ground:
     serializedVersion: 2
     m_Bits: 64
-  gravity: -15
-  drag: {x: 10, y: 0, z: 10}
-  speed: 10
-  jumpHeight: 3.5
-  dashCoolDown: 4
-  dashDistance: 5
+  canMove: 1
+  grounded: 0
+  jumping: 0
+  nrmSpeed: 7
+  sprSpeed: 10
+  crchSpeed: 5
+  speedCap: 20
+  jumpForce: 5
+  drag: 5
+  idleDrag: 25
+  airFriction: 0.2
+  height: 2
+  crouchScale: 0.5
+  maxSlopeAngle: 45
+  jumpKey: 32
+  sprintKey: 304
+  crouchKey: 99
 --- !u!114 &8649613076853638560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,14 +404,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8649613077721364473}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4944231609365239286}
   - {fileID: 4944231608882375485}
   m_Father: {fileID: 8649613076853638562}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &8649613077721364476
 Camera:
