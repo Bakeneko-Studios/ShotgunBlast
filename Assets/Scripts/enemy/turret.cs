@@ -38,9 +38,9 @@ public class turret : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.GetComponent<enemyFramework>().playerInSightRange)
-        {
-            aimGuns();
-        }
+        //if (player.GetComponent<enemyFramework>().playerInSightRange)
+        //{
+        //    aimGuns();
+        //}
     }
 }

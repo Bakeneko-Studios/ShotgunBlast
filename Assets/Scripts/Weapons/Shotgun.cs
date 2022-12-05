@@ -49,9 +49,11 @@ public class Shotgun : MonoBehaviour
                 // [!] from this exclamation mark all the way to the next exclamation mark, code is added by Bill. Delete if no want.
                 //      code that changes initial position of the pellets to the tip of the shotgun barrel. Direction is not changed. Shooting seems normal. delete if no want.
                 pShot.transform.Translate(new Vector3(0.2f,-0.2f,0.7f));
+                pShot.GetComponent<Pellet>().playersBullet = true; // avoid friendly fire from enemies
                 // [!] code above is code edited by Bill. Delete if no want.
                 pShot.transform.rotation = Quaternion.RotateTowards(pShot.transform.rotation, pelletAngles[i], spreadAngle);
                 pShot.GetComponent<Rigidbody>().AddForce(pShot.transform.forward * pelletSpeed);
+                StartCoroutine(cam.GetComponent<cameraShake>().shakeCamera(0.2f, 0.5f));
             }
             canShoot=false;
             if (isAnimate)
@@ -71,6 +73,9 @@ public class Shotgun : MonoBehaviour
         yield return reloadWait;
         canShoot = true;
     }
+
+    
+
     public void OnPrimaryFire()
     {
         FireGun();

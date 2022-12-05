@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3444144886869329538}
   m_Layer: 0
   m_Name: DefultPellet
-  m_TagString: Untagged
+  m_TagString: projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -236,4 +236,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32d81a7cfd4b04e4d8b8cf1438e3ac5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pelletSpeed: 0
   dmg: 15

@@ -15,7 +15,7 @@ public class enemyFramework : MonoBehaviour
     public GameObject healthBar;
     private float scale;
     private Transform healthBarFront;
-    public TextMeshProUGUI healthBarText;
+    //public TextMeshProUGUI healthBarText;
 
 
     [Header("basicInfo")]
@@ -35,7 +35,8 @@ public class enemyFramework : MonoBehaviour
     public bool playerInSightRange, playerInAttackRange;
     [Range(0,360)]
     public float viewAngle = 90f;
-
+    public bool alwaysSeePlayer = true;
+    
 
     [Header("Movement")]
     public float turnSpeed = 5f;
@@ -51,11 +52,14 @@ public class enemyFramework : MonoBehaviour
 
     void Start()
     {
-        //healthBarFront = healthBar.transform.Find("front");
+        if (healthBar != null)
+        {
+            healthBarFront = healthBar.transform.Find("front");
+            scale = healthBarFront.localScale.x / health;
+        }
         player = GameObject.FindGameObjectWithTag("Player").transform;
         if (canMove)
             agent = GetComponent<NavMeshAgent>();
-        //scale = healthBarFront.localScale.x / health;
 
     }
 
@@ -63,13 +67,14 @@ public class enemyFramework : MonoBehaviour
     {
         // Change the health by the amount specified in the amount variable
 
-        if (healthBar.activeSelf == false)
-            healthBar.SetActive(true);
+        if (healthBar != null)
+            if (healthBar.activeSelf == false)
+                healthBar.SetActive(true);
 
         health += amount;
-
-        healthBarFront.transform.localScale = new Vector3(health * scale, healthBarFront.transform.localScale.y, healthBarFront.transform.localScale.z);
-        healthBarText.text = health + "/1000";
+        if (healthBarFront != null)
+            healthBarFront.transform.localScale = new Vector3(health * scale, healthBarFront.transform.localScale.y, healthBarFront.transform.localScale.z);
+        //healthBarText.text = health + "/1000";
         if (health <= 0)
         {
             Destroy(this.gameObject);
@@ -123,8 +128,8 @@ public class enemyFramework : MonoBehaviour
                 playerInSightRange = false;
         }
 
-        if (!playerInSightRange && !playerInAttackRange && patrol && canMove) Patroling();
-        if (playerInSightRange && !playerInAttackRange && canMove) ChasePlayer();
+        if (!playerInSightRange && !playerInAttackRange && patrol && canMove && !alwaysSeePlayer) Patroling();
+        if ((playerInSightRange || alwaysSeePlayer) && !playerInAttackRange && canMove) ChasePlayer();
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
     }
 
@@ -184,8 +189,5 @@ public class enemyFramework : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-
-    }
+    
 }

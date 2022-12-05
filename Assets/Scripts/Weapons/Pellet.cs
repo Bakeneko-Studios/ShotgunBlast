@@ -7,6 +7,7 @@ public class Pellet : MonoBehaviour
     public float pelletSpeed;
     public int dmg;
     int num;
+    public bool playersBullet = false;
     //!bool collideDetect = false;
     //TODO Pellets will destory cuz when they spawn they trigger OnTriggerEnter, make a tag so that they dont get destroyed by eachother
     //void Start() {StartCoroutine(waitLife());}//? this thing destroys the pellets after 10 seconds, may conflict witht the damage
@@ -28,9 +29,9 @@ public class Pellet : MonoBehaviour
         //     Destroy(this.gameObject);
         // }
 
-        if (other.gameObject.GetComponent<Dummy>() != null)
+        if (other.gameObject.GetComponent<enemyFramework>() != null && playersBullet)
         {
-            other.gameObject.GetComponent<Dummy>().minusHP(dmg);
+            other.gameObject.GetComponent<enemyFramework>().ChangeHealth(-dmg);
         }
     }
     private void FixedUpdate()

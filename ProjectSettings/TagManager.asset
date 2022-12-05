@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - userSettings
   - RHand
+  - projectile
   layers:
   - Default
   - TransparentFX
