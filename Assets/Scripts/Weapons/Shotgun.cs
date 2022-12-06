@@ -22,6 +22,10 @@ public class Shotgun : MonoBehaviour
     public bool isAnimate;
     private bool canShoot;
     private WaitForSeconds reloadWait;
+    //camera shake
+    public float cameraShakeDuration = 0.3f;
+    public float cameraShakeMagnitude = 0.6f;
+
     void Awake()
     {
         pelletAngles = new List<Quaternion>();
@@ -42,6 +46,7 @@ public class Shotgun : MonoBehaviour
     {
         if (canShoot)
         {
+            StartCoroutine(cam.GetComponent<cameraShake>().shakeCamera(cameraShakeDuration, cameraShakeMagnitude));
             for (int i=0; i<pelletCount; i++)
             {
                 pelletAngles[i] = Random.rotation;
@@ -53,7 +58,7 @@ public class Shotgun : MonoBehaviour
                 // [!] code above is code edited by Bill. Delete if no want.
                 pShot.transform.rotation = Quaternion.RotateTowards(pShot.transform.rotation, pelletAngles[i], spreadAngle);
                 pShot.GetComponent<Rigidbody>().AddForce(pShot.transform.forward * pelletSpeed);
-                StartCoroutine(cam.GetComponent<cameraShake>().shakeCamera(0.2f, 0.5f));
+                
             }
             canShoot=false;
             if (isAnimate)

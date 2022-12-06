@@ -7,9 +7,8 @@ public class turret : MonoBehaviour
 
     public GameObject projectile;
     public Transform[] firePoints;
-    public GameObject gun;
     public float projectileSpeed = 1000;
-    public GameObject player;
+    private GameObject player;
 
     public void attack(Transform player)
     {

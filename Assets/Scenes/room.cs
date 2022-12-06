@@ -16,6 +16,7 @@ public class room : MonoBehaviour
     public GameObject[] enemies;
     private Collider colide;
     bool roomEntered = false;
+    
 
     void Start()
     {

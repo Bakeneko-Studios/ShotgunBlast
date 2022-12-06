@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class cameraShake : MonoBehaviour
 {
+
+    public AnimationCurve curve; // for smoothing camera shakes
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,10 +25,9 @@ public class cameraShake : MonoBehaviour
         float elasped = 0.0f;
         while (elasped < duration)
         {
-            float x = Random.Range(-1f, 1f) * magnitude;
-            float y = Random.Range(-1f, 1f) * magnitude;
-            transform.localPosition = new Vector3(x, y, originalPos.z);
             elasped += Time.deltaTime;
+            float strength = curve.Evaluate(elasped/duration) * magnitude;
+            transform.localPosition = originalPos + Random.insideUnitSphere * strength;
             yield return null;
         }
         transform.localPosition = originalPos;

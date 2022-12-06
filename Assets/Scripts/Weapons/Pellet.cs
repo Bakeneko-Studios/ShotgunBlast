@@ -30,8 +30,12 @@ public class Pellet : MonoBehaviour
         // }
 
         if (other.gameObject.GetComponent<enemyFramework>() != null && playersBullet)
-        {
+        {   
             other.gameObject.GetComponent<enemyFramework>().ChangeHealth(-dmg);
+        }
+        if (other.gameObject.tag == "Player" && !playersBullet)
+        {
+            other.gameObject.GetComponent<playerHealth>().ChangeHealth(-dmg);
         }
     }
     private void FixedUpdate()
