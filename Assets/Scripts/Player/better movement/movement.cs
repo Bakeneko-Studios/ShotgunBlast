@@ -9,11 +9,13 @@ public class movement : MonoBehaviour
     public Transform player;
     public Rigidbody rb;
     public LayerMask ground;
+    public Transform cam;
 
     [Header("Player attributes")]
     public bool canMove = true;
-    public bool grounded;
-    public bool jumping;
+    public bool grounded = true;
+    public bool fatigued = false;
+    public bool canSlide = true;
     public static float velocity;
     public static float nvvelocity;
     private float speed;
@@ -25,14 +27,19 @@ public class movement : MonoBehaviour
     RaycastHit slopeCast;
 
     [Header("Values")]
+    public float gravity;
     public float nrmSpeed;
     public float sprSpeed;
     public float crchSpeed;
     public float speedCap;
     public float jumpForce;
+    public float jumpDelay;
     public float drag;
-    public float idleDrag;
     public float airFriction;
+    public float slideThreshold;
+    public float slideForce;
+    public float slideCooldown;
+    public float wallbounceForce;
     public float height;
     public float crouchScale;
     private float yScale;
@@ -46,7 +53,8 @@ public class movement : MonoBehaviour
     void Start()
     {
         rb=GetComponent<Rigidbody>();
-        yScale = transform.localScale.y;
+        yScale=transform.localScale.y;
+        cam=Camera.main.transform;
     }
 
     void Update()
@@ -60,11 +68,11 @@ public class movement : MonoBehaviour
 
         if(!wasGrounded&&grounded)
         {
-            jumping=false;
             if(Mathf.Sqrt(vl.x*vl.x+vl.y*vl.y+vl.z*vl.z)>1.5*(Mathf.Sqrt(vl.x*vl.x+vl.z*vl.z)) && vl.magnitude>10)
             {
                 StartCoroutine(impactForce(Mathf.Log10(Mathf.Sqrt(vl.x*vl.x+vl.y*vl.y+vl.z*vl.z)/2)-0.5f));
             }
+            else StartCoroutine(jumpFatigue());
         }
 
         h = canMove ? Input.GetAxis("Horizontal") : 0;
@@ -77,28 +85,47 @@ public class movement : MonoBehaviour
             rb.velocity = new Vector3(cvel.x,rb.velocity.y,cvel.z);
         }
 
-        if(grounded&&Input.GetKey(crouchKey))
+        if(grounded)
         {
-            Player.state=Player.MoveState.crouch;
-            speed=crchSpeed;
-            rb.drag=drag;
-        }
-        else if(grounded&&h==0&&v==0)
-        {
-            Player.state=Player.MoveState.idle;
-            rb.drag=drag;
-        }
-        else if(grounded&&Input.GetKey(sprintKey)&&v>0)
-        {
-            Player.state=Player.MoveState.sprint;
-            speed=sprSpeed;
-            rb.drag=drag;
-        }
-        else if(grounded)
-        {
-            Player.state=Player.MoveState.walk;
-            speed=nrmSpeed;
-            rb.drag=drag;
+            if(Input.GetKey(crouchKey))
+            {
+                if(nvvelocity>slideThreshold)
+                {
+                    if(Player.state!=Player.MoveState.slide&&canSlide)
+                    {
+                        rb.AddForce(rb.velocity.normalized*slideForce,ForceMode.Impulse);
+                        StartCoroutine(slideCD());
+                    }
+                    Player.state=Player.MoveState.slide;
+                    fatigued=true;
+                    h=0;v=0;
+                    rb.drag=1;
+                }
+                else
+                {
+                    Player.state=Player.MoveState.crouch;
+                    fatigued=false;
+                    speed=crchSpeed;
+                    rb.drag=drag;
+                }
+            }
+            else if(h==0&&v==0)
+            {
+                Player.state=Player.MoveState.idle;
+                rb.drag=drag;
+            }
+            else if(Input.GetKey(sprintKey)&&v>0)
+            {
+                Player.state=Player.MoveState.sprint;
+                speed=sprSpeed;
+                rb.drag=drag;
+            }
+            else
+            {
+                Player.state=Player.MoveState.walk;
+                speed=nrmSpeed;
+                rb.drag=drag;
+            }
         }
         else
         {
@@ -106,11 +133,22 @@ public class movement : MonoBehaviour
             rb.drag=0;
         }
 
-        if(Input.GetKeyDown(jumpKey)&&grounded&&canMove)
+        if(Input.GetKeyDown(jumpKey)&&canMove)
         {
-            jumping=true;
-            rb.velocity = new Vector3(rb.velocity.x,0f,rb.velocity.z);
-            rb.AddForce(transform.up*jumpForce,ForceMode.Impulse);
+            if(grounded)
+            {
+                rb.velocity = new Vector3(rb.velocity.x,0f,rb.velocity.z);
+                rb.AddForce(transform.up*(fatigued?jumpForce/2:jumpForce),ForceMode.Impulse);
+            }
+            else
+            {
+                RaycastHit hit;
+                if(Physics.Raycast(cam.position,cam.forward,out hit,0.8f))
+                {
+                    rb.AddForce(hit.normal*wallbounceForce,ForceMode.Impulse);
+                    rb.AddForce(Vector3.up*10f,ForceMode.Impulse);
+                }
+            }
         }
 
         if(Input.GetKeyDown(crouchKey))
@@ -129,22 +167,33 @@ public class movement : MonoBehaviour
         if(canMove)
         {
             direction = player.forward*v+player.right*h;
-            if(onSlope()&&!jumping)
+            if(onSlope()&&Player.state!=Player.MoveState.air)
             {
-                rb.AddForce(Vector3.ProjectOnPlane(direction,slopeCast.normal).normalized*speed*15f,ForceMode.Force);
+                rb.AddForce(Vector3.ProjectOnPlane(direction,slopeCast.normal).normalized*speed*12.5f,ForceMode.Force);
                 if(rb.velocity.y>0) rb.AddForce(Vector3.down*80f,ForceMode.Force);
             }
             else if(grounded) rb.AddForce(direction.normalized*speed*10f,ForceMode.Force);
             else rb.AddForce(direction.normalized*speed*10f*airFriction,ForceMode.Force);
-            rb.useGravity=!onSlope();
+            rb.AddForce(0,onSlope()?0:gravity,0,ForceMode.Force);
         }
     }
     IEnumerator impactForce(float time)
     {
         canMove=false;
-        Debug.Log(time);
         yield return new WaitForSeconds(time);
         canMove=true;
+    }
+    IEnumerator jumpFatigue()
+    {
+        fatigued=true;
+        yield return new WaitForSeconds(jumpDelay);
+        fatigued=false;
+    }
+    IEnumerator slideCD()
+    {
+        canSlide=false;
+        yield return new WaitForSeconds(slideCooldown);
+        canSlide=true;
     }
 
     private bool onSlope()
