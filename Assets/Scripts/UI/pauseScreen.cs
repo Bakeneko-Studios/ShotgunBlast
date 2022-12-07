@@ -7,14 +7,18 @@ public class pauseScreen : MonoBehaviour
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private  GameObject settingsController; //prefab
     [SerializeField] private  GameObject userSettings; //prefab
+    public GameObject menuHealthBar;
     private GameObject UD;
     private GameObject currentlyOpened;
+    private GameObject Player;
 
 
     void Awake() {
         if(GameObject.Find("userSettings") == null) {
             UD = Instantiate(userSettings);
         }
+        Player = GameObject.FindGameObjectWithTag("Player");
+        Player.GetComponent<InputManager>().pauseScreen = GetComponent<pauseScreen>();
         loadSettings(true);
         currentlyOpened = mainPanel;
     }
@@ -25,6 +29,7 @@ public class pauseScreen : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
             mainPanel.SetActive(true);
+            refreshHealthBar();
         }
         else
         {
@@ -46,6 +51,16 @@ public class pauseScreen : MonoBehaviour
         mainPanel.SetActive(false);
     }
 
+    public void refreshHealthBar() {
+        if(Player.GetComponent<playerHealth>() != null) {
+            playerHealth playerHealth = Player.GetComponent<playerHealth>();
+            playerHealth.healthBar.SetActive(false);
+            float hp = playerHealth.health;
+            float scale = menuHealthBar.transform.localScale.x / 100;
+            menuHealthBar.transform.localScale = new Vector3(hp * scale, menuHealthBar.transform.localScale.y, menuHealthBar.transform.localScale.z);
+        }
+    }
+
     void loadSettings(bool destory) {
         GameObject tempSettingsController = Instantiate(settingsController, this.transform);
         tempSettingsController.GetComponent<settingsController>().onlyLoadSettings = destory;
@@ -53,5 +68,9 @@ public class pauseScreen : MonoBehaviour
 
     public void saveVar() {
         SavingSystem.SaveUser(UD.GetComponent<UserSettings>());
+    }
+
+    public void leaveGame() {
+        Application.Quit();
     }
 }
