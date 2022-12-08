@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/DungeonGen.unity
     guid: 771e4625327431d4ab8d2a7779cccbb4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Map.unity
     guid: b9b810886190853468dbd5629a099527
   - enabled: 0
@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Guns.unity
     guid: 1dc1512fb5bce8740a88b1afa9849e5a
+  - enabled: 1
+    path: Assets/Scenes/AndaMain.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}
