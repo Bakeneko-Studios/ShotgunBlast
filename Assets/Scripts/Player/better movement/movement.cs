@@ -74,11 +74,11 @@ public class movement : MonoBehaviour
             {
                 StartCoroutine(impactForce(Mathf.Log10(Mathf.Sqrt(vl.x*vl.x+vl.y*vl.y+vl.z*vl.z)/2)-0.5f));
             }
-            else StartCoroutine(jumpFatigue());
+            //else StartCoroutine(jumpFatigue());
         }
 
-        h = canMove ? Input.GetAxis("Horizontal") : 0;
-        v = canMove ? Input.GetAxis("Vertical") : 0;
+        h = canMove ? (Input.GetKey(KeyCode.A)?-1:0) + (Input.GetKey(KeyCode.D)?1:0) : 0;
+        v = canMove ? (Input.GetKey(KeyCode.S)?-1:0) + (Input.GetKey(KeyCode.W)?1:0) : 0;
         
         Vector3 vel = new Vector3(rb.velocity.x,0f,rb.velocity.z);
         if(vel.magnitude>speedCap)
@@ -99,14 +99,14 @@ public class movement : MonoBehaviour
                         StartCoroutine(slideCD());
                     }
                     Player.state=Player.MoveState.slide;
-                    fatigued=true;
+                    //fatigued=true;
                     h=0;v=0;
                     rb.drag=1;
                 }
                 else
                 {
                     Player.state=Player.MoveState.crouch;
-                    fatigued=false;
+                    //fatigued=false;
                     speed=crchSpeed;
                     rb.drag=drag;
                 }
@@ -116,12 +116,12 @@ public class movement : MonoBehaviour
                 Player.state=Player.MoveState.idle;
                 rb.drag=drag;
             }
-            else if(Input.GetKey(sprintKey)&&v>0)
-            {
-                Player.state=Player.MoveState.sprint;
-                speed=sprSpeed;
-                rb.drag=drag;
-            }
+            // else if(Input.GetKey(sprintKey)&&v>0)
+            // {
+            //     Player.state=Player.MoveState.sprint;
+            //     speed=sprSpeed;
+            //     rb.drag=drag;
+            // }
             else
             {
                 Player.state=Player.MoveState.walk;
