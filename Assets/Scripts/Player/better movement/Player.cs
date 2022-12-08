@@ -10,4 +10,5 @@ public static class Player
     {idle,walk,sprint,crouch,slide,air}
     public static contact playerStatus;
     public static MoveState state;
+    public static float hp = 100;
 }

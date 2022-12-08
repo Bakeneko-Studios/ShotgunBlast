@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class movement : MonoBehaviour
 {
+    public static movement instance;
     [Header("Components")]
     public Transform player;
     public Rigidbody rb;
@@ -50,6 +51,7 @@ public class movement : MonoBehaviour
     public KeyCode sprintKey = KeyCode.LeftShift;
     public KeyCode crouchKey = KeyCode.C;
 
+    private void Awake() {instance=this;}
     void Start()
     {
         rb=GetComponent<Rigidbody>();

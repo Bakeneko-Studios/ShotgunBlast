@@ -46,7 +46,7 @@ public class Shotgun : MonoBehaviour
     {
         if (canShoot)
         {
-            StartCoroutine(cam.GetComponent<cameraShake>().shakeCamera(cameraShakeDuration, cameraShakeMagnitude));
+            if(cam.GetComponent<cameraShake>()!=null) StartCoroutine(cam.GetComponent<cameraShake>().shakeCamera(cameraShakeDuration, cameraShakeMagnitude));
             for (int i=0; i<pelletCount; i++)
             {
                 pelletAngles[i] = Random.rotation;
