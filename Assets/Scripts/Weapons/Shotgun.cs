@@ -26,6 +26,8 @@ public class Shotgun : MonoBehaviour
     public float cameraShakeDuration = 0.3f;
     public float cameraShakeMagnitude = 0.6f;
 
+    public KeyCode shootKey = KeyCode.Mouse0;
+
     void Awake()
     {
         pelletAngles = new List<Quaternion>();
@@ -53,8 +55,8 @@ public class Shotgun : MonoBehaviour
                 GameObject pShot = Instantiate(pellet, bulletExit.position, cam.rotation);
                 // [!] from this exclamation mark all the way to the next exclamation mark, code is added by Bill. Delete if no want.
                 //      code that changes initial position of the pellets to the tip of the shotgun barrel. Direction is not changed. Shooting seems normal. delete if no want.
-                pShot.transform.Translate(new Vector3(0.2f,-0.2f,0.7f));
-                pShot.GetComponent<Pellet>().playersBullet = true; // avoid friendly fire from enemies
+                //pShot.transform.Translate(new Vector3(0.2f,-0.2f,0.7f));
+                //pShot.GetComponent<Pellet>().playersBullet = true; // avoid friendly fire from enemies
                 // [!] code above is code edited by Bill. Delete if no want.
                 pShot.transform.rotation = Quaternion.RotateTowards(pShot.transform.rotation, pelletAngles[i], spreadAngle);
                 pShot.GetComponent<Rigidbody>().AddForce(pShot.transform.forward * pelletSpeed);
@@ -78,11 +80,9 @@ public class Shotgun : MonoBehaviour
         yield return reloadWait;
         canShoot = true;
     }
-
-    
-
-    public void OnPrimaryFire()
+    void Update() 
     {
-        FireGun();
-    }
+        if (Input.GetKeyDown(shootKey))
+            FireGun();
+    }   
 }

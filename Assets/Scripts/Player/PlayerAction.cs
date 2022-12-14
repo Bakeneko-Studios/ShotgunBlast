@@ -9,7 +9,7 @@ public class PlayerAction : MonoBehaviour
     UnityEvent onInteract;
     public GameObject hint;
     private float interactRange = 5f;
-    private bool eIsPressed = false;
+    public KeyCode interactKey = KeyCode.E;
     void Update()
     {
         RaycastHit hit;
@@ -19,10 +19,9 @@ public class PlayerAction : MonoBehaviour
             {
                 hint.SetActive(true);
                 onInteract = hit.collider.GetComponent<Interactable>().onInteract;
-                if (eIsPressed)
+                if (Input.GetKeyDown(interactKey))
                 {
                     onInteract.Invoke();
-                    eIsPressed = false;
                     hint.SetActive(false);
                 }
             }
@@ -32,9 +31,5 @@ public class PlayerAction : MonoBehaviour
             }
         }
         
-    }
-    public void OnEPressed()
-    {
-        eIsPressed = true;
     }
 }

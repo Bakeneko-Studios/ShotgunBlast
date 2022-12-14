@@ -17,8 +17,10 @@ public class MouseLook : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-    void Update()
+    void FixedUpdate()
     {
+        mouseX = Input.GetAxis("Mouse X") * sensitivity;
+        mouseY = Input.GetAxis("Mouse Y") * sensitivity;
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -xClamp, xClamp);
@@ -28,15 +30,5 @@ public class MouseLook : MonoBehaviour
             playerCam.eulerAngles = targetRotation;
             transform.Rotate(Vector3.up, mouseX);
         }
-        // foreach (Transform hand in hands)
-        // {
-        //     hand.eulerAngles = targetRotation;
-        // }
-    }
-
-    public void RecieveInput(Vector2 mouseInput)
-    {
-        mouseX = mouseInput.x * sensitivity;
-        mouseY = mouseInput.y * sensitivity;
     }
 }
