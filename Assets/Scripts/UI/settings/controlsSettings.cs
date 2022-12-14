@@ -11,11 +11,9 @@ public class controlsSettings : MonoBehaviour
 
     [SerializeField] private GameObject controlsPanel;
 
-    void Start()
+    void Awake()
     {
-        if(SavingSystem.LoadUser() != null) {
-            loadVar();
-        }
+        loadVar();
         updateSensitivity();
     }
 
@@ -27,8 +25,9 @@ public class controlsSettings : MonoBehaviour
 
     void loadVar() {
         SavedData data = SavingSystem.LoadUser();
-        sensitivitySlider.value = data.sensitivityFlt;
-    }
+        //sensitivitySlider.value = data.sensitivityFlt;
+        Debug.Log("loaded" + data.sensitivityFlt);
+        }
 
     void saveVar() {
         UserSettings UD = GameObject.FindGameObjectWithTag("userSettings").GetComponent<UserSettings>();

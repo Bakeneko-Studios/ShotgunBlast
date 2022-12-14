@@ -13,7 +13,6 @@ public class InputManager : MonoBehaviour
     private PlayerInput playerInput;
     private PlayerInput.MoveActions daMove;
     private PlayerInput.CombatActions daCombat;
-    private PlayerInput.UIActions daUI;
     private Vector2 horizontalInput;
     private Vector2 mouseInput;
     void Awake() 
@@ -21,7 +20,6 @@ public class InputManager : MonoBehaviour
         playerInput = new PlayerInput();
         daMove = playerInput.Move;
         daCombat = playerInput.Combat;
-        daUI = playerInput.UI;
 
         daMove.MouseX.performed += ctx => mouseInput.x = ctx.ReadValue<float>();
         daMove.MouseY.performed += ctx => mouseInput.y = ctx.ReadValue<float>();
@@ -29,9 +27,6 @@ public class InputManager : MonoBehaviour
 
         //*Combat
         daCombat.PrimaryFire.performed += _ => shotgun.OnPrimaryFire();
-
-        //UI
-        daUI.Escape.performed += _ => pauseScreen.OnEscPressed();
     }
     public void enableGun()
     {
@@ -47,13 +42,11 @@ public class InputManager : MonoBehaviour
     private void OnEnable() 
     {
         daMove.Enable();
-        daUI.Enable();
         //daCombat.Enable();
     }
     private void OnDisable()
     {
         daMove.Disable();
         daCombat.Disable();
-        daUI.Disable();
     }
 }

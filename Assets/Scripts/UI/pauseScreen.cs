@@ -19,11 +19,16 @@ public class pauseScreen : MonoBehaviour
         }
         Player = GameObject.FindGameObjectWithTag("Player");
         Player.GetComponent<InputManager>().pauseScreen = GetComponent<pauseScreen>();
-        loadSettings(true);
         currentlyOpened = mainPanel;
     }
 
-    public void OnEscPressed() {
+    void Update() {
+        if(Input.GetKeyDown(KeyCode.Escape)) {
+            OnEscPressed();
+        }
+    }
+
+    void OnEscPressed() {
         if (Cursor.lockState == CursorLockMode.Locked)
         {
             Cursor.lockState = CursorLockMode.None;
@@ -61,9 +66,8 @@ public class pauseScreen : MonoBehaviour
         }
     }
 
-    void loadSettings(bool destory) {
+    void loadSettings() {
         GameObject tempSettingsController = Instantiate(settingsController, this.transform);
-        tempSettingsController.GetComponent<settingsController>().onlyLoadSettings = destory;
     }
 
     public void saveVar() {

@@ -17,7 +17,7 @@ public class audioSettings : MonoBehaviour
 
     [SerializeField] private GameObject audioPanel;
 
-    void Start()
+    void Awake()
     {
         loadVar();
         updateVolume();
