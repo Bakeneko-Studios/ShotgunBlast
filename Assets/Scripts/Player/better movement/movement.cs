@@ -36,7 +36,7 @@ public class movement : MonoBehaviour
     public float jumpForce;
     public float jumpDelay;
     public float drag;
-    public float airFriction;
+    public float airControl;
     public float slideThreshold;
     public float slideForce;
     public float slideCooldown;
@@ -139,8 +139,11 @@ public class movement : MonoBehaviour
         {
             if(grounded)
             {
-                rb.velocity = new Vector3(rb.velocity.x,0f,rb.velocity.z);
-                rb.AddForce(transform.up*(fatigued?jumpForce/2:jumpForce),ForceMode.Impulse);
+                if(Player.state!=Player.MoveState.slide)
+                {
+                    rb.velocity = new Vector3(rb.velocity.x,0f,rb.velocity.z);
+                    rb.AddForce(transform.up*(fatigued?jumpForce/2:jumpForce),ForceMode.Impulse);
+                }
             }
             else
             {
@@ -148,7 +151,7 @@ public class movement : MonoBehaviour
                 if(Physics.Raycast(cam.position,cam.forward,out hit,0.8f))
                 {
                     rb.AddForce(hit.normal*wallbounceForce,ForceMode.Impulse);
-                    rb.AddForce(Vector3.up*10f,ForceMode.Impulse);
+                    rb.AddForce(Vector3.up*12f,ForceMode.Impulse);
                 }
             }
         }
@@ -175,7 +178,7 @@ public class movement : MonoBehaviour
                 if(rb.velocity.y>0) rb.AddForce(Vector3.down*80f,ForceMode.Force);
             }
             else if(grounded) rb.AddForce(direction.normalized*speed*10f,ForceMode.Force);
-            else rb.AddForce(direction.normalized*speed*10f*airFriction,ForceMode.Force);
+            else rb.AddForce(direction.normalized*speed*10f*airControl,ForceMode.Force);
             rb.AddForce(0,onSlope()?0:gravity,0,ForceMode.Force);
         }
     }
