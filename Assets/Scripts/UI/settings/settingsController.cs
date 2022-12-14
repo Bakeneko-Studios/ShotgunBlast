@@ -5,10 +5,13 @@ using UnityEngine;
 public class settingsController : MonoBehaviour
 {
     [SerializeField] private GameObject[] subPanels;
+    public bool onlyLoadSettings;
     public GameObject pointer;
 
     void Start() {
-
+        if (onlyLoadSettings){ 
+            Destroy(this.gameObject);
+        }
     }
 
     public void settingsButton(GameObject thisPanel) {
