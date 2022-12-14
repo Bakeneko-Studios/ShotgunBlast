@@ -73,7 +73,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8802580451924028001}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65e08d9da7bbcc04ab3b031633e93f15, type: 3}
   m_Name: 
@@ -87,6 +87,10 @@ MonoBehaviour:
   bulletExit: {fileID: 8367450049874559982}
   pelletAngles: []
   isAnimate: 1
+  canShoot: 0
+  cameraShakeDuration: 0.3
+  cameraShakeMagnitude: 0.6
+  shootKey: 323
 --- !u!95 &1750266750
 Animator:
   serializedVersion: 4

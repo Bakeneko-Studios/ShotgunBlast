@@ -18,7 +18,7 @@ public class controlsSettings : MonoBehaviour
     }
 
     public void updateSensitivity() { //put on slider
-        MouseLook.sensitivity = sensitivitySlider.value/2f;
+        MouseLook.sensitivity = sensitivitySlider.value*10;
         sensitivityText.text = sensitivitySlider.value.ToString();
         saveVar();
     }

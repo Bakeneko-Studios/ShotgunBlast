@@ -8,6 +8,7 @@ public class pauseScreen : MonoBehaviour
     [SerializeField] private  GameObject settingsController; //prefab
     [SerializeField] private  GameObject userSettings; //prefab
     public GameObject menuHealthBar;
+    public GameObject hudHealthBar;
     private GameObject UD;
     private GameObject currentlyOpened;
     private GameObject Player;
@@ -57,7 +58,7 @@ public class pauseScreen : MonoBehaviour
     public void refreshHealthBar() {
         if(Player.GetComponent<playerHealth>() != null) {
             playerHealth playerHealth = Player.GetComponent<playerHealth>();
-            playerHealth.healthBar.SetActive(false);
+            playerHealth.healthBar.gameObject.SetActive(!playerHealth.healthBar.gameObject.activeInHierarchy);
             float hp = playerHealth.health;
             float scale = menuHealthBar.transform.localScale.x / 100;
             menuHealthBar.transform.localScale = new Vector3(hp * scale, menuHealthBar.transform.localScale.y, menuHealthBar.transform.localScale.z);

@@ -22,6 +22,7 @@ public class ItemPickup : MonoBehaviour
         }
         //put gun as child of gunHolder
         GameObject myGun = Instantiate(gun);
+        myGun.GetComponent<Shotgun>().enabled = true;
         myGun.transform.SetParent(gunHolder.transform);
         //Maybe set soecuak transform (diffrent gun sizes)
         myGun.transform.localPosition = Vector3.zero;

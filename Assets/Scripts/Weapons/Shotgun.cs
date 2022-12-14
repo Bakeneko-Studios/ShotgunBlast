@@ -20,7 +20,7 @@ public class Shotgun : MonoBehaviour
     public List<Quaternion> pelletAngles;
     //Variables
     public bool isAnimate;
-    private bool canShoot;
+    public bool canShoot;
     private WaitForSeconds reloadWait;
     //camera shake
     public float cameraShakeDuration = 0.3f;
@@ -46,9 +46,10 @@ public class Shotgun : MonoBehaviour
 
     public void FireGun()
     {
-        if (canShoot)
+        if (canShoot && Time.timeScale>0)
         {
-            if(cam.GetComponent<cameraShake>()!=null) StartCoroutine(cam.GetComponent<cameraShake>().shakeCamera(cameraShakeDuration, cameraShakeMagnitude));
+            if(cam.GetComponent<cameraShake>()!=null)
+                StartCoroutine(cam.GetComponent<cameraShake>().shakeCamera(cameraShakeDuration, cameraShakeMagnitude));
             for (int i=0; i<pelletCount; i++)
             {
                 pelletAngles[i] = Random.rotation;
