@@ -3586,7 +3586,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 4948371843877130287}
   m_HandleRect: {fileID: 4948371842006219049}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 1
   m_MaxValue: 100
   m_WholeNumbers: 1
   m_Value: 38
@@ -9473,7 +9473,6 @@ MonoBehaviour:
   - {fileID: 3895322075440227895}
   - {fileID: 7776152396257165286}
   - {fileID: 7175569213849354391}
-  onlyLoadSettings: 0
   pointer: {fileID: 7010184712979840148}
 --- !u!114 &3292114469453517714
 MonoBehaviour:
