@@ -295,6 +295,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 2067992342}
     m_Modifications:
     - target: {fileID: 120784123789738490, guid: 266f4ffbfe494b044bc0ecc7fe0d84d7, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 120784123789738490, guid: 266f4ffbfe494b044bc0ecc7fe0d84d7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0a6820c53fb6f0d48bb259d2fb871b1d, type: 3}
+    - target: {fileID: 120784123789738490, guid: 266f4ffbfe494b044bc0ecc7fe0d84d7, type: 3}
       propertyPath: m_Color.b
       value: 0
       objectReference: {fileID: 0}
@@ -305,6 +313,10 @@ PrefabInstance:
     - target: {fileID: 120784123789738490, guid: 266f4ffbfe494b044bc0ecc7fe0d84d7, type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 120784123789738490, guid: 266f4ffbfe494b044bc0ecc7fe0d84d7, type: 3}
+      propertyPath: m_FillMethod
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4485715425742745227, guid: 266f4ffbfe494b044bc0ecc7fe0d84d7, type: 3}
       propertyPath: m_Color.b
@@ -1761,7 +1773,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-5330
+  m_Name: pb_Mesh-74766
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8501,11 +8513,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 0a6820c53fb6f0d48bb259d2fb871b1d, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
