@@ -12,36 +12,39 @@ public class pauseScreen : MonoBehaviour
     private GameObject currentlyOpened;
     private GameObject Player;
 
+    public KeyCode escMenu = KeyCode.Escape;
 
     void Awake() {
         if(GameObject.Find("userSettings") == null) {
             UD = Instantiate(userSettings);
         }
         Player = GameObject.FindGameObjectWithTag("Player");
-        Player.GetComponent<InputManager>().pauseScreen = GetComponent<pauseScreen>();
         loadSettings(true);
         currentlyOpened = mainPanel;
     }
 
-    public void OnEscPressed() {
-        if (Cursor.lockState == CursorLockMode.Locked)
+    void Update(){
+        if (Input.GetKeyDown(escMenu))
         {
-            Cursor.lockState = CursorLockMode.None;
-            Time.timeScale = 0;
-            mainPanel.SetActive(true);
-            refreshHealthBar();
-        }
-        else
-        {
-            if(currentlyOpened != mainPanel) {
+            if (Cursor.lockState == CursorLockMode.Locked)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Time.timeScale = 0;
                 mainPanel.SetActive(true);
-                Destroy(currentlyOpened);
-                currentlyOpened = mainPanel;
-            } else {
-                Time.timeScale = 1f;
-                mainPanel.SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked;
-                saveVar();
+                refreshHealthBar();
+            }
+            else
+            {
+                if(currentlyOpened != mainPanel) {
+                    mainPanel.SetActive(true);
+                    Destroy(currentlyOpened);
+                    currentlyOpened = mainPanel;
+                } else {
+                    Time.timeScale = 1f;
+                    mainPanel.SetActive(false);
+                    Cursor.lockState = CursorLockMode.Locked;
+                    saveVar();
+                }
             }
         }
     }
