@@ -258,38 +258,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &25254450 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8649613076853638572, guid: 62f998d093f403c4ba34ca00a209961a, type: 3}
-  m_PrefabInstance: {fileID: 93332691}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &25254458
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 25254450}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.6408908, z: 0.82866734}
-  m_Center: {x: 1.6282186e-16, y: 0.055452704, z: 0.042707562}
---- !u!114 &25254466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 25254450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b88ec8633f70c0428c72c9092462f0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  healthBar: {fileID: 1774468935}
 --- !u!1 &30352401
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,6 +459,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 25254466, guid: 62f998d093f403c4ba34ca00a209961a, type: 3}
+      propertyPath: hudHealthBar
+      value: 
+      objectReference: {fileID: 1774468937}
+    - target: {fileID: 25254466, guid: 62f998d093f403c4ba34ca00a209961a, type: 3}
+      propertyPath: menuHealthBar
+      value: 
+      objectReference: {fileID: 776977523}
+    - target: {fileID: 1155677900765194453, guid: 62f998d093f403c4ba34ca00a209961a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3224887463733073227, guid: 62f998d093f403c4ba34ca00a209961a, type: 3}
       propertyPath: ang
       value: 
@@ -538,26 +518,6 @@ PrefabInstance:
     - target: {fileID: 4944231609365239287, guid: 62f998d093f403c4ba34ca00a209961a, type: 3}
       propertyPath: m_Layer
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7961946055964912700, guid: 62f998d093f403c4ba34ca00a209961a, type: 3}
-      propertyPath: drag
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7961946055964912700, guid: 62f998d093f403c4ba34ca00a209961a, type: 3}
-      propertyPath: nrmSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7961946055964912700, guid: 62f998d093f403c4ba34ca00a209961a, type: 3}
-      propertyPath: sprSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7961946055964912700, guid: 62f998d093f403c4ba34ca00a209961a, type: 3}
-      propertyPath: jumpForce
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 7961946055964912700, guid: 62f998d093f403c4ba34ca00a209961a, type: 3}
-      propertyPath: airFriction
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8649613076842237343, guid: 62f998d093f403c4ba34ca00a209961a, type: 3}
       propertyPath: m_Layer
@@ -3395,6 +3355,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 701360489}
   m_CullTransparentMesh: 1
+--- !u!114 &776977523 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 120784123789738490, guid: 266f4ffbfe494b044bc0ecc7fe0d84d7, type: 3}
+  m_PrefabInstance: {fileID: 1109681010}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &813250598
 GameObject:
   m_ObjectHideFlags: 0
@@ -4972,6 +4943,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1538154888}
     m_Modifications:
+    - target: {fileID: 120784123789738490, guid: 266f4ffbfe494b044bc0ecc7fe0d84d7, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 120784123789738490, guid: 266f4ffbfe494b044bc0ecc7fe0d84d7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0a6820c53fb6f0d48bb259d2fb871b1d, type: 3}
+    - target: {fileID: 120784123789738490, guid: 266f4ffbfe494b044bc0ecc7fe0d84d7, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 120784123789738490, guid: 266f4ffbfe494b044bc0ecc7fe0d84d7, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 120784123789738490, guid: 266f4ffbfe494b044bc0ecc7fe0d84d7, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 120784123789738490, guid: 266f4ffbfe494b044bc0ecc7fe0d84d7, type: 3}
+      propertyPath: m_FillMethod
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485715425742745227, guid: 266f4ffbfe494b044bc0ecc7fe0d84d7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485715425742745227, guid: 266f4ffbfe494b044bc0ecc7fe0d84d7, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485715425742745227, guid: 266f4ffbfe494b044bc0ecc7fe0d84d7, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485715425742745227, guid: 266f4ffbfe494b044bc0ecc7fe0d84d7, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8057595761968574616, guid: 266f4ffbfe494b044bc0ecc7fe0d84d7, type: 3}
       propertyPath: m_Name
       value: pausePanel
@@ -5020,6 +5031,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8057595761968574622, guid: 266f4ffbfe494b044bc0ecc7fe0d84d7, type: 3}
+      propertyPath: hudHealthBar
+      value: 
+      objectReference: {fileID: 1516512286}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 266f4ffbfe494b044bc0ecc7fe0d84d7, type: 3}
 --- !u!1 &1109762649
@@ -7063,8 +7078,10 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0, w: 1}
   - {x: 0, y: 0, z: 0, w: 1}
   isAnimate: 1
+  canShoot: 0
   cameraShakeDuration: 0.2
   cameraShakeMagnitude: 0.5
+  shootKey: 323
 --- !u!1 &1645919927
 GameObject:
   m_ObjectHideFlags: 0
@@ -7376,11 +7393,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 0a6820c53fb6f0d48bb259d2fb871b1d, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0

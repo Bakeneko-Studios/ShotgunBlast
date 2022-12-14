@@ -13,7 +13,7 @@ public class pauseScreen : MonoBehaviour
     private GameObject currentlyOpened;
     private GameObject Player;
 
-    public KeyCode escMenu = KeyCode.Escape;
+    public KeyCode pauseKey = KeyCode.Escape;
 
     void Awake() {
         if(GameObject.Find("userSettings") == null) {
@@ -25,14 +25,15 @@ public class pauseScreen : MonoBehaviour
     }
 
     void Update(){
-        if (Input.GetKeyDown(escMenu))
+        if (Input.GetKeyDown(pauseKey))
         {
             if (Cursor.lockState == CursorLockMode.Locked)
             {
                 Cursor.lockState = CursorLockMode.None;
                 Time.timeScale = 0;
                 mainPanel.SetActive(true);
-                refreshHealthBar();
+                hudHealthBar.SetActive(false);
+                // refreshHealthBar();
             }
             else
             {
@@ -43,8 +44,9 @@ public class pauseScreen : MonoBehaviour
                 } else {
                     Time.timeScale = 1f;
                     mainPanel.SetActive(false);
-                    Cursor.lockState = CursorLockMode.Locked;
+                    hudHealthBar.SetActive(true);
                     saveVar();
+                    Cursor.lockState = CursorLockMode.Locked;
                 }
             }
         }
@@ -55,15 +57,15 @@ public class pauseScreen : MonoBehaviour
         mainPanel.SetActive(false);
     }
 
-    public void refreshHealthBar() {
-        if(Player.GetComponent<playerHealth>() != null) {
-            playerHealth playerHealth = Player.GetComponent<playerHealth>();
-            playerHealth.healthBar.gameObject.SetActive(!playerHealth.healthBar.gameObject.activeInHierarchy);
-            float hp = playerHealth.health;
-            float scale = menuHealthBar.transform.localScale.x / 100;
-            menuHealthBar.transform.localScale = new Vector3(hp * scale, menuHealthBar.transform.localScale.y, menuHealthBar.transform.localScale.z);
-        }
-    }
+    // public void refreshHealthBar() {
+    //     if(Player.GetComponent<playerHealth>() != null) {
+    //         playerHealth playerHealth = Player.GetComponent<playerHealth>();
+    //         playerHealth.healthBar.gameObject.SetActive(!playerHealth.healthBar.gameObject.activeInHierarchy);
+    //         float hp = playerHealth.health;
+    //         float scale = menuHealthBar.transform.localScale.x / 100;
+    //         menuHealthBar.transform.localScale = new Vector3(hp * scale, menuHealthBar.transform.localScale.y, menuHealthBar.transform.localScale.z);
+    //     }
+    // }
 
     void loadSettings(bool destory) {
         GameObject tempSettingsController = Instantiate(settingsController, this.transform);

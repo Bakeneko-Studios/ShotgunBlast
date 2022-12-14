@@ -7,7 +7,8 @@ public class playerHealth : MonoBehaviour
 {
     public float health = 100;
     float maxHealth;
-    public Image healthBar;
+    public Image hudHealthBar;
+    public Image menuHealthBar;
     private float scale;
     //public GameObject deathPanel;
 
@@ -18,9 +19,11 @@ public class playerHealth : MonoBehaviour
 
         health += amount;
 
-        healthBar.fillAmount=health/maxHealth;
+        hudHealthBar.fillAmount=health/maxHealth;
+        menuHealthBar.fillAmount=health/maxHealth;
         if (health <= 0)
         {
+            Debug.Log("ded");
             //deathPanel.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;

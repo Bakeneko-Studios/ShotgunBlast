@@ -157,7 +157,6 @@ GameObject:
   - component: {fileID: 8649613076842237340}
   - component: {fileID: 8649613076842237330}
   - component: {fileID: 8649613076842237341}
-  - component: {fileID: 1155677900765194453}
   m_Layer: 8
   m_Name: Capsule
   m_TagString: Untagged
@@ -230,20 +229,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1155677900765194453
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8649613076842237343}
-  m_Material: {fileID: 13400000, guid: f0528fa412c8f794dafafcf283ae38ef, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8649613076853638572
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,6 +245,7 @@ GameObject:
   - component: {fileID: 4245268676769854621}
   - component: {fileID: 3224887463733073227}
   - component: {fileID: 25254466}
+  - component: {fileID: 5150432699366685201}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -336,15 +322,15 @@ MonoBehaviour:
   fatigued: 0
   canSlide: 1
   gravity: -19.6
-  nrmSpeed: 10
-  sprSpeed: 20
-  crchSpeed: 10
+  nrmSpeed: 25
+  sprSpeed: 25
+  crchSpeed: 15
   speedCap: 30
-  jumpForce: 12
+  jumpForce: 10
   jumpDelay: 0.5
-  drag: 7
-  airFriction: 1
-  slideThreshold: 9
+  drag: 15
+  airControl: 0.01
+  slideThreshold: 10
   slideForce: 10
   slideCooldown: 2
   wallbounceForce: 15
@@ -415,8 +401,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b88ec8633f70c0428c72c9092462f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5000
-  healthBar: {fileID: 0}
+  health: 100
+  hudHealthBar: {fileID: 0}
+  menuHealthBar: {fileID: 0}
+--- !u!136 &5150432699366685201
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8649613076853638572}
+  m_Material: {fileID: 13400000, guid: f0528fa412c8f794dafafcf283ae38ef, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8649613077721364473
 GameObject:
   m_ObjectHideFlags: 0
