@@ -348,9 +348,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   types:
   - room: {fileID: 1441303576}
-    count: 3
+    count: 5
   - room: {fileID: 2109531434}
-    count: 2
+    count: 3
   - room: {fileID: 1925002881}
     count: 1
   startRoom: {fileID: 994794131}
@@ -359,6 +359,7 @@ MonoBehaviour:
   gridX: 5
   gridZ: 5
   cellSize: 30
+  doorSpawnRate: 0.5
 --- !u!4 &1104782669
 Transform:
   m_ObjectHideFlags: 0

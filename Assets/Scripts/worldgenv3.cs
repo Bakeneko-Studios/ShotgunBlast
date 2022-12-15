@@ -42,7 +42,8 @@ public class worldgenv3 : MonoBehaviour
     [Range(2,100)] public int gridX;
     [Range(2,100)] public int gridZ;
     public int cellSize;
-    Cell start,end;
+    [Range(0.25f,1)]public float doorSpawnRate = 0.5f;
+    Cell start,end,lastRoom;
     List<GameObject> rooms = new List<GameObject>();
     void Awake()
     {
@@ -51,6 +52,14 @@ public class worldgenv3 : MonoBehaviour
     void Start()
     {
         generate();
+    }
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            clear();
+            generate();
+        }
     }
     void validate()
     {
@@ -70,7 +79,7 @@ public class worldgenv3 : MonoBehaviour
     }
     void generate()
     {
-        e:
+        attempt:
         foreach (RoomType type in types){for (int i = 0; i < type.count; i++){rooms.Add(type.room);}}
         grid = new Cell[gridX,gridZ];
         Cell room1;
@@ -86,43 +95,54 @@ public class worldgenv3 : MonoBehaviour
             case 1: room1 = new Cell(rooms[r],start.x+1,start.z); break;
             case 2: room1 = new Cell(rooms[r],start.x,start.z-1); break;
             case 3: room1 = new Cell(rooms[r],start.x-1,start.z); break;
-            default: clear(); goto e;
+            default: clear(); goto attempt;
         }
-        rooms.RemoveAt(r);
-        Debug.Log($"{room1.structure.name}: [{room1.x},{room1.z}]");
-        bool e = pathfind(room1);
-        if(!e){clear(); goto e;}
-    }
-    bool pathfind(Cell c)
-    {
-        grid[c.x,c.z]=c;
-        c.place(cellSize,parent);
-        Debug.Log($"{c.structure.name}: [{c.x},{c.z}]");
-        if(rooms.Count==0) {Debug.Log("no more rooms"); return true;}
-        List<int> doors = validPaths(c);
-        if(doors==null) {Debug.Log("no valid paths"); return false;}
-        foreach (int i in doors)
+        bool e = pathfind(room1,r);
+        if(!e||rooms.Count!=0){clear(); goto attempt;}
+        List<int> b = validPaths(lastRoom);
+        if(b==null) {clear(); goto attempt;}
+        d = b[Random.Range(0,b.Count)];
+        switch(d)
         {
-            if(Random.Range(0,2)==0)
+            case 0: end = new Cell(endRoom,lastRoom.x,lastRoom.z+1); break;
+            case 1: end = new Cell(endRoom,lastRoom.x+1,lastRoom.z); break;
+            case 2: end = new Cell(endRoom,lastRoom.x,lastRoom.z-1); break;
+            case 3: end = new Cell(endRoom,lastRoom.x-1,lastRoom.z); break;
+            default: clear(); goto attempt;
+        }
+        grid[end.x,end.z]=end;
+        end.place(cellSize,parent);
+    }
+    bool pathfind(Cell c, int r)
+    {
+        if(rooms.Count==1) lastRoom=c;
+        rooms.RemoveAt(r);
+        grid[c.x,c.z]=c;
+        c.place(cellSize,parent); //place current toom
+        Debug.Log($"{c.structure.name}: [{c.x},{c.z}]");
+        List<int> doors = validPaths(c); //all valid adjacent cells
+        if(doors==null) {Debug.Log("no valid paths"); return false;}
+        for (int i = 0; i < doors.Count; i++) {if(Random.value<doorSpawnRate) {doors.RemoveAt(i);i--;}} //50% chance for a door to spawn
+        foreach (int i in doors) //new path for each chosen direction
+        {
+            if(rooms.Count==0) {Debug.Log("no more rooms"); return true;}
+            int rr = Random.Range(0,rooms.Count);
+            switch(i)
             {
-                int r = Random.Range(0,rooms.Count);
-                switch(i)
-                {
-                    case 0: pathfind(new Cell(rooms[r],start.x,start.z+1)); break;
-                    case 1: pathfind(new Cell(rooms[r],start.x+1,start.z)); break;
-                    case 2: pathfind(new Cell(rooms[r],start.x,start.z-1)); break;
-                    case 3: pathfind(new Cell(rooms[r],start.x-1,start.z)); break;
-                    default: return false;
-                }
-                rooms.RemoveAt(r);
+                case 0: pathfind(new Cell(rooms[rr],c.x,c.z+1),rr); break; //north
+                case 1: pathfind(new Cell(rooms[rr],c.x+1,c.z),rr); break; //east
+                case 2: pathfind(new Cell(rooms[rr],c.x,c.z-1),rr); break; //south
+                case 3: pathfind(new Cell(rooms[rr],c.x-1,c.z),rr); break; //west
+                default: return false;
             }
         }
-        Debug.Log("path finsihed");
+        Debug.Log("path finished");
         return true;
     }
     void clear()
     {
-        foreach (Transform g in parent.GetComponentsInChildren<Transform>()) Destroy(g.gameObject);
+        foreach (Transform t in parent) Destroy(t.gameObject);
+        rooms=new List<GameObject>();
         grid=null;
     }
     private void OnDrawGizmos() {
