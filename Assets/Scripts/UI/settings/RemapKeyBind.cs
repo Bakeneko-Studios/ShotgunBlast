@@ -19,7 +19,7 @@ public class RemapKeyBind : MonoBehaviour
             foreach(char c in newInputstr) {
                 KeyCode newInput = (KeyCode)c;
                 Debug.Log(newInput.ToString());
-                controlsSettings.inputKeyBinds.Add(targetAction,newInput);
+                controlsSettings.inputKeyBinds[targetAction] = newInput;
             }
             this.gameObject.SetActive(false);
         }

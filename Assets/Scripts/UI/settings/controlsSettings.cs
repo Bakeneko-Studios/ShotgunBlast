@@ -18,7 +18,16 @@ public class controlsSettings : MonoBehaviour
 
     MouseLook mouseLook;
 
-    public Dictionary<string, KeyCode> inputKeyBinds;
+    public Dictionary<string,KeyCode> inputKeyBinds = new Dictionary<string, KeyCode>() {
+        // {"forward",KeyCode.W},
+        // {"back",KeyCode.S},
+        // {"left",KeyCode.A},
+        // {"right",KeyCode.D},
+        {"jump",KeyCode.Space},
+        {"crouch",KeyCode.LeftControl},
+        {"dash",KeyCode.LeftShift},
+        {"pause",KeyCode.Escape},
+    };
 
     void Awake()
     {
