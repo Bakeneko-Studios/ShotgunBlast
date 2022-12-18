@@ -47,6 +47,10 @@ public class movement : MonoBehaviour
     public float maxSlopeAngle;
     
     [Header("Keybinds")]
+    public KeyCode walkKey = KeyCode.W;
+    public KeyCode leftKey = KeyCode.A;
+    public KeyCode backKey = KeyCode.S;
+    public KeyCode rightKey = KeyCode.D;
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode sprintKey = KeyCode.LeftShift;
     public KeyCode crouchKey = KeyCode.C;
@@ -77,8 +81,8 @@ public class movement : MonoBehaviour
             //else StartCoroutine(jumpFatigue());
         }
 
-        h = canMove ? (Input.GetKey(KeyCode.A)?-1:0) + (Input.GetKey(KeyCode.D)?1:0) : 0;
-        v = canMove ? (Input.GetKey(KeyCode.S)?-1:0) + (Input.GetKey(KeyCode.W)?1:0) : 0;
+        h = canMove ? (Input.GetKey(leftKey)?-1:0) + (Input.GetKey(rightKey)?1:0) : 0;
+        v = canMove ? (Input.GetKey(backKey)?-1:0) + (Input.GetKey(walkKey)?1:0) : 0;
         
         Vector3 vel = new Vector3(rb.velocity.x,0f,rb.velocity.z);
         if(vel.magnitude>speedCap)

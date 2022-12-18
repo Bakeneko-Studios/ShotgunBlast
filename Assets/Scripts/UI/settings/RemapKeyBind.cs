@@ -8,18 +8,35 @@ public class RemapKeyBind : MonoBehaviour
     [SerializeField] private controlsSettings controlsSettings;
     [HideInInspector] public string targetAction;
 
-    void Start() {
-        Debug.Log("Yes");
-    }
+    KeyCode[] notStringKeyCodes = {
+    //on your left
+    KeyCode.Tab,KeyCode.CapsLock,KeyCode.LeftShift,KeyCode.LeftControl,KeyCode.LeftAlt,KeyCode.LeftCommand,
+    //arrows
+    KeyCode.UpArrow,KeyCode.RightArrow,KeyCode.DownArrow,KeyCode.LeftArrow,
+    //on your right
+    KeyCode.RightShift,KeyCode.RightControl,KeyCode.RightAlt,KeyCode.PageUp,KeyCode.PageDown,KeyCode.RightCommand,
+    //mouse
+    KeyCode.Mouse1,KeyCode.Mouse2,KeyCode.Mouse3,KeyCode.Mouse4
+    };
 
     void Update() {
         if(Input.anyKeyDown) {
-            //find a new KeyBind
+            //keybinds that are strings
             string newInputstr = Input.inputString;
-            foreach(char c in newInputstr) {
-                KeyCode newInput = (KeyCode)c;
-                Debug.Log(newInput.ToString());
-                controlsSettings.inputKeyBinds[targetAction] = newInput;
+            if(newInputstr.ToString() != "") {
+                foreach(char c in newInputstr) {
+                    KeyCode newInput = (KeyCode)c;
+                    controlsSettings.inputKeyBinds[targetAction] = newInput;
+                    controlsSettings.updateButtonText(targetAction,newInput.ToString());
+                }
+            } else {
+                foreach(KeyCode kc in notStringKeyCodes) {
+                    if(Input.GetKey(kc)) {
+                        KeyCode newInput = kc;
+                    controlsSettings.inputKeyBinds[targetAction] = newInput;
+                    controlsSettings.updateButtonText(targetAction,newInput.ToString());
+                    }
+                }
             }
             this.gameObject.SetActive(false);
         }

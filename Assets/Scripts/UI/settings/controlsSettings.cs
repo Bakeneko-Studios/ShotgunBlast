@@ -9,8 +9,8 @@ public class controlsSettings : MonoBehaviour
 {
     [SerializeField] private Slider sensitivitySlider;
     [SerializeField] private TextMeshProUGUI sensitivityText;
-
     [SerializeField] private GameObject controlsPanel;
+    [SerializeField] private Transform keyBindPanel;
     [SerializeField] private RemapKeyBind rmkb;
 
     movement movement;
@@ -19,14 +19,14 @@ public class controlsSettings : MonoBehaviour
     MouseLook mouseLook;
 
     public Dictionary<string,KeyCode> inputKeyBinds = new Dictionary<string, KeyCode>() {
-        // {"forward",KeyCode.W},
-        // {"back",KeyCode.S},
-        // {"left",KeyCode.A},
-        // {"right",KeyCode.D},
+        {"walk",KeyCode.W},
+        {"left",KeyCode.A},
+        {"back",KeyCode.S},
+        {"right",KeyCode.D},
         {"jump",KeyCode.Space},
         {"crouch",KeyCode.LeftControl},
-        {"dash",KeyCode.LeftShift},
-        {"pause",KeyCode.Escape},
+        {"sprint",KeyCode.LeftShift},
+        {"interact",KeyCode.E},
     };
 
     void Awake()
@@ -34,7 +34,7 @@ public class controlsSettings : MonoBehaviour
         context();
         loadVar();
         updateSensitivity();
-        //updateKeyBinds();
+        updateKeyBinds();
     }
 
     void context() {
@@ -57,18 +57,50 @@ public class controlsSettings : MonoBehaviour
 
     public void updateKeyBinds() { //put this one a button or exit idk. Convert dictionary to script
         //movement keybinds
+        movement.walkKey = inputKeyBinds["walk"];
+        movement.leftKey = inputKeyBinds["left"];
+        movement.backKey = inputKeyBinds["back"];
+        movement.rightKey = inputKeyBinds["right"];
+        //parkour keybinds
         movement.jumpKey = inputKeyBinds["jump"];
         movement.sprintKey = inputKeyBinds["sprint"];
         movement.crouchKey = inputKeyBinds["crouch"];
         //PlayerAction keybind
         playerAction.interactKey = inputKeyBinds["interact"];;
+        saveVar();
+    }
+
+    public void updateButtonText(string action,string newInput) {
+        foreach (Transform button in keyBindPanel) {
+            if(button.name == action) {
+                TextMeshProUGUI childtext = button.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
+                childtext.text = newInput;
+                dynamicButtons(button);
+            } 
+        }
+    }
+
+    void Start() {
+        foreach (Transform button in keyBindPanel) {
+            dynamicButtons(button);
+        }
+    }
+
+    void dynamicButtons(Transform button) {
+        TextMeshProUGUI childtext = button.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
+        float len = childtext.text.Length;
+        if (len != 1) { //astetic touch
+            len = len / 2 + 1;
+        }
+        RectTransform buttonRTF = (button.GetChild(0) as RectTransform);
+        buttonRTF.sizeDelta = new Vector2(50 * len ,50);
     }
 
     void loadVar() {
         SavedData data = SavingSystem.LoadUser();
         sensitivitySlider.value = data.sensitivityFlt;
         if(data.inputKeyBinds != null) {
-            data.inputKeyBinds.ToList().ForEach(x => inputKeyBinds.Add(x.Key, x.Value)); //merge dictionaries I hope I did this correctly
+            inputKeyBinds = data.inputKeyBinds;
         }
     }
 
