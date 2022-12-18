@@ -33,5 +33,6 @@ public class SavedData
         effectsVolumeFlt = user.effectsVolumeFlt;
         //Controls
         sensitivityFlt = user.sensitivityFlt;
+        inputKeyBinds = user.inputKeyBinds;
     }
 }
