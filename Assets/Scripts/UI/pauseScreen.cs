@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class pauseScreen : MonoBehaviour
+public class PauseScreen : MonoBehaviour
 {
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private  GameObject settingsController; //prefab
@@ -19,8 +19,8 @@ public class pauseScreen : MonoBehaviour
         if(GameObject.Find("userSettings") == null) {
             UD = Instantiate(userSettings);
         }
-        Player = GameObject.FindGameObjectWithTag("Player");
         loadSettings(true);
+        Player = GameObject.FindGameObjectWithTag("Player");
         currentlyOpened = mainPanel;
     }
 

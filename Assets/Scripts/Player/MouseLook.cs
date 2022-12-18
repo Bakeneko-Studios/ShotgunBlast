@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
-    public static float sensitivity = 0.3f;
+    public float sensitivity;
     [SerializeField] Transform playerCam;
     //[SerializeField] Transform hands;
     [SerializeField] float xClamp = 85f;    
@@ -16,7 +16,7 @@ public class MouseLook : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
-    void FixedUpdate()
+    void Update()
     {
         mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
         mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
