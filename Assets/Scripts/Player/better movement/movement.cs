@@ -36,7 +36,7 @@ public class movement : MonoBehaviour
     public float jumpForce;
     public float jumpDelay;
     public float drag;
-    public float airFriction;
+    public float airControl;
     public float slideThreshold;
     public float slideForce;
     public float slideCooldown;
@@ -47,6 +47,10 @@ public class movement : MonoBehaviour
     public float maxSlopeAngle;
     
     [Header("Keybinds")]
+    public KeyCode walkKey = KeyCode.W;
+    public KeyCode leftKey = KeyCode.A;
+    public KeyCode backKey = KeyCode.S;
+    public KeyCode rightKey = KeyCode.D;
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode sprintKey = KeyCode.LeftShift;
     public KeyCode crouchKey = KeyCode.C;
@@ -77,8 +81,8 @@ public class movement : MonoBehaviour
             //else StartCoroutine(jumpFatigue());
         }
 
-        h = canMove ? (Input.GetKey(KeyCode.A)?-1:0) + (Input.GetKey(KeyCode.D)?1:0) : 0;
-        v = canMove ? (Input.GetKey(KeyCode.S)?-1:0) + (Input.GetKey(KeyCode.W)?1:0) : 0;
+        h = canMove ? (Input.GetKey(leftKey)?-1:0) + (Input.GetKey(rightKey)?1:0) : 0;
+        v = canMove ? (Input.GetKey(backKey)?-1:0) + (Input.GetKey(walkKey)?1:0) : 0;
         
         Vector3 vel = new Vector3(rb.velocity.x,0f,rb.velocity.z);
         if(vel.magnitude>speedCap)
@@ -139,8 +143,11 @@ public class movement : MonoBehaviour
         {
             if(grounded)
             {
-                rb.velocity = new Vector3(rb.velocity.x,0f,rb.velocity.z);
-                rb.AddForce(transform.up*(fatigued?jumpForce/2:jumpForce),ForceMode.Impulse);
+                if(Player.state!=Player.MoveState.slide)
+                {
+                    rb.velocity = new Vector3(rb.velocity.x,0f,rb.velocity.z);
+                    rb.AddForce(transform.up*(fatigued?jumpForce/2:jumpForce),ForceMode.Impulse);
+                }
             }
             else
             {
@@ -148,7 +155,7 @@ public class movement : MonoBehaviour
                 if(Physics.Raycast(cam.position,cam.forward,out hit,0.8f))
                 {
                     rb.AddForce(hit.normal*wallbounceForce,ForceMode.Impulse);
-                    rb.AddForce(Vector3.up*10f,ForceMode.Impulse);
+                    rb.AddForce(Vector3.up*12f,ForceMode.Impulse);
                 }
             }
         }
@@ -175,7 +182,7 @@ public class movement : MonoBehaviour
                 if(rb.velocity.y>0) rb.AddForce(Vector3.down*80f,ForceMode.Force);
             }
             else if(grounded) rb.AddForce(direction.normalized*speed*10f,ForceMode.Force);
-            else rb.AddForce(direction.normalized*speed*10f*airFriction,ForceMode.Force);
+            else rb.AddForce(direction.normalized*speed*10f*airControl,ForceMode.Force);
             rb.AddForce(0,onSlope()?0:gravity,0,ForceMode.Force);
         }
     }

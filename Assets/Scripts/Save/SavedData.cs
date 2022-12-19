@@ -17,6 +17,7 @@ public class SavedData
     public float effectsVolumeFlt;
     //Controls
     public float sensitivityFlt;
+    public Dictionary<string, KeyCode> inputKeyBinds;
 
     public SavedData (UserSettings user)
     {
@@ -32,5 +33,6 @@ public class SavedData
         effectsVolumeFlt = user.effectsVolumeFlt;
         //Controls
         sensitivityFlt = user.sensitivityFlt;
+        inputKeyBinds = user.inputKeyBinds;
     }
 }

@@ -2,46 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class pauseScreen : MonoBehaviour
+public class PauseScreen : MonoBehaviour
 {
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private  GameObject settingsController; //prefab
     [SerializeField] private  GameObject userSettings; //prefab
     public GameObject menuHealthBar;
+    public GameObject hudHealthBar;
     private GameObject UD;
     private GameObject currentlyOpened;
     private GameObject Player;
 
+    public KeyCode pauseKey = KeyCode.Escape;
 
     void Awake() {
         if(GameObject.Find("userSettings") == null) {
             UD = Instantiate(userSettings);
         }
-        Player = GameObject.FindGameObjectWithTag("Player");
-        Player.GetComponent<InputManager>().pauseScreen = GetComponent<pauseScreen>();
         loadSettings(true);
+        Player = GameObject.FindGameObjectWithTag("Player");
         currentlyOpened = mainPanel;
     }
 
-    public void OnEscPressed() {
-        if (Cursor.lockState == CursorLockMode.Locked)
+    void Update(){
+        if (Input.GetKeyDown(pauseKey))
         {
-            Cursor.lockState = CursorLockMode.None;
-            Time.timeScale = 0;
-            mainPanel.SetActive(true);
-            refreshHealthBar();
-        }
-        else
-        {
-            if(currentlyOpened != mainPanel) {
+            if (Cursor.lockState == CursorLockMode.Locked)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Time.timeScale = 0;
                 mainPanel.SetActive(true);
-                Destroy(currentlyOpened);
-                currentlyOpened = mainPanel;
-            } else {
-                Time.timeScale = 1f;
-                mainPanel.SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked;
-                saveVar();
+                hudHealthBar.SetActive(false);
+                // refreshHealthBar();
+            }
+            else
+            {
+                if(currentlyOpened != mainPanel) {
+                    mainPanel.SetActive(true);
+                    Destroy(currentlyOpened);
+                    currentlyOpened = mainPanel;
+                } else {
+                    Time.timeScale = 1f;
+                    mainPanel.SetActive(false);
+                    hudHealthBar.SetActive(true);
+                    saveVar();
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
             }
         }
     }
@@ -51,15 +57,15 @@ public class pauseScreen : MonoBehaviour
         mainPanel.SetActive(false);
     }
 
-    public void refreshHealthBar() {
-        if(Player.GetComponent<playerHealth>() != null) {
-            playerHealth playerHealth = Player.GetComponent<playerHealth>();
-            playerHealth.healthBar.SetActive(false);
-            float hp = playerHealth.health;
-            float scale = menuHealthBar.transform.localScale.x / 100;
-            menuHealthBar.transform.localScale = new Vector3(hp * scale, menuHealthBar.transform.localScale.y, menuHealthBar.transform.localScale.z);
-        }
-    }
+    // public void refreshHealthBar() {
+    //     if(Player.GetComponent<playerHealth>() != null) {
+    //         playerHealth playerHealth = Player.GetComponent<playerHealth>();
+    //         playerHealth.healthBar.gameObject.SetActive(!playerHealth.healthBar.gameObject.activeInHierarchy);
+    //         float hp = playerHealth.health;
+    //         float scale = menuHealthBar.transform.localScale.x / 100;
+    //         menuHealthBar.transform.localScale = new Vector3(hp * scale, menuHealthBar.transform.localScale.y, menuHealthBar.transform.localScale.z);
+    //     }
+    // }
 
     void loadSettings(bool destory) {
         GameObject tempSettingsController = Instantiate(settingsController, this.transform);

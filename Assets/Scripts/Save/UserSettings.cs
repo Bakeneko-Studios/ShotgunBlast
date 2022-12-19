@@ -20,6 +20,7 @@ public class UserSettings : MonoBehaviour
     public float effectsVolumeFlt;
     //Controls
     public float sensitivityFlt;
+    public Dictionary<string, KeyCode> inputKeyBinds;
 
     void Awake()
     {

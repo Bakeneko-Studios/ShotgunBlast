@@ -7,18 +7,6 @@ public class cameraShake : MonoBehaviour
 
     public AnimationCurve curve; // for smoothing camera shakes
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public IEnumerator shakeCamera(float duration, float magnitude)
     {
         Vector3 originalPos = transform.localPosition;

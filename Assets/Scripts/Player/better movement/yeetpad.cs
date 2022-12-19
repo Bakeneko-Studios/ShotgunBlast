@@ -6,5 +6,5 @@ public class yeetpad : MonoBehaviour
 {
     public float yeetForce;
     private void OnTriggerEnter(Collider other)
-    {if(other.transform.parent.tag=="Player") movement.instance.rb.AddForce(transform.up*yeetForce,ForceMode.Impulse);}
+    {if(other.tag=="Player") movement.instance.rb.AddForce(transform.up*yeetForce,ForceMode.Impulse);}
 }

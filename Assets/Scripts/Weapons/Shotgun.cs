@@ -20,11 +20,13 @@ public class Shotgun : MonoBehaviour
     public List<Quaternion> pelletAngles;
     //Variables
     public bool isAnimate;
-    private bool canShoot;
+    public bool canShoot;
     private WaitForSeconds reloadWait;
     //camera shake
     public float cameraShakeDuration = 0.3f;
     public float cameraShakeMagnitude = 0.6f;
+
+    public KeyCode shootKey = KeyCode.Mouse0;
 
     void Awake()
     {
@@ -44,16 +46,17 @@ public class Shotgun : MonoBehaviour
 
     public void FireGun()
     {
-        if (canShoot)
+        if (canShoot && Time.timeScale>0)
         {
-            if(cam.GetComponent<cameraShake>()!=null) StartCoroutine(cam.GetComponent<cameraShake>().shakeCamera(cameraShakeDuration, cameraShakeMagnitude));
+            if(cam.GetComponent<cameraShake>()!=null)
+                StartCoroutine(cam.GetComponent<cameraShake>().shakeCamera(cameraShakeDuration, cameraShakeMagnitude));
             for (int i=0; i<pelletCount; i++)
             {
                 pelletAngles[i] = Random.rotation;
                 GameObject pShot = Instantiate(pellet, bulletExit.position, cam.rotation);
                 // [!] from this exclamation mark all the way to the next exclamation mark, code is added by Bill. Delete if no want.
                 //      code that changes initial position of the pellets to the tip of the shotgun barrel. Direction is not changed. Shooting seems normal. delete if no want.
-                pShot.transform.Translate(new Vector3(0.2f,-0.2f,0.7f));
+                //pShot.transform.Translate(new Vector3(0.2f,-0.2f,0.7f));
                 pShot.GetComponent<Pellet>().playersBullet = true; // avoid friendly fire from enemies
                 // [!] code above is code edited by Bill. Delete if no want.
                 pShot.transform.rotation = Quaternion.RotateTowards(pShot.transform.rotation, pelletAngles[i], spreadAngle);
@@ -78,11 +81,9 @@ public class Shotgun : MonoBehaviour
         yield return reloadWait;
         canShoot = true;
     }
-
-    
-
-    public void OnPrimaryFire()
+    void Update() 
     {
-        FireGun();
-    }
+        if (Input.GetKeyDown(shootKey))
+            FireGun();
+    }   
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
-    public static float sensitivity = 0.3f;
+    public float sensitivity;
     [SerializeField] Transform playerCam;
     //[SerializeField] Transform hands;
     [SerializeField] float xClamp = 85f;    
@@ -15,10 +15,11 @@ public class MouseLook : MonoBehaviour
     void Awake() 
     {
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
     void Update()
     {
+        mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+        mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -xClamp, xClamp);
@@ -28,15 +29,5 @@ public class MouseLook : MonoBehaviour
             playerCam.eulerAngles = targetRotation;
             transform.Rotate(Vector3.up, mouseX);
         }
-        // foreach (Transform hand in hands)
-        // {
-        //     hand.eulerAngles = targetRotation;
-        // }
-    }
-
-    public void RecieveInput(Vector2 mouseInput)
-    {
-        mouseX = mouseInput.x * sensitivity;
-        mouseY = mouseInput.y * sensitivity;
     }
 }
