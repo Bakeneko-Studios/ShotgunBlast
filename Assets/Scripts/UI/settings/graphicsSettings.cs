@@ -13,6 +13,8 @@ public class graphicsSettings : MonoBehaviour
     
     [SerializeField] private TMP_Dropdown preset;
     [SerializeField] private GameObject graphicsPanel;
+    [SerializeField] private Slider renderDistance;
+    [SerializeField] private Slider FOV;
 
     private Camera cam;
 
@@ -29,14 +31,18 @@ public class graphicsSettings : MonoBehaviour
 
     void Update()
     {
-        if(graphicsPanel.activeInHierarchy) {
-            updateGraphics();
-        }
-        saveVar();
+        // if(graphicsPanel.activeInHierarchy) {
+        //     updateGraphics();
+        // }
+        // saveVar();
     }
 
-    void updateGraphics() {
+    public void updateGraphics() {
         QualitySettings.SetQualityLevel(preset.value,false);
+        Debug.Log(QualitySettings.GetQualityLevel());
+        Camera.main.farClipPlane = renderDistance.value;
+        Camera.main.fieldOfView = FOV.value;
+        saveVar();
     }
 
     void loadVar() {
