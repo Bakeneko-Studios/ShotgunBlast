@@ -30,6 +30,7 @@ public class PauseScreen : MonoBehaviour
             if (Cursor.lockState == CursorLockMode.Locked)
             {
                 Cursor.lockState = CursorLockMode.None;
+                Player.GetComponent<movement>().enabled = false;
                 Time.timeScale = 0;
                 mainPanel.SetActive(true);
                 hudHealthBar.SetActive(false);
@@ -41,11 +42,13 @@ public class PauseScreen : MonoBehaviour
                     mainPanel.SetActive(true);
                     Destroy(currentlyOpened);
                     currentlyOpened = mainPanel;
+                    saveVar();
                 } else {
                     Time.timeScale = 1f;
                     mainPanel.SetActive(false);
                     hudHealthBar.SetActive(true);
                     saveVar();
+                    Player.GetComponent<movement>().enabled = true;
                     Cursor.lockState = CursorLockMode.Locked;
                 }
             }

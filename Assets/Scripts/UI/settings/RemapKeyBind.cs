@@ -21,15 +21,14 @@ public class RemapKeyBind : MonoBehaviour
 
     void Update() {
         if(Input.anyKeyDown) {
-            //keybinds that are strings
             string newInputstr = Input.inputString;
-            if(newInputstr.ToString() != "") {
+            if(newInputstr.ToString() != "") { //try string KeyBinds
                 foreach(char c in newInputstr) {
                     KeyCode newInput = (KeyCode)c;
                     controlsSettings.inputKeyBinds[targetAction] = newInput;
                     controlsSettings.updateButtonText(targetAction,newInput.ToString());
                 }
-            } else {
+            } else { //try keybinds in List
                 foreach(KeyCode kc in notStringKeyCodes) {
                     if(Input.GetKey(kc)) {
                         KeyCode newInput = kc;
@@ -38,6 +37,7 @@ public class RemapKeyBind : MonoBehaviour
                     }
                 }
             }
+            controlsSettings.GetComponentInParent<PauseScreen>().pauseKey = KeyCode.Escape; //reenable escape
             this.gameObject.SetActive(false);
         }
     }

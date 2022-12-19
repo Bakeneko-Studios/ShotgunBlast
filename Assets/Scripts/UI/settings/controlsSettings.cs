@@ -28,6 +28,7 @@ public class controlsSettings : MonoBehaviour
         {"crouch",KeyCode.C},
         {"sprint",KeyCode.LeftShift},
         {"interact",KeyCode.E},
+        {"pause",KeyCode.Escape}
     };
 
     void Awake()
@@ -57,6 +58,7 @@ public class controlsSettings : MonoBehaviour
         inputKeyBindsClone = inputKeyBinds; //cloning dictionaries
         rmkb.gameObject.SetActive(true); //SetActive(false)-ed in rmkb
         rmkb.targetAction = action; //forward the action to change
+        GetComponentInParent<PauseScreen>().pauseKey = KeyCode.None;
     }
 
     public void updateKeyBinds() { //put this one a button or exit idk. Convert dictionary to script
@@ -99,7 +101,7 @@ public class controlsSettings : MonoBehaviour
                 TextMeshProUGUI childtext = button.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
                 childtext.text = newInput;
                 //dynamicButtons
-                float len = newInput    .Length;
+                float len = newInput.Length;
                 if (len != 1) { //astetic touch
                     len = (len + 1f) / 2f;
                 }

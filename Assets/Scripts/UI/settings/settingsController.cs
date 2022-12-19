@@ -25,8 +25,9 @@ public class settingsController : MonoBehaviour
             }
             
             string thisButtonName = thisPanel.name.Replace("Panel","Button");
-            pointer.transform.SetParent(GameObject.Find(thisButtonName).transform);
+            pointer.transform.SetParent(GameObject.Find(thisButtonName).transform) ;
             pointer.transform.localPosition  = new Vector2(-161f,-1f);
         }
+        GetComponentInParent<PauseScreen>().saveVar();
     }
 }
