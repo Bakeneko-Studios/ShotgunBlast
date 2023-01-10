@@ -43,6 +43,13 @@ public class audioSettings : MonoBehaviour
         UD.effectsVolumeFlt = effectsSlider.value;
     }
 
+    public void resetVar() {
+        masterSlider.value = 0;
+        musicSlider.value = 0;
+        effectsSlider.value = 0;
+        saveVar();
+    }
+
     public void masterChange()
     {
         mainMixer.SetFloat("MasterMix", masterSlider.value);

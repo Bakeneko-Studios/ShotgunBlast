@@ -13,7 +13,6 @@ public class graphicsSettings : MonoBehaviour
     
     [SerializeField] private TMP_Dropdown preset;
     [SerializeField] private GameObject graphicsPanel;
-    [SerializeField] private Slider renderDistance;
     [SerializeField] private Slider FOV;
 
     private Camera cam;
@@ -40,7 +39,6 @@ public class graphicsSettings : MonoBehaviour
     public void updateGraphics() {
         QualitySettings.SetQualityLevel(preset.value,false);
         Debug.Log(QualitySettings.GetQualityLevel());
-        Camera.main.farClipPlane = renderDistance.value;
         Camera.main.fieldOfView = FOV.value;
         saveVar();
     }
@@ -53,5 +51,10 @@ public class graphicsSettings : MonoBehaviour
     void saveVar() {
         UserSettings UD = GameObject.FindGameObjectWithTag("userSettings").GetComponent<UserSettings>();
         UD.gQualityInt = preset.value;
+    }
+
+    public void resettVar() {
+        preset.value = 3;
+        saveVar();
     }
 }
