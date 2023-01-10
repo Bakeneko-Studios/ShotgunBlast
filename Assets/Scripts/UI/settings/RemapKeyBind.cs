@@ -26,14 +26,14 @@ public class RemapKeyBind : MonoBehaviour
                 foreach(char c in newInputstr) {
                     KeyCode newInput = (KeyCode)c;
                     controlsSettings.inputKeyBinds[targetAction] = newInput;
-                    controlsSettings.updateButtonText(targetAction,newInput.ToString());
+                    controlsSettings.updateButtonText(targetAction,newInput.ToString(),true);
                 }
             } else { //try keybinds in List
                 foreach(KeyCode kc in notStringKeyCodes) {
                     if(Input.GetKey(kc)) {
                         KeyCode newInput = kc;
                     controlsSettings.inputKeyBinds[targetAction] = newInput;
-                    controlsSettings.updateButtonText(targetAction,newInput.ToString());
+                    controlsSettings.updateButtonText(targetAction,newInput.ToString(),true);
                     }
                 }
             }

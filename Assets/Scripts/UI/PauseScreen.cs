@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PauseScreen : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PauseScreen : MonoBehaviour
     private GameObject Player;
 
     public KeyCode pauseKey = KeyCode.Escape;
+    [SerializeField] private GameObject defaultSelected;
 
     void Awake() {
         if(GameObject.Find("userSettings") == null) {
@@ -35,6 +37,7 @@ public class PauseScreen : MonoBehaviour
                 mainPanel.SetActive(true);
                 hudHealthBar.SetActive(false);
                 // refreshHealthBar();
+                EventSystem.current.SetSelectedGameObject(defaultSelected); 
             }
             else
             {
