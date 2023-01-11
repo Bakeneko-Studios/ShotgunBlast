@@ -56,8 +56,8 @@ MonoBehaviour:
   pelletAngles: []
   isAnimate: 1
   canShoot: 0
-  cameraShakeDuration: 0.3
-  cameraShakeMagnitude: 0.6
+  cameraShakeDuration: 0.1
+  cameraShakeMagnitude: 0.05
   shootKey: 323
 --- !u!95 &3755831994444685436
 Animator:

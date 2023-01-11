@@ -326,7 +326,7 @@ MonoBehaviour:
   sprSpeed: 25
   crchSpeed: 15
   speedCap: 30
-  jumpForce: 10
+  jumpForce: 20
   jumpDelay: 0.5
   drag: 15
   airControl: 0.01
@@ -337,6 +337,10 @@ MonoBehaviour:
   height: 2
   crouchScale: 0.5
   maxSlopeAngle: 45
+  walkKey: 119
+  leftKey: 97
+  backKey: 115
+  rightKey: 100
   jumpKey: 32
   sprintKey: 304
   crouchKey: 99
@@ -352,6 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c091dbf5ba434c14fa9131c5ba637b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sensitivity: 0
   playerCam: {fileID: 8649613077721364478}
   xClamp: 85
 --- !u!114 &4245268676769854621
