@@ -9,17 +9,16 @@ public class Shotgun : MonoBehaviour
     public float spreadAngle;
     public float pelletSpeed;
     public float reloadTime;
-    public string theAnimation;
     //Effects
     public GameObject pellet;
     //TODO public GameObject muzzleFire;
     //Other Stuff
     public Transform bulletExit;
     private Transform cam;
-    private Animator animator;
+    private Animation anim;
     public List<Quaternion> pelletAngles;
+    [HideInInspector]public bool isAnimate;
     //Variables
-    public bool isAnimate;
     public bool canShoot;
     private WaitForSeconds reloadWait;
     //camera shake
@@ -41,7 +40,10 @@ public class Shotgun : MonoBehaviour
     void Start()
     {
         cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
-        animator = this.GetComponent<Animator>();
+        anim = GetComponentInChildren<Animation>();
+        if (anim != null) {
+            isAnimate = true;
+        }
     }
 
     public void FireGun()
@@ -64,23 +66,21 @@ public class Shotgun : MonoBehaviour
                 
             }
             canShoot=false;
-            if (isAnimate)
-            {
-                animator.Play(theAnimation);
+            if (isAnimate) {
+                anim.Play();
                 StartCoroutine(Reload());
-            }
-            else
-            {
+            } else {
                 canShoot = true;
             }
         }
-            
     }
+
     IEnumerator Reload()
     {
         yield return reloadWait;
         canShoot = true;
     }
+
     void Update() 
     {
         if (Input.GetKeyDown(shootKey))

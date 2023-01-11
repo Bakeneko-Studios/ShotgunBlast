@@ -51,7 +51,6 @@ MonoBehaviour:
   spreadAngle: 16
   pelletSpeed: 5000
   reloadTime: 1
-  theAnimation: HingeCrack
   pellet: {fileID: 879660532207597176, guid: fbee47f6501b43e4d9fcc3c420c95c0b, type: 3}
   bulletExit: {fileID: 1744430434822825672}
   pelletAngles: []
@@ -213,3 +212,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5788537484621825091, guid: 25015c5db7a36994db24689c2a50f450, type: 3}
   m_PrefabInstance: {fileID: 7226695620443537625}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3755831993884099739 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5788537484621825090, guid: 25015c5db7a36994db24689c2a50f450, type: 3}
+  m_PrefabInstance: {fileID: 7226695620443537625}
+  m_PrefabAsset: {fileID: 0}
+--- !u!111 &8372152733810567000
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3755831993884099739}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: e35c1ec2739c42a4aa80fa35fb8ee386, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: e35c1ec2739c42a4aa80fa35fb8ee386, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
