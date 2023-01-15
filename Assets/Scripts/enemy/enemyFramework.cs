@@ -5,53 +5,89 @@ using UnityEngine.UI;
 using UnityEngine.AI;
 using TMPro;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class enemyFramework : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    [Header("Health")]
+    [Header("Basic Info")]
     public float health = 100;
 
     public GameObject healthBar;
     private float scale;
     private Transform healthBarFront;
     //public TextMeshProUGUI healthBarText;
-
-
-    [Header("basicInfo")]
     NavMeshAgent agent;
     Transform player;
     public LayerMask whatIsGround, whatIsPlayer,obstuctionMask;
 
-    //patrol
-    [Header("Patrol")]
-    public bool canMove = true;
-    public bool patrol = true;
-    public Vector3 walkPoint;
-    bool walkPointSet;
-    public float walkPointRange; // how far can it walk
-    public float sightRange, attackRange;
-    [HideInInspector]
-    public bool playerInSightRange, playerInAttackRange;
-    [Range(0,360)]
-    public float viewAngle = 90f;
-    public bool alwaysSeePlayer = true;
-    
+    [Header("Animations (optional)")]//optional
+    public Animator anim;
+    public string wakeAnimation;
+    public string deathAnimation; 
+    public string attackAnimation;
+    private bool awake = false; // need to run animation first
 
-    [Header("Movement")]
+
+    [Header("Movement & Attack")]
     public float turnSpeed = 5f;
-
-    [Header("Attack")]
     bool alreadyAttacked;
     public float attackCooldownTime = 1f;
     public float aimTolerance = 15f;
     float nextFireTime = 0f;
     bool aimed = false;
+    public GameObject attackScript; // object that contains the attack script ex. turret or melee, seperated so trigger colliders dont interfere
+    public float attackRange;
 
-   
+
+    //patrol
+    [Header("Patrol")]
+    public bool canMove = true;
+    private Vector3 walkPoint;
+    bool walkPointSet;
+    public bool alwaysSeePlayer = true;
+
+    //hide if always see player since enemy doesnt need to search
+    [HideInInspector]
+    public bool patrol = true;
+    [HideInInspector] 
+    public float walkPointRange; // how far can it walk
+    [HideInInspector]
+    public float sightRange;
+    [HideInInspector]
+    public bool playerInSightRange, playerInAttackRange;
+    [HideInInspector]
+    [Range(0,360)]
+    public float viewAngle = 90f;
+
+
+    IEnumerator waitLife(float life)
+    {
+        yield return new WaitForSeconds(life);
+        Destroy(this.gameObject);
+    }
+    IEnumerator wakeUp()
+    {
+        // Play the animation for getting suck in
+        anim.Play(wakeAnimation);
+
+        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
+
+        awake = true;
+    }
+    public void setAwake()
+    {
+        awake = true;
+    }
 
     void Start()
     {
+        if (attackScript == null)
+            attackScript = this.gameObject;
+
         if (healthBar != null)
         {
             healthBarFront = healthBar.transform.Find("front");
@@ -60,6 +96,15 @@ public class enemyFramework : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         if (canMove)
             agent = GetComponent<NavMeshAgent>();
+        if (wakeAnimation != "")
+        {
+            //anim.Play(wakeAnimation);
+            StartCoroutine("wakeUp");
+        }
+        else
+        {
+            awake = true;
+        }
 
     }
 
@@ -77,7 +122,14 @@ public class enemyFramework : MonoBehaviour
         //healthBarText.text = health + "/1000";
         if (health <= 0)
         {
-            Destroy(this.gameObject);
+            if (healthBar != null)
+                healthBar.SetActive(false);
+            
+            if (deathAnimation != "")
+                anim.Play(deathAnimation);
+            StartCoroutine("waitLife", 2); // destory object after certain time
+            agent.enabled = false;
+            enabled = false;
         }
 
     }
@@ -88,17 +140,21 @@ public class enemyFramework : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
 
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, sightRange);
+        if (!alwaysSeePlayer)
+        {
+
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, sightRange);
 
 
-        Vector3 viewAngle01 = DirectionFromAngle(transform.eulerAngles.y, -viewAngle / 2);
-        Vector3 viewAngle02 = DirectionFromAngle(transform.eulerAngles.y, viewAngle / 2);
+            Vector3 viewAngle01 = DirectionFromAngle(transform.eulerAngles.y, -viewAngle / 2);
+            Vector3 viewAngle02 = DirectionFromAngle(transform.eulerAngles.y, viewAngle / 2);
 
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(transform.position, transform.position + viewAngle01 * sightRange);
-        Gizmos.DrawLine(transform.position, transform.position + viewAngle02 * sightRange);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(transform.position, transform.position + viewAngle01 * sightRange);
+            Gizmos.DrawLine(transform.position, transform.position + viewAngle02 * sightRange);
 
+        }
     }
 
 
@@ -111,6 +167,8 @@ public class enemyFramework : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!awake) return;
+
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
@@ -179,15 +237,43 @@ public class enemyFramework : MonoBehaviour
     {
         if (canMove)
             agent.SetDestination(transform.position);
-        
+
         turnTowardsPlayer();
         //gun.GetComponent<Weapon>().EnemyShoot();
         if (nextFireTime < Time.time && aimed)
         {
-            this.gameObject.SendMessageUpwards("attack",player);
+            if (attackAnimation != "")
+                anim.Play(attackAnimation);
+
+            attackScript.SendMessageUpwards("attack",player);
             nextFireTime = attackCooldownTime + Time.time;
         }
     }
 
     
 }
+
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(enemyFramework))]
+public class enemyFramework_Editor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector(); // for other non-HideInInspector fields
+        
+        enemyFramework script = (enemyFramework)target;
+
+        // draw checkbox for the bool
+        //script.alwaysSeePlayer = EditorGUILayout.Toggle("Always See Player", script.alwaysSeePlayer);
+
+        if (!script.alwaysSeePlayer) // if bool is true, dont show other fields
+        {
+            script.patrol = EditorGUILayout.Toggle("Patrol?", script.patrol);
+            script.walkPointRange = EditorGUILayout.FloatField("Walk Point Range", script.walkPointRange);
+            script.sightRange = EditorGUILayout.FloatField("Sight Range", script.sightRange);
+            script.viewAngle = EditorGUILayout.FloatField("View Angle", script.viewAngle);
+        }
+    }
+}
+#endif

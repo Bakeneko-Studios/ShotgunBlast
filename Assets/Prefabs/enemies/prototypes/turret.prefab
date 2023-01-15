@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8491567444175136248
 Transform:
   m_ObjectHideFlags: 0
@@ -673,19 +673,23 @@ MonoBehaviour:
   obstuctionMask:
     serializedVersion: 2
     m_Bits: 512
-  canMove: 0
-  patrol: 1
-  walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 0
-  sightRange: 5
-  attackRange: 5
-  playerInSightRange: 0
-  playerInAttackRange: 0
-  viewAngle: 90
-  alwaysSeePlayer: 1
+  wakeAnimation: 
+  deathAnimation: 
+  anim: {fileID: 0}
+  attackAnimation: 
   turnSpeed: 5
   attackCooldownTime: 1
   aimTolerance: 15
+  attackScript: {fileID: 0}
+  attackRange: 5
+  canMove: 0
+  patrol: 1
+  alwaysSeePlayer: 1
+  walkPointRange: 0
+  sightRange: 5
+  playerInSightRange: 0
+  playerInAttackRange: 0
+  viewAngle: 90
 --- !u!114 &8491567445470649766
 MonoBehaviour:
   m_ObjectHideFlags: 0
