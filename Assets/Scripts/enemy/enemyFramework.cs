@@ -23,6 +23,7 @@ public class enemyFramework : MonoBehaviour
     NavMeshAgent agent;
     Transform player;
     public LayerMask whatIsGround, whatIsPlayer,obstuctionMask;
+    public Rigidbody rb;
 
     [Header("Animations (optional)")]//optional
     public Animator anim;
@@ -41,7 +42,6 @@ public class enemyFramework : MonoBehaviour
     bool aimed = false;
     public GameObject attackScript; // object that contains the attack script ex. turret or melee, seperated so trigger colliders dont interfere
     public float attackRange;
-
 
     //patrol
     [Header("Patrol")]
@@ -233,11 +233,11 @@ public class enemyFramework : MonoBehaviour
             //transform.rotation = Quaternion.RotateTowards(transform.rotation, player.rotation, turnSpeed*Time.deltaTime); //player controlled
     }
 
+
     private void AttackPlayer()
     {
         if (canMove)
             agent.SetDestination(transform.position);
-
         turnTowardsPlayer();
         //gun.GetComponent<Weapon>().EnemyShoot();
         if (nextFireTime < Time.time && aimed)
