@@ -8,7 +8,6 @@ public class SavedData
     //Settings Data
     //Graphics
     public int gQualityInt;
-    public float rDistanceFlt;
     public float FOVFlt;
     public bool healthBarBool;
     //Audio
@@ -19,20 +18,19 @@ public class SavedData
     public float sensitivityFlt;
     public Dictionary<string, KeyCode> inputKeyBinds;
 
-    public SavedData (UserSettings user)
+    public SavedData()
     {
         //Settings Data
         //Graphics
-        gQualityInt = user.gQualityInt;
-        rDistanceFlt = user.rDistanceFlt;
-        FOVFlt = user.FOVFlt;
-        healthBarBool = user.healthBarBool;
+        gQualityInt = UserSettings.gQualityInt;
+        FOVFlt = UserSettings.FOVFlt;
+        healthBarBool = UserSettings.healthBarBool;
         //Audio
-        masterVolumeFlt = user.masterVolumeFlt;
-        musicVolumeFlt = user.musicVolumeFlt;
-        effectsVolumeFlt = user.effectsVolumeFlt;
+        masterVolumeFlt = UserSettings.masterVolumeFlt;
+        musicVolumeFlt = UserSettings.musicVolumeFlt;
+        effectsVolumeFlt = UserSettings.effectsVolumeFlt;
         //Controls
-        sensitivityFlt = user.sensitivityFlt;
-        inputKeyBinds = user.inputKeyBinds;
+        sensitivityFlt = UserSettings.sensitivityFlt;
+        inputKeyBinds = UserSettings.keybinds;
     }
 }

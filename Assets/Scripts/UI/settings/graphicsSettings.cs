@@ -18,9 +18,7 @@ public class graphicsSettings : MonoBehaviour
     private Camera cam;
 
     void Awake() {
-        if(SavingSystem.LoadUser() != null) {
-            loadVar();
-        }
+        loadVar();
         updateGraphics();
     }
 
@@ -44,17 +42,16 @@ public class graphicsSettings : MonoBehaviour
     }
 
     void loadVar() {
-        SavedData data = SavingSystem.LoadUser();
-        preset.value = data.gQualityInt;
+        preset.value = UserSettings.gQualityInt;
+        FOV.value = UserSettings.FOVFlt;
     }
 
     void saveVar() {
-        UserSettings UD = GameObject.FindGameObjectWithTag("userSettings").GetComponent<UserSettings>();
-        UD.gQualityInt = preset.value;
+        UserSettings.gQualityInt = preset.value;
+        UserSettings.FOVFlt = FOV.value;
     }
 
     public void resettVar() {
-        preset.value = 3;
-        saveVar();
+        UserSettings.resetGraphics();
     }
 }

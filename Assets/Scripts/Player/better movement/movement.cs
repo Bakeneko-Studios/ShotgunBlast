@@ -45,15 +45,6 @@ public class movement : MonoBehaviour
     public float crouchScale;
     private float yScale;
     public float maxSlopeAngle;
-    
-    [Header("Keybinds")]
-    public KeyCode walkKey = KeyCode.W;
-    public KeyCode leftKey = KeyCode.A;
-    public KeyCode backKey = KeyCode.S;
-    public KeyCode rightKey = KeyCode.D;
-    public KeyCode jumpKey = KeyCode.Space;
-    public KeyCode sprintKey = KeyCode.LeftShift;
-    public KeyCode crouchKey = KeyCode.C;
 
     private void Awake() {instance=this;}
     void Start()
@@ -81,8 +72,8 @@ public class movement : MonoBehaviour
             //else StartCoroutine(jumpFatigue());
         }
 
-        h = canMove ? (Input.GetKey(leftKey)?-1:0) + (Input.GetKey(rightKey)?1:0) : 0;
-        v = canMove ? (Input.GetKey(backKey)?-1:0) + (Input.GetKey(walkKey)?1:0) : 0;
+        h = canMove ? (Input.GetKey(UserSettings.keybinds["left"])?-1:0) + (Input.GetKey(UserSettings.keybinds["right"])?1:0) : 0;
+        v = canMove ? (Input.GetKey(UserSettings.keybinds["back"])?-1:0) + (Input.GetKey(UserSettings.keybinds["forward"])?1:0) : 0;
         
         Vector3 vel = new Vector3(rb.velocity.x,0f,rb.velocity.z);
         if(vel.magnitude>speedCap)
@@ -93,7 +84,7 @@ public class movement : MonoBehaviour
 
         if(grounded)
         {
-            if(Input.GetKey(crouchKey))
+            if(Input.GetKey(UserSettings.keybinds["crouch"]))
             {
                 if(nvvelocity>slideThreshold)
                 {
@@ -139,7 +130,7 @@ public class movement : MonoBehaviour
             rb.drag=0;
         }
 
-        if(Input.GetKeyDown(jumpKey)&&canMove)
+        if(Input.GetKeyDown(UserSettings.keybinds["jump"])&&canMove)
         {
             if(grounded)
             {
@@ -160,12 +151,12 @@ public class movement : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(crouchKey))
+        if(Input.GetKeyDown(UserSettings.keybinds["crouch"]))
         {
             transform.localScale = new Vector3(transform.localScale.x,crouchScale,transform.localScale.z);
             transform.position = new Vector3(transform.position.x,transform.position.y-(yScale-crouchScale),transform.position.z);
         }
-        if(Input.GetKeyUp(crouchKey))
+        if(Input.GetKeyUp(UserSettings.keybinds["crouch"]))
         {
             transform.position = new Vector3(transform.position.x,transform.position.y+(yScale-crouchScale),transform.position.z);
             transform.localScale = new Vector3(transform.localScale.x,yScale,transform.localScale.z);

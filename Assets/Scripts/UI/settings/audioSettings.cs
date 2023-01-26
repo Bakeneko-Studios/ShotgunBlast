@@ -30,24 +30,19 @@ public class audioSettings : MonoBehaviour
     }
 
     void loadVar() {
-        SavedData data = SavingSystem.LoadUser();
-        masterSlider.value = data.masterVolumeFlt;
-        musicSlider.value = data.musicVolumeFlt;
-        effectsSlider.value = data.effectsVolumeFlt;
+        masterSlider.value = UserSettings.masterVolumeFlt;
+        musicSlider.value = UserSettings.musicVolumeFlt;
+        effectsSlider.value = UserSettings.effectsVolumeFlt;
     }
 
     public void saveVar() {
-        UserSettings UD = GameObject.FindGameObjectWithTag("userSettings").GetComponent<UserSettings>();
-        UD.masterVolumeFlt = masterSlider.value;
-        UD.musicVolumeFlt = musicSlider.value;
-        UD.effectsVolumeFlt = effectsSlider.value;
+        UserSettings.masterVolumeFlt = masterSlider.value;
+        UserSettings.musicVolumeFlt = musicSlider.value;
+        UserSettings.effectsVolumeFlt = effectsSlider.value;
     }
 
     public void resetVar() {
-        masterSlider.value = 0;
-        musicSlider.value = 0;
-        effectsSlider.value = 0;
-        saveVar();
+        UserSettings.resetAudio();
     }
 
     public void masterChange()
