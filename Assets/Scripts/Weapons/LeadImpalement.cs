@@ -2,28 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shotgun : MonoBehaviour
+public class LeadImpalement : Shotgun
 {
-    //Gun Stats
-    public int pelletCount;
-    public float spreadAngle;
-    public float pelletSpeed;
-    public float reloadTime;
-    //Effects
-    public GameObject pellet;
-    //TODO public GameObject muzzleFire;
-    //Other Stuff
-    public Transform bulletExit;
-    protected Transform cam;
-    protected Animation anim;
-    public List<Quaternion> pelletAngles;
-    [HideInInspector]public bool isAnimate;
-    //Variables
-    public bool canShoot;
-    //camera shake
-    public float cameraShakeDuration = 0.3f;
-    public float cameraShakeMagnitude = 0.6f;
-
     void Awake()
     {
         pelletAngles = new List<Quaternion>();
@@ -42,7 +22,7 @@ public class Shotgun : MonoBehaviour
         }
     }
 
-    public void FireGun()
+    new public void FireGun()
     {
         if (canShoot && Time.timeScale>0)
         {

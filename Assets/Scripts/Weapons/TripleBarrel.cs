@@ -2,27 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shotgun : MonoBehaviour
+public class TripleBarrel : Shotgun
 {
     //Gun Stats
-    public int pelletCount;
-    public float spreadAngle;
-    public float pelletSpeed;
-    public float reloadTime;
-    //Effects
-    public GameObject pellet;
-    //TODO public GameObject muzzleFire;
-    //Other Stuff
-    public Transform bulletExit;
-    protected Transform cam;
-    protected Animation anim;
-    public List<Quaternion> pelletAngles;
-    [HideInInspector]public bool isAnimate;
-    //Variables
-    public bool canShoot;
-    //camera shake
-    public float cameraShakeDuration = 0.3f;
-    public float cameraShakeMagnitude = 0.6f;
+    public int ammoInClip = 2;
+    public float fireRate = 1f;
 
     void Awake()
     {
@@ -42,10 +26,21 @@ public class Shotgun : MonoBehaviour
         }
     }
 
-    public void FireGun()
+    new public void FireGun()
     {
-        if (canShoot && Time.timeScale>0)
+        if(ammoInClip==0)
         {
+            canShoot=false;
+            if (isAnimate)
+            {
+                anim.Play();
+                StartCoroutine(Reload());
+            }
+            else canShoot = true;
+        }
+        else
+        {
+            canShoot=false;
             if(cam.GetComponent<cameraShake>()!=null)
                 StartCoroutine(cam.GetComponent<cameraShake>().shakeCamera(cameraShakeDuration, cameraShakeMagnitude));
             for (int i=0; i<pelletCount; i++)
@@ -58,25 +53,29 @@ public class Shotgun : MonoBehaviour
                 pShot.transform.rotation = Quaternion.RotateTowards(pShot.transform.rotation, pelletAngles[i], spreadAngle);
                 pShot.GetComponent<Rigidbody>().AddForce(pShot.transform.forward * pelletSpeed);
             }
-            canShoot=false;
-            if (isAnimate) {
-                anim.Play();
-                StartCoroutine(Reload());
-            } else {
-                canShoot = true;
-            }
+            ammoInClip--;
+            StartCoroutine(shotDelay());
         }
+    }
+
+    IEnumerator shotDelay()
+    {
+        yield return new WaitForSeconds(fireRate);
+        canShoot=true;
     }
 
     IEnumerator Reload()
     {
         yield return new WaitForSeconds(reloadTime);
+        ammoInClip = 3;
         canShoot = true;
     }
 
     void Update() 
     {
-        if (Input.GetKeyDown(UserSettings.keybinds["attack"]))
+        if (Input.GetKeyDown(UserSettings.keybinds["attack"]) && canShoot && Time.timeScale>0)
             FireGun();
+        else if(Input.GetKeyDown(UserSettings.keybinds["attack"]))
+            StartCoroutine(Reload());
     }   
 }

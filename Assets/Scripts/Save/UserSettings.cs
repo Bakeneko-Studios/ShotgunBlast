@@ -31,6 +31,7 @@ public static class UserSettings
         {"pause",KeyCode.Escape},
         {"attack",KeyCode.Mouse0},
         {"charge",KeyCode.Mouse1},
+        {"reload",KeyCode.R},
     };
 
     public static void resetKeybinds()
