@@ -32,6 +32,8 @@ public static class UserSettings
         {"attack",KeyCode.Mouse0},
         {"charge",KeyCode.Mouse1},
         {"reload",KeyCode.R},
+        {"punch",KeyCode.V},
+        {"ability",KeyCode.Q},
     };
 
     public static void resetKeybinds()
@@ -48,6 +50,8 @@ public static class UserSettings
             {"pause",KeyCode.Escape},
             {"attack",KeyCode.Mouse0},
             {"charge",KeyCode.Mouse1},
+            {"punch",KeyCode.V},
+            {"ability",KeyCode.Q},
         };
     }
     public static void resetGraphics()

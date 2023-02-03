@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 195c9e787318a3b4b8fe9d6eec8fc012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pelletCount: 0
+  pelletCount: 14
   spreadAngle: 10
   pelletSpeed: 5000
   reloadTime: 1

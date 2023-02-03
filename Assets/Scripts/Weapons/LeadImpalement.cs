@@ -15,11 +15,9 @@ public class LeadImpalement : Shotgun
     }
     void Start()
     {
-        cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        cam = Camera.main.transform;
         anim = GetComponentInChildren<Animation>();
-        if (anim != null) {
-            isAnimate = true;
-        }
+        isAnimate = !(anim==null);
     }
 
     new public void FireGun()

@@ -58,7 +58,6 @@ MonoBehaviour:
   canShoot: 0
   cameraShakeDuration: 0.1
   cameraShakeMagnitude: 0.05
-  shootKey: 323
 --- !u!95 &3755831994444685436
 Animator:
   serializedVersion: 4

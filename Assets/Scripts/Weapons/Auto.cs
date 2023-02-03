@@ -6,7 +6,7 @@ public class Auto : Shotgun
 {
     //Gun Stats
     public int ammoInClip = 8;
-    public float fireRate = 0.3f;
+    public float fireRate = 0.5f;
 
     void Awake()
     {
@@ -19,11 +19,9 @@ public class Auto : Shotgun
     }
     void Start()
     {
-        cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        cam = Camera.main.transform;
         anim = GetComponentInChildren<Animation>();
-        if (anim != null) {
-            isAnimate = true;
-        }
+        isAnimate = !(anim==null);
     }
 
     new public void FireGun()
@@ -42,7 +40,7 @@ public class Auto : Shotgun
         {
             canShoot=false;
             if(cam.GetComponent<cameraShake>()!=null)
-                StartCoroutine(cam.GetComponent<cameraShake>().shakeCamera(cameraShakeDuration, cameraShakeMagnitude));
+               StartCoroutine(cam.GetComponent<cameraShake>().shakeCamera(cameraShakeDuration, cameraShakeMagnitude));
             for (int i=0; i<pelletCount; i++)
             {
                 pelletAngles[i] = Random.rotation;
@@ -75,7 +73,7 @@ public class Auto : Shotgun
     {
         if (Input.GetKey(UserSettings.keybinds["attack"]) && canShoot && Time.timeScale>0)
             FireGun();
-        else if(Input.GetKeyDown(UserSettings.keybinds["attack"]))
+        else if(Input.GetKeyDown(UserSettings.keybinds["reload"]))
             StartCoroutine(Reload());
     }   
 }

@@ -19,11 +19,9 @@ public class DoubleBarrel : Shotgun
     }
     void Start()
     {
-        cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        cam = Camera.main.transform;
         anim = GetComponentInChildren<Animation>();
-        if (anim != null) {
-            isAnimate = true;
-        }
+        isAnimate = !(anim==null);
     }
 
     new public void FireGun()
@@ -75,7 +73,7 @@ public class DoubleBarrel : Shotgun
     {
         if (Input.GetKeyDown(UserSettings.keybinds["attack"]) && canShoot && Time.timeScale>0)
             FireGun();
-        else if(Input.GetKeyDown(UserSettings.keybinds["attack"]))
+        else if(Input.GetKeyDown(UserSettings.keybinds["reload"]))
             StartCoroutine(Reload());
     }   
 }

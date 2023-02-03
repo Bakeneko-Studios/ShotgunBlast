@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TripleBarrel : Shotgun
+public class BRRRRRRRRRRRRRRRRRRRR : Shotgun
 {
     //Gun Stats
-    public int ammoInClip = 2;
-    public float fireRate = 1f;
-
+    public int ammoInClip = 69420;
     void Awake()
     {
         pelletAngles = new List<Quaternion>();
@@ -52,26 +50,19 @@ public class TripleBarrel : Shotgun
                 pShot.GetComponent<Rigidbody>().AddForce(pShot.transform.forward * pelletSpeed);
             }
             ammoInClip--;
-            StartCoroutine(shotDelay());
         }
-    }
-
-    IEnumerator shotDelay()
-    {
-        yield return new WaitForSeconds(fireRate);
-        canShoot=true;
     }
 
     IEnumerator Reload()
     {
         yield return new WaitForSeconds(reloadTime);
-        ammoInClip = 3;
+        ammoInClip = 69420;
         canShoot = true;
     }
 
     void Update() 
     {
-        if (Input.GetKeyDown(UserSettings.keybinds["attack"]) && canShoot && Time.timeScale>0)
+        if (Input.GetKey(UserSettings.keybinds["attack"]) && canShoot && Time.timeScale>0)
             FireGun();
         else if(Input.GetKeyDown(UserSettings.keybinds["reload"]))
             StartCoroutine(Reload());
