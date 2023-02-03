@@ -6,45 +6,44 @@ public class worldgenv3 : MonoBehaviour
 {
     class Cell
     {
-        public GameObject structure;
+        public Room room;
         public int x, z;
-        public Cell(GameObject structure,int cellX,int cellZ)
+        public Cell(Room structure,int cellX,int cellZ,int cellSize)
         {
-            this.structure=structure;
+            room=structure;
             x=cellX;
             z=cellZ;
             doors = new Vector3[4];
+            room.eastDoor+=new Vector3((x+0.5f)*cellSize,0,(z+0.5f)*cellSize);
+            room.westDoor+=new Vector3((x+0.5f)*cellSize,0,(z+0.5f)*cellSize);
+            room.northDoor+=new Vector3((x+0.5f)*cellSize,0,(z+0.5f)*cellSize);
+            room.southDoor+=new Vector3((x+0.5f)*cellSize,0,(z+0.5f)*cellSize);
         }
         public Vector3[] doors;
         public void place(int cellSize, Transform parent)
-        {GameObject.Instantiate(structure,new Vector3((x+0.5f)*cellSize,0,(z+0.5f)*cellSize),new Quaternion(),parent);}
+        {GameObject.Instantiate(room.structure,new Vector3((x+0.5f)*cellSize,0,(z+0.5f)*cellSize),new Quaternion(),parent);}
     }
     [System.Serializable] class RoomType
     {
-        public GameObject room;
+        public Room room;
         public int count;
     }
-    [System.Serializable] class Room
-    {
-        GameObject structure;
-        Vector3 northDoor;
-        Vector3 eastDoor;
-        Vector3 southDoor;
-        Vector3 westDoor;
-    }
-    enum Direction
-    {north,east,south,west}
+    private bool valid=true;
     [SerializeField] RoomType[] types;
-    [SerializeField] private GameObject startRoom;
-    [SerializeField] private GameObject endRoom;
+    [SerializeField] private Room startRoom;
+    [SerializeField] private Room endRoom;
     [SerializeField] private Transform parent;
-    private Cell[,] grid;
+    [SerializeField] private Transform hallwayParent;
+    public GameObject hallwaySegment;
+    public int segmentLength;
+    [SerializeField] private Cell[,] grid;
     [Range(2,100)] public int gridX;
     [Range(2,100)] public int gridZ;
     public int cellSize;
     [Range(0.25f,1)]public float doorSpawnRate = 0.5f;
     Cell start,end,lastRoom;
-    List<GameObject> rooms = new List<GameObject>();
+    List<Room> rooms = new List<Room>();
+    List<Vector3> hallways = new List<Vector3>();
     void Awake()
     {
         validate();
@@ -65,7 +64,7 @@ public class worldgenv3 : MonoBehaviour
     {
         int a=0;
         foreach (RoomType type in types) a+=type.count;
-        if(a+2>gridX*gridZ/2) {throw new System.Exception("Too many rooms (max = gridsize/2");}
+        if(a+2>gridX*gridZ/2) {Debug.LogError("Too many rooms (max = gridsize/2"); valid=false;}
     }
     List<int> validPaths(Cell c)
     {
@@ -79,11 +78,12 @@ public class worldgenv3 : MonoBehaviour
     }
     void generate()
     {
+        if(!valid) {Debug.LogWarning("invalid config, can't generate"); return;}
         attempt:
-        foreach (RoomType type in types){for (int i = 0; i < type.count; i++){rooms.Add(type.room);}}
+        foreach (RoomType type in types){for (int i = 0; i < type.count; i++){rooms.Add(new Room(type.room));}}
         grid = new Cell[gridX,gridZ];
         Cell room1;
-        start = new Cell(startRoom,Random.Range(0,gridX),Random.Range(0,gridZ));
+        start = new Cell(new Room(startRoom),Random.Range(0,gridX),Random.Range(0,gridZ),cellSize);
         grid[start.x,start.z]=start;
         start.place(cellSize,parent);
         Debug.Log($"Start: [{start.x},{start.z}]");
@@ -91,58 +91,78 @@ public class worldgenv3 : MonoBehaviour
         int r = Random.Range(0,rooms.Count);
         switch(d)
         {
-            case 0: room1 = new Cell(rooms[r],start.x,start.z+1); break;
-            case 1: room1 = new Cell(rooms[r],start.x+1,start.z); break;
-            case 2: room1 = new Cell(rooms[r],start.x,start.z-1); break;
-            case 3: room1 = new Cell(rooms[r],start.x-1,start.z); break;
-            default: clear(); goto attempt;
+            case 0: room1 = new Cell(rooms[r],start.x,start.z+1,cellSize); hallways.Add(start.room.northDoor);hallways.Add(room1.room.southDoor); break;
+            case 1: room1 = new Cell(rooms[r],start.x+1,start.z,cellSize); hallways.Add(start.room.eastDoor); hallways.Add(room1.room.westDoor);  break;
+            case 2: room1 = new Cell(rooms[r],start.x,start.z-1,cellSize); hallways.Add(start.room.southDoor);hallways.Add(room1.room.northDoor); break;
+            case 3: room1 = new Cell(rooms[r],start.x-1,start.z,cellSize); hallways.Add(start.room.westDoor); hallways.Add(room1.room.eastDoor);  break;
+            default: clear(); Debug.LogWarning("restarting (1)"); goto attempt;
         }
         bool e = pathfind(room1,r);
-        if(!e||rooms.Count!=0){clear(); goto attempt;}
+        if(!e||rooms.Count!=0){clear(); Debug.LogWarning("restarting (2)"); goto attempt;}
         List<int> b = validPaths(lastRoom);
-        if(b==null) {clear(); goto attempt;}
+        if(b==null) {clear(); Debug.LogWarning("restarting (3)"); goto attempt;}
         d = b[Random.Range(0,b.Count)];
         switch(d)
         {
-            case 0: end = new Cell(endRoom,lastRoom.x,lastRoom.z+1); break;
-            case 1: end = new Cell(endRoom,lastRoom.x+1,lastRoom.z); break;
-            case 2: end = new Cell(endRoom,lastRoom.x,lastRoom.z-1); break;
-            case 3: end = new Cell(endRoom,lastRoom.x-1,lastRoom.z); break;
-            default: clear(); goto attempt;
+            case 0: end = new Cell(new Room(endRoom),lastRoom.x,lastRoom.z+1,cellSize); hallways.Add(lastRoom.room.northDoor); hallways.Add(end.room.southDoor); break;
+            case 1: end = new Cell(new Room(endRoom),lastRoom.x+1,lastRoom.z,cellSize); hallways.Add(lastRoom.room.eastDoor);  hallways.Add(end.room.westDoor);  break;
+            case 2: end = new Cell(new Room(endRoom),lastRoom.x,lastRoom.z-1,cellSize); hallways.Add(lastRoom.room.southDoor); hallways.Add(end.room.northDoor); break;
+            case 3: end = new Cell(new Room(endRoom),lastRoom.x-1,lastRoom.z,cellSize); hallways.Add(lastRoom.room.westDoor);  hallways.Add(end.room.eastDoor);  break;
+            default: clear(); Debug.LogWarning("restrting (4)"); goto attempt;
         }
         grid[end.x,end.z]=end;
         end.place(cellSize,parent);
+        bool walls = connect();
+        if(!walls) {clear(); Debug.LogWarning("restarting (5)"); goto attempt;}
     }
     bool pathfind(Cell c, int r)
     {
         if(rooms.Count==1) lastRoom=c;
         rooms.RemoveAt(r);
         grid[c.x,c.z]=c;
-        c.place(cellSize,parent); //place current toom
-        Debug.Log($"{c.structure.name}: [{c.x},{c.z}]");
-        List<int> doors = validPaths(c); //all valid adjacent cells
-        if(doors==null) {Debug.Log("no valid paths"); return false;}
-        for (int i = 0; i < doors.Count; i++) {if(Random.value<doorSpawnRate) {doors.RemoveAt(i);i--;}} //50% chance for a door to spawn
-        foreach (int i in doors) //new path for each chosen direction
+        c.place(cellSize,parent);
+        Debug.Log($"{c.room.structure.name}: [{c.x},{c.z}]");
+        List<int> doors = validPaths(c);
+        if(doors==null) {Debug.LogWarning("no valid paths"); return false;}
+        for (int i = 0; i < doors.Count; i++) {if(Random.value<doorSpawnRate) {doors.RemoveAt(i);i--;}}
+        foreach (int i in doors)
         {
             if(rooms.Count==0) {Debug.Log("no more rooms"); return true;}
             int rr = Random.Range(0,rooms.Count);
             switch(i)
             {
-                case 0: pathfind(new Cell(rooms[rr],c.x,c.z+1),rr); break; //north
-                case 1: pathfind(new Cell(rooms[rr],c.x+1,c.z),rr); break; //east
-                case 2: pathfind(new Cell(rooms[rr],c.x,c.z-1),rr); break; //south
-                case 3: pathfind(new Cell(rooms[rr],c.x-1,c.z),rr); break; //west
+                case 0: hallways.Add(c.room.northDoor); hallways.Add(new Vector3((c.x+0.5f)*cellSize,0,(c.z+1.5f)*cellSize)+rooms[rr].southDoor); pathfind(new Cell(rooms[rr],c.x,c.z+1,cellSize),rr); break;
+                case 1: hallways.Add(c.room.eastDoor);  hallways.Add(new Vector3((c.x+1.5f)*cellSize,0,(c.z+0.5f)*cellSize)+rooms[rr].westDoor);  pathfind(new Cell(rooms[rr],c.x+1,c.z,cellSize),rr); break;
+                case 2: hallways.Add(c.room.southDoor); hallways.Add(new Vector3((c.x+0.5f)*cellSize,0,(c.z-0.5f)*cellSize)+rooms[rr].northDoor); pathfind(new Cell(rooms[rr],c.x,c.z-1,cellSize),rr); break;
+                case 3: hallways.Add(c.room.westDoor);  hallways.Add(new Vector3((c.x-0.5f)*cellSize,0,(c.z+0.5f)*cellSize)+rooms[rr].eastDoor);  pathfind(new Cell(rooms[rr],c.x-1,c.z,cellSize),rr); break;
                 default: return false;
             }
         }
         Debug.Log("path finished");
         return true;
     }
+    bool connect()
+    {
+        if(hallways.Count%2!=0) {Debug.LogError("missing hallway"); return false;}
+        for (int i = 0; i < hallways.Count; i+=2)
+        {
+            switch (hallways[i+1]-hallways[i])
+            {
+                case Vector3 v1 when v1.x>0: for (int j = 0; j < v1.x; j+=segmentLength)  {GameObject.Instantiate(hallwaySegment,hallways[i]+new Vector3(j+segmentLength/2,0,segmentLength/2) ,new Quaternion(0,0,0,0),hallwayParent);} break;
+                case Vector3 v2 when v2.x<0: for (int j = 0; j < -v2.x; j+=segmentLength) {GameObject.Instantiate(hallwaySegment,hallways[i]+new Vector3(-j+segmentLength/2,0,segmentLength/2),new Quaternion(0,180,0,0),hallwayParent);} break;
+                case Vector3 v3 when v3.z>0: for (int j = 0; j < v3.z; j+=segmentLength)  {GameObject.Instantiate(hallwaySegment,hallways[i]+new Vector3(segmentLength/2,0,j+segmentLength/2) ,new Quaternion(0,-90,0,0),hallwayParent);} break;
+                case Vector3 v4 when v4.z<0: for (int j = 0; j < -v4.z; j+=segmentLength) {GameObject.Instantiate(hallwaySegment,hallways[i]+new Vector3(segmentLength/2,0,-j+segmentLength/2),new Quaternion(0,90,0,0),hallwayParent);} break;
+                default: throw new System.Exception("VEIFWEFGUOYDHIUYG#OEWDUOMIYWEGFFUCKKKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            }
+        }
+        return true;
+    }
     void clear()
     {
-        foreach (Transform t in parent) Destroy(t.gameObject);
-        rooms=new List<GameObject>();
+        foreach (Transform t in parent) {if(t.name!=hallwayParent.name) Destroy(t.gameObject);}
+        foreach (Transform t in hallwayParent) {Destroy(t.gameObject);}
+        rooms.Clear();
+        hallways.Clear();
         grid=null;
     }
     private void OnDrawGizmos() {
@@ -150,5 +170,10 @@ public class worldgenv3 : MonoBehaviour
             Gizmos.DrawLine(new Vector3(i*cellSize,0,0),new Vector3(i*cellSize,0,gridZ*cellSize));
         for (int i = 0; i <= gridZ; i++)
             Gizmos.DrawLine(new Vector3(0,0,i*cellSize),new Vector3(gridX*cellSize,0,i*cellSize));
+        Gizmos.color = Color.green;
+        for (int i = 0; i < hallways.Count-1; i+=2)
+        {
+            Gizmos.DrawLine(hallways[i],hallways[i+1]);
+        }
     }
 }

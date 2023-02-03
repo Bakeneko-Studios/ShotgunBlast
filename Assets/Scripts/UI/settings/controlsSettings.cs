@@ -20,18 +20,6 @@ public class controlsSettings : MonoBehaviour
 
     MouseLook mouseLook;
 
-    public Dictionary<string,KeyCode> inputKeyBinds = new Dictionary<string, KeyCode>() {
-        {"walk",KeyCode.W},
-        {"left",KeyCode.A},
-        {"back",KeyCode.S},
-        {"right",KeyCode.D},
-        {"jump",KeyCode.Space},
-        {"crouch",KeyCode.C},
-        {"sprint",KeyCode.LeftShift},
-        {"interact",KeyCode.E},
-        {"pause",KeyCode.Escape}
-    };
-
     void Awake()
     {
         context();
@@ -53,10 +41,9 @@ public class controlsSettings : MonoBehaviour
         saveVar();
     }
 
-    Dictionary<string,KeyCode> inputKeyBindsClone; //create a clone incase error
+    Dictionary<string,KeyCode> keybindsClone = UserSettings.keybinds; //create a clone incase error
 
     public void ChangeKey(string action) {
-        inputKeyBindsClone = inputKeyBinds; //cloning dictionaries
         rmkb.gameObject.SetActive(true); //SetActive(false)-ed in rmkb
         rmkb.targetAction = action; //forward the action to change
         GetComponentInParent<PauseScreen>().pauseKey = KeyCode.None;
@@ -65,13 +52,13 @@ public class controlsSettings : MonoBehaviour
     public void updateKeyBinds() { //put this one a button or exit idk. Convert dictionary to script
         //check for duplicates
         bool duplicates = false;
-        var dupe = inputKeyBinds.GroupBy(x => x.Value);
+        var dupe = UserSettings.keybinds.GroupBy(x => x.Value);
         foreach (var group in dupe) {
             if (group.Count() > 1)
             {
                 duplicates = true;
                 string message = group.Key.ToString();
-                inputKeyBinds = inputKeyBindsClone; //revert changes
+                UserSettings.keybinds = keybindsClone; //revert changes
                 errorPanel.SetActive(true);
                 Debug.Log(message);
                 break;
@@ -79,17 +66,8 @@ public class controlsSettings : MonoBehaviour
         }
         //if no duplicates send values to scripts
         if(!duplicates) {
-            //movement keybinds
-            movement.walkKey = inputKeyBinds["walk"];
-            movement.leftKey = inputKeyBinds["left"];
-            movement.backKey = inputKeyBinds["back"];
-            movement.rightKey = inputKeyBinds["right"];
-            //parkour keybinds
-            movement.jumpKey = inputKeyBinds["jump"];
-            movement.sprintKey = inputKeyBinds["sprint"];
-            movement.crouchKey = inputKeyBinds["crouch"];
             //PlayerAction keybind
-            playerAction.interactKey = inputKeyBinds["interact"];;
+            playerAction.interactKey = UserSettings.keybinds["interact"];;
             saveVar();
         }
     }
@@ -115,49 +93,30 @@ public class controlsSettings : MonoBehaviour
     }
 
     void Start() {
-        foreach (var item in inputKeyBinds) {
+        foreach (var item in UserSettings.keybinds) {
             updateButtonText(item.Key,item.Value.ToString(),false);
         }
     }
 
-    public void resetKeyBinds() {
-        inputKeyBinds = new Dictionary<string, KeyCode>() {
-            {"walk",KeyCode.W},
-            {"left",KeyCode.A},
-            {"back",KeyCode.S},
-            {"right",KeyCode.D},
-            {"jump",KeyCode.Space},
-            {"crouch",KeyCode.C},
-            {"sprint",KeyCode.LeftShift},
-            {"interact",KeyCode.E},
-            {"pause",KeyCode.Escape}
-        };
-        foreach (var item in inputKeyBinds) {
+    public void resetKeyBinds()
+    {
+        UserSettings.resetKeybinds();
+        foreach (var item in UserSettings.keybinds)
+        {
             updateButtonText(item.Key,item.Value.ToString(),false);
         }
     }
     void loadVar() {
-        SavedData data = SavingSystem.LoadUser();
-        sensitivitySlider.value = data.sensitivityFlt;
-        if(data.inputKeyBinds != null) {
-            inputKeyBinds = data.inputKeyBinds;
-        }
-        else {
-            Debug.Log("fuck it's not working");
-        }
+        sensitivitySlider.value = UserSettings.sensitivityFlt;
     }
 
     void saveVar() {
-        UserSettings UD = GameObject.FindGameObjectWithTag("userSettings").GetComponent<UserSettings>();
         //sensitivity
-        UD.sensitivityFlt = sensitivitySlider.value;
-        //movement keybinds
-        UD.inputKeyBinds = inputKeyBinds;
+        UserSettings.sensitivityFlt = sensitivitySlider.value;
     }
 
     public void resetVar() {
-        resetKeyBinds();
-        sensitivitySlider.value = 70f;
+        UserSettings.resetControls();
         saveVar();
     }
 }

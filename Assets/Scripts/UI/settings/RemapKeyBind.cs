@@ -16,7 +16,7 @@ public class RemapKeyBind : MonoBehaviour
     //on your right
     KeyCode.RightShift,KeyCode.RightControl,KeyCode.RightAlt,KeyCode.PageUp,KeyCode.PageDown,KeyCode.RightCommand,
     //mouse
-    KeyCode.Mouse1,KeyCode.Mouse2,KeyCode.Mouse3,KeyCode.Mouse4
+    KeyCode.Mouse0,KeyCode.Mouse1,KeyCode.Mouse2,KeyCode.Mouse3,KeyCode.Mouse4,KeyCode.Mouse5,KeyCode.Mouse6,
     };
 
     void Update() {
@@ -25,14 +25,14 @@ public class RemapKeyBind : MonoBehaviour
             if(newInputstr.ToString() != "") { //try string KeyBinds
                 foreach(char c in newInputstr) {
                     KeyCode newInput = (KeyCode)c;
-                    controlsSettings.inputKeyBinds[targetAction] = newInput;
+                    UserSettings.keybinds[targetAction] = newInput;
                     controlsSettings.updateButtonText(targetAction,newInput.ToString(),true);
                 }
             } else { //try keybinds in List
                 foreach(KeyCode kc in notStringKeyCodes) {
                     if(Input.GetKey(kc)) {
                         KeyCode newInput = kc;
-                    controlsSettings.inputKeyBinds[targetAction] = newInput;
+                    UserSettings.keybinds[targetAction] = newInput;
                     controlsSettings.updateButtonText(targetAction,newInput.ToString(),true);
                     }
                 }

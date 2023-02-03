@@ -7,7 +7,6 @@ public class PauseScreen : MonoBehaviour
 {
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private  GameObject settingsController; //prefab
-    [SerializeField] private  GameObject userSettings; //prefab
     public GameObject menuHealthBar;
     public GameObject hudHealthBar;
     private GameObject UD;
@@ -18,9 +17,6 @@ public class PauseScreen : MonoBehaviour
     [SerializeField] private GameObject defaultSelected;
 
     void Awake() {
-        if(GameObject.Find("userSettings") == null) {
-            UD = Instantiate(userSettings);
-        }
         loadSettings(true);
         Player = GameObject.FindGameObjectWithTag("Player");
         currentlyOpened = mainPanel;
@@ -79,7 +75,7 @@ public class PauseScreen : MonoBehaviour
     }
 
     public void saveVar() {
-        SavingSystem.SaveUser(UD.GetComponent<UserSettings>());
+        SavingSystem.SaveUser();
     }
 
     public void leaveGame() {

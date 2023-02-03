@@ -2,28 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shotgun : MonoBehaviour
+public class EMP : Shotgun
 {
-    //Gun Stats
-    public int pelletCount;
-    public float spreadAngle;
-    public float pelletSpeed;
-    public float reloadTime;
-    //Effects
-    public GameObject pellet;
-    //TODO public GameObject muzzleFire;
-    //Other Stuff
-    public Transform bulletExit;
-    protected Transform cam;
-    protected Animation anim;
-    public List<Quaternion> pelletAngles;
-    [HideInInspector]public bool isAnimate;
-    //Variables
-    public bool canShoot;
-    //camera shake
-    public float cameraShakeDuration = 0.3f;
-    public float cameraShakeMagnitude = 0.6f;
-
+    public float fireRate = 2f;
     void Awake()
     {
         pelletAngles = new List<Quaternion>();
@@ -37,10 +18,12 @@ public class Shotgun : MonoBehaviour
     {
         cam = Camera.main.transform;
         anim = GetComponentInChildren<Animation>();
-        isAnimate = !(anim==null);
+        if (anim != null) {
+            isAnimate = true;
+        }
     }
 
-    public void FireGun()
+    new public void FireGun()
     {
         if(cam.GetComponent<cameraShake>()!=null)
             StartCoroutine(cam.GetComponent<cameraShake>().shakeCamera(cameraShakeDuration, cameraShakeMagnitude));
@@ -55,23 +38,18 @@ public class Shotgun : MonoBehaviour
             pShot.GetComponent<Rigidbody>().AddForce(pShot.transform.forward * pelletSpeed);
         }
         canShoot=false;
-        if (isAnimate) {
-            anim.Play();
-            StartCoroutine(Reload());
-        } else {
-            canShoot = true;
-        }
+        StartCoroutine(shootDelay());
     }
 
-    IEnumerator Reload()
+    IEnumerator shootDelay()
     {
-        yield return new WaitForSeconds(reloadTime);
-        canShoot = true;
+        yield return new WaitForSeconds(fireRate);
+        canShoot=true;
     }
 
     void Update() 
     {
-        if (Input.GetKeyDown(UserSettings.keybinds["attack"]) && canShoot && Time.timeScale>0)
+        if (Input.GetKeyDown(UserSettings.keybinds["attack"]))
             FireGun();
     }   
 }
