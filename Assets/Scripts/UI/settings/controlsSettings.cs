@@ -46,7 +46,7 @@ public class controlsSettings : MonoBehaviour
     public void ChangeKey(string action) {
         rmkb.gameObject.SetActive(true); //SetActive(false)-ed in rmkb
         rmkb.targetAction = action; //forward the action to change
-        GetComponentInParent<PauseScreen>().pauseKey = KeyCode.None;
+        UserSettings.keybinds["pause"] = KeyCode.None;
     }
 
     public void updateKeyBinds() { //put this one a button or exit idk. Convert dictionary to script

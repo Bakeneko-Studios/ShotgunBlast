@@ -11,24 +11,20 @@ public class PauseScreen : MonoBehaviour
     public GameObject hudHealthBar;
     private GameObject UD;
     private GameObject currentlyOpened;
-    private GameObject Player;
-
-    public KeyCode pauseKey = KeyCode.Escape;
     [SerializeField] private GameObject defaultSelected;
 
     void Awake() {
         loadSettings(true);
-        Player = GameObject.FindGameObjectWithTag("Player");
         currentlyOpened = mainPanel;
     }
 
     void Update(){
-        if (Input.GetKeyDown(pauseKey))
+        if (Input.GetKeyDown(UserSettings.keybinds["pause"]))
         {
-            if (Cursor.lockState == CursorLockMode.Locked)
+            if (!Player.paused)
             {
                 Cursor.lockState = CursorLockMode.None;
-                Player.GetComponent<movement>().enabled = false;
+                Player.paused=true;
                 Time.timeScale = 0;
                 mainPanel.SetActive(true);
                 hudHealthBar.SetActive(false);
@@ -47,7 +43,7 @@ public class PauseScreen : MonoBehaviour
                     mainPanel.SetActive(false);
                     hudHealthBar.SetActive(true);
                     saveVar();
-                    Player.GetComponent<movement>().enabled = true;
+                    Player.paused=false;
                     Cursor.lockState = CursorLockMode.Locked;
                 }
             }

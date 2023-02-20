@@ -34,6 +34,7 @@ public static class UserSettings
         {"reload",KeyCode.R},
         {"punch",KeyCode.V},
         {"ability",KeyCode.Q},
+        {"freecam",KeyCode.Z},
     };
 
     public static void resetKeybinds()
@@ -52,6 +53,7 @@ public static class UserSettings
             {"charge",KeyCode.Mouse1},
             {"punch",KeyCode.V},
             {"ability",KeyCode.Q},
+            {"freecam",KeyCode.Z},
         };
     }
     public static void resetGraphics()

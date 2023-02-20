@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
+    public static MouseLook instance;
     public float sensitivity;
     [SerializeField] Transform playerCam;
     //[SerializeField] Transform hands;
@@ -14,6 +15,7 @@ public class MouseLook : MonoBehaviour
 
     void Awake() 
     {
+        instance=this;
         Cursor.lockState = CursorLockMode.Locked;
     }
     void Update()

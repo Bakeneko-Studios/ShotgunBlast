@@ -37,7 +37,7 @@ public class RemapKeyBind : MonoBehaviour
                     }
                 }
             }
-            controlsSettings.GetComponentInParent<PauseScreen>().pauseKey = KeyCode.Escape; //reenable escape
+            UserSettings.keybinds["pause"] = KeyCode.Escape;; //reenable escape
             this.gameObject.SetActive(false);
         }
     }

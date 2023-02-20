@@ -7,8 +7,9 @@ public static class Player
     public enum contact
     {ground,air,wall,ledge}
     public enum MoveState
-    {idle,walk,sprint,crouch,slide,air}
+    {idle,walk,sprint,crouch,slide,air,freecam}
     public static contact playerStatus;
     public static MoveState state;
+    public static bool paused = false;
     public static float hp = 100;
 }
