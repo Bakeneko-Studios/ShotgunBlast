@@ -1,11 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
-public class Pellet : MonoBehaviour
+public class EMPPellet : MonoBehaviour
 {
     private float life = 5f;
     public float pelletSpeed;
     public int dmg;
+    public int empDmg;
     public bool playersBullet = false;
     //!bool collideDetect = false;
     //TODO Pellets will destory cuz when they spawn they trigger OnTriggerEnter, make a tag so that they dont get destroyed by eachother
@@ -31,8 +32,9 @@ public class Pellet : MonoBehaviour
         if (other.gameObject.GetComponent<enemyFramework>() != null && playersBullet)
         {   
             other.gameObject.GetComponent<enemyFramework>().ChangeHealth(-dmg);
+            other.gameObject.GetComponent<enemyFramework>().ChangeEMPHealth(-empDmg);
         }
-        if (other.gameObject.tag == "Player" && !playersBullet)
+        else if (other.gameObject.tag == "Player" && !playersBullet)
         {
             other.gameObject.GetComponent<playerHealth>().ChangeHealth(-dmg);
         }
