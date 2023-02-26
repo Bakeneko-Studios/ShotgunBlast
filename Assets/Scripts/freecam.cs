@@ -13,6 +13,10 @@ public class freecam : MonoBehaviour
     float h,v;
     float mouseX,mouseY,xRotation;
     [SerializeField] Canvas canvas;
+    void Awake()
+    {
+        this.enabled=!Player.dev;
+    }
     void Update()
     {
         if(!Player.paused)

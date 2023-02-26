@@ -8,9 +8,7 @@ Library/BurstCache/JIT/
 Library/PackageCache/
 Library/ShaderCache/
 Library/ScriptAssemblies/
-UserSettings
-UserSettings/Layouts/CurrentMaximizeLayout.dwlt
-UserSettings/Layouts/default-2021.dwlt
+UserSettings/
 Assembly-CSharp.csproj
 ShotgunBlast.sln
 obj/Debug/Assembly-CSharp.csproj.AssemblyReference.cache
@@ -24,9 +22,7 @@ Library\BurstCache\JIT\
 Library\PackageCache\
 Library\ShaderCache\
 Library\ScriptAssemblies\
-UserSettings
-UserSettings\Layouts\CurrentMaximizeLayout.dwlt
-UserSettings\Layouts\default-2021.dwlt
+UserSettings\
 Assembly-CSharp.csproj
 ShotgunBlast.sln
 obj\Debug\Assembly-CSharp.csproj.AssemblyReference.cache
