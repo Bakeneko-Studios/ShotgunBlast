@@ -451,6 +451,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &51930230 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4944231609365239287, guid: 62f998d093f403c4ba34ca00a209961a, type: 3}
+  m_PrefabInstance: {fileID: 1155677899070604997}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &67112437
 GameObject:
   m_ObjectHideFlags: 0
@@ -22058,6 +22063,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &882494393 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4944231608882375474, guid: 62f998d093f403c4ba34ca00a209961a, type: 3}
+  m_PrefabInstance: {fileID: 1155677899070604997}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &906849436
 GameObject:
   m_ObjectHideFlags: 0
@@ -35901,6 +35911,14 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1689958132}
+    - target: {fileID: 7961946055964912700, guid: 62f998d093f403c4ba34ca00a209961a, type: 3}
+      propertyPath: leftHand
+      value: 
+      objectReference: {fileID: 882494393}
+    - target: {fileID: 7961946055964912700, guid: 62f998d093f403c4ba34ca00a209961a, type: 3}
+      propertyPath: rightHand
+      value: 
+      objectReference: {fileID: 51930230}
     - target: {fileID: 7961946055964912703, guid: 62f998d093f403c4ba34ca00a209961a, type: 3}
       propertyPath: m_Interpolate
       value: 1

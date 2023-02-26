@@ -19,6 +19,10 @@ public static class UserSettings
     public static float effectsVolumeFlt = 1f;
     //Controls
     public static float sensitivityFlt = 70f;
+
+    //Game data
+    public static List<Arm> unlockedArms = new List<Arm>();
+
     public static Dictionary<string, KeyCode> keybinds = new Dictionary<string, KeyCode>()
     {
         {"forward",KeyCode.W},
@@ -35,6 +39,7 @@ public static class UserSettings
         {"punch",KeyCode.V},
         {"ability",KeyCode.Q},
         {"freecam",KeyCode.Z},
+        {"cycle arm",KeyCode.X},
     };
 
     public static void resetKeybinds()
@@ -54,6 +59,7 @@ public static class UserSettings
             {"punch",KeyCode.V},
             {"ability",KeyCode.Q},
             {"freecam",KeyCode.Z},
+            {"cycle arm",KeyCode.X}
         };
     }
     public static void resetGraphics()

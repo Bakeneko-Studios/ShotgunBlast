@@ -21,7 +21,7 @@ public class TripleBarrel : Shotgun
     {
         cam = Camera.main.transform;
         anim = GetComponentInChildren<Animation>();
-        isAnimate = !(anim==null);
+        isAnimate = anim!=null && animOneHand!=null;
     }
 
     new public void FireGun()
@@ -29,12 +29,11 @@ public class TripleBarrel : Shotgun
         if(ammoInClip==0)
         {
             canShoot=false;
-            if (isAnimate)
-            {
+            if(isAnimate && !ArmManager.isBusy)
                 anim.Play();
-                StartCoroutine(Reload());
-            }
-            else canShoot = true;
+            else if(isAnimate)
+                animOneHand.Play();
+            StartCoroutine(Reload());
         }
         else
         {
@@ -64,9 +63,11 @@ public class TripleBarrel : Shotgun
 
     IEnumerator Reload()
     {
+        ArmManager.isBusy=true;
         yield return new WaitForSeconds(reloadTime);
         ammoInClip = 3;
         canShoot = true;
+        ArmManager.isBusy=false;
     }
 
     void Update() 
