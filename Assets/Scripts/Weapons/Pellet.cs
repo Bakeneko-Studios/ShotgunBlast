@@ -37,6 +37,10 @@ public class Pellet : MonoBehaviour
         {
             other.gameObject.GetComponent<playerHealth>().ChangeHealth(-dmg);
         }
+        if (other.gameObject.tag == "Shield")
+        {
+            Destroy(this.gameObject);
+        }
     }
     private void FixedUpdate()
     {

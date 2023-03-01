@@ -12,6 +12,7 @@ TagManager:
   - userSettings
   - RHand
   - projectile
+  - Shield
   layers:
   - Default
   - TransparentFX
