@@ -21,7 +21,7 @@ public class Auto : Shotgun
     {
         cam = Camera.main.transform;
         anim = GetComponentInChildren<Animation>();
-        isAnimate = !(anim==null);
+        isAnimate = anim!=null && animOneHand!=null;
     }
 
     new public void FireGun()
@@ -29,12 +29,11 @@ public class Auto : Shotgun
         if(ammoInClip==0)
         {
             canShoot=false;
-            if (isAnimate)
-            {
+            if(isAnimate && !ArmManager.isBusy)
                 anim.Play();
-                StartCoroutine(Reload());
-            }
-            else canShoot = true;
+            else if(isAnimate)
+                animOneHand.Play();
+            StartCoroutine(Reload());
         }
         else
         {
@@ -64,9 +63,11 @@ public class Auto : Shotgun
 
     IEnumerator Reload()
     {
+        ArmManager.isBusy=true;
         yield return new WaitForSeconds(reloadTime);
         ammoInClip = 8;
         canShoot = true;
+        ArmManager.isBusy=false;
     }
 
     void Update() 

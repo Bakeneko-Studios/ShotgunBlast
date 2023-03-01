@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class Player
 {
+    public static readonly bool dev = true;
     public enum contact
     {ground,air,wall,ledge}
     public enum MoveState

@@ -15,10 +15,17 @@ public class enemyFramework : MonoBehaviour
 
     [Header("Basic Info")]
     public float health = 100;
+    public float empHealth = 100;
+    readonly float maxEmphealth = 100;
+    public float empResistance = 0f;
+    [SerializeField] private bool stunned;
+    public float stunTime = 5f;
 
     public GameObject healthBar;
+    public GameObject empHealthBar;
     private float scale;
     private Transform healthBarFront;
+    private Transform empHealthBarFront;
     //public TextMeshProUGUI healthBarText;
     NavMeshAgent agent;
     Transform player;
@@ -51,17 +58,11 @@ public class enemyFramework : MonoBehaviour
     public bool alwaysSeePlayer = true;
 
     //hide if always see player since enemy doesnt need to search
-    [HideInInspector]
-    public bool patrol = true;
-    [HideInInspector] 
-    public float walkPointRange; // how far can it walk
-    [HideInInspector]
-    public float sightRange;
-    [HideInInspector]
-    public bool playerInSightRange, playerInAttackRange;
-    [HideInInspector]
-    [Range(0,360)]
-    public float viewAngle = 90f;
+    [HideInInspector] public bool patrol = true;
+    [HideInInspector]  public float walkPointRange; // how far can it walk
+    [HideInInspector] public float sightRange;
+    [HideInInspector] public bool playerInSightRange, playerInAttackRange;
+    [HideInInspector] [Range(0,360)] public float viewAngle = 90f;
 
 
     IEnumerator waitLife(float life)
@@ -78,6 +79,16 @@ public class enemyFramework : MonoBehaviour
 
         awake = true;
     }
+    IEnumerator emp()
+    {
+        stunned=true;
+        yield return new WaitForSeconds(stunTime);
+        stunned=false;
+    }
+    void empHeal()
+    {
+        if(!stunned && empHealth<maxEmphealth) empHealth++;
+    }
     public void setAwake()
     {
         awake = true;
@@ -93,6 +104,10 @@ public class enemyFramework : MonoBehaviour
             healthBarFront = healthBar.transform.Find("front");
             scale = healthBarFront.localScale.x / health;
         }
+        if(empHealthBar != null)
+        {
+            empHealthBarFront = empHealthBar.transform.Find("front");
+        }
         player = GameObject.FindGameObjectWithTag("Player").transform;
         if (canMove)
             agent = GetComponent<NavMeshAgent>();
@@ -105,7 +120,7 @@ public class enemyFramework : MonoBehaviour
         {
             awake = true;
         }
-
+        InvokeRepeating("empHeal",10f,1f);
     }
 
     public void ChangeHealth(float amount)
@@ -132,6 +147,22 @@ public class enemyFramework : MonoBehaviour
             enabled = false;
         }
 
+    }
+    public void ChangeEMPHealth(float amount)
+    {
+        if (empHealthBar != null)
+            if (empHealthBar.activeSelf == false)
+                empHealthBar.SetActive(true);
+        
+        if(amount>=0) empHealth += amount;
+        else empHealth += amount*empResistance;
+        if (empHealthBarFront != null)
+            empHealthBarFront.transform.localScale = new Vector3(maxEmphealth - (empHealth * scale), empHealthBarFront.transform.localScale.y, empHealthBarFront.transform.localScale.z);
+        if (empHealth<=0)
+        {
+            empHealth=0;
+            StartCoroutine(emp());
+        }
     }
 
     private void OnDrawGizmosSelected()
@@ -167,7 +198,7 @@ public class enemyFramework : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!awake) return;
+        if (!awake || stunned) return;
 
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
