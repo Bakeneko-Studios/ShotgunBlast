@@ -4,7 +4,6 @@ Logs/
 obj/
 Library/
 UserSettings/
-ProjectSettings/
 Assembly-CSharp.csproj
 ShotgunBlast.sln
 
@@ -13,7 +12,6 @@ Logs\
 obj\
 Library\
 UserSettings\
-ProjectSettings\
 Assembly-CSharp.csproj
 ShotgunBlast.sln
 
