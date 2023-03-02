@@ -1,18 +1,20 @@
 
 Temp/
 Logs/
+obj/
 Library/
 UserSettings/
 ProjectSettings/
 Assembly-CSharp.csproj
 ShotgunBlast.sln
-obj/Debug/Assembly-CSharp.csproj.AssemblyReference.cache
 
 Temp\
 Logs\
+obj\
 Library\
 UserSettings\
 ProjectSettings\
 Assembly-CSharp.csproj
 ShotgunBlast.sln
-obj\Debug\Assembly-CSharp.csproj.AssemblyReference.cache
+
+mono_crash.mem.38410.1.blob
