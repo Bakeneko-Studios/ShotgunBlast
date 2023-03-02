@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class freecam : MonoBehaviour
 {
-    public bool clampX;
     bool fc;
     Vector3 ogPosition;
     Quaternion ogDirection;
@@ -12,11 +11,13 @@ public class freecam : MonoBehaviour
     public int sensitivity;
     float h,v;
     float mouseX,mouseY,xRotation;
+    // float xlimit = 90f;
     [SerializeField] Canvas canvas;
-    void Awake()
+    void Start()
     {
-        this.enabled=!Player.dev;
+        
     }
+
     void Update()
     {
         if(!Player.paused)
@@ -53,7 +54,6 @@ public class freecam : MonoBehaviour
 
                 mouseX += Input.GetAxis("Mouse X") * sensitivity * Time.unscaledDeltaTime;
                 mouseY -= Input.GetAxis("Mouse Y") * sensitivity * Time.unscaledDeltaTime;
-                if(clampX) mouseY = Mathf.Clamp(mouseY,-90,90);
                 transform.rotation = Quaternion.Euler(new Vector3(mouseY,mouseX,0));
             }
         }

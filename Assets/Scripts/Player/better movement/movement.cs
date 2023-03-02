@@ -11,7 +11,6 @@ public class movement : MonoBehaviour
     public Rigidbody rb;
     public LayerMask ground;
     public Transform cam;
-    public GameObject leftHand, rightHand;
 
     [Header("Player attributes")]
     public bool canMove = true;
@@ -64,14 +63,14 @@ public class movement : MonoBehaviour
         grounded = Physics.Raycast(transform.position,Vector3.down,height*0.5f+0.2f,ground);
         Player.playerStatus = (grounded?Player.contact.ground:Player.contact.air);
 
-        // if(!wasGrounded&&grounded)
-        // {
-        //     if(Mathf.Sqrt(vl.x*vl.x+vl.y*vl.y+vl.z*vl.z)>1.5*(Mathf.Sqrt(vl.x*vl.x+vl.z*vl.z)) && vl.magnitude>10)
-        //     {
-        //         StartCoroutine(impactForce(Mathf.Log10(Mathf.Sqrt(vl.x*vl.x+vl.y*vl.y+vl.z*vl.z)/2)-0.5f));
-        //     }
-        //     //else StartCoroutine(jumpFatigue());
-        // }
+        if(!wasGrounded&&grounded)
+        {
+            if(Mathf.Sqrt(vl.x*vl.x+vl.y*vl.y+vl.z*vl.z)>1.5*(Mathf.Sqrt(vl.x*vl.x+vl.z*vl.z)) && vl.magnitude>10)
+            {
+                StartCoroutine(impactForce(Mathf.Log10(Mathf.Sqrt(vl.x*vl.x+vl.y*vl.y+vl.z*vl.z)/2)-0.5f));
+            }
+            //else StartCoroutine(jumpFatigue());
+        }
 
         h = canMove ? (Input.GetKey(UserSettings.keybinds["left"])?-1:0) + (Input.GetKey(UserSettings.keybinds["right"])?1:0) : 0;
         v = canMove ? (Input.GetKey(UserSettings.keybinds["back"])?-1:0) + (Input.GetKey(UserSettings.keybinds["forward"])?1:0) : 0;
@@ -156,13 +155,9 @@ public class movement : MonoBehaviour
         {
             transform.localScale = new Vector3(transform.localScale.x,crouchScale,transform.localScale.z);
             transform.position = new Vector3(transform.position.x,transform.position.y-(yScale-crouchScale),transform.position.z);
-            leftHand.transform.localScale = new Vector3(1,1/crouchScale,1);
-            rightHand.transform.localScale = new Vector3(1,1/crouchScale,1);
         }
         if(Input.GetKeyUp(UserSettings.keybinds["crouch"]))
         {
-            leftHand.transform.localScale = Vector3.one;
-            rightHand.transform.localScale = Vector3.one;
             transform.position = new Vector3(transform.position.x,transform.position.y+(yScale-crouchScale),transform.position.z);
             transform.localScale = new Vector3(transform.localScale.x,yScale,transform.localScale.z);
         }

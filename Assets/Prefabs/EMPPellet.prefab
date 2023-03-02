@@ -13,9 +13,8 @@ GameObject:
   - component: {fileID: 6794411547253709212}
   - component: {fileID: 6740836171041751782}
   - component: {fileID: 8252349730045778414}
-  - component: {fileID: 3444144886869329538}
   - component: {fileID: 4458344676439468508}
-  - component: {fileID: 3272261319721339000}
+  - component: {fileID: 3444144886869329538}
   m_Layer: 0
   m_Name: EMPPellet
   m_TagString: projectile
@@ -117,21 +116,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3444144886869329538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 879660532207597176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32d81a7cfd4b04e4d8b8cf1438e3ac5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pelletSpeed: 0
-  dmg: 2
-  playersBullet: 0
 --- !u!96 &4458344676439468508
 TrailRenderer:
   serializedVersion: 2
@@ -240,7 +224,7 @@ TrailRenderer:
   m_MinVertexDistance: 0.07
   m_Autodestruct: 1
   m_Emitting: 1
---- !u!114 &3272261319721339000
+--- !u!114 &3444144886869329538
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -249,10 +233,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 879660532207597176}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f23e6f48470ef354f94af0889dc9946a, type: 3}
+  m_Script: {fileID: 11500000, guid: 32d81a7cfd4b04e4d8b8cf1438e3ac5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pelletSpeed: 0
   dmg: 2
-  empDmg: 10
   playersBullet: 0

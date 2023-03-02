@@ -14,10 +14,6 @@ public class HUD : MonoBehaviour
     [SerializeField] private TextMeshProUGUI sta;
     [SerializeField] private Transform cam;
 
-    void Awake()
-    {
-        this.enabled=!Player.dev;
-    }
     void Update()
     {
         Vector3 p = transform.position;

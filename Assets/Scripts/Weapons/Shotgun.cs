@@ -16,7 +16,6 @@ public class Shotgun : MonoBehaviour
     public Transform bulletExit;
     protected Transform cam;
     protected Animation anim;
-    protected Animation animOneHand;
     public List<Quaternion> pelletAngles;
     [HideInInspector]public bool isAnimate;
     //Variables
@@ -38,7 +37,7 @@ public class Shotgun : MonoBehaviour
     {
         cam = Camera.main.transform;
         anim = GetComponentInChildren<Animation>();
-        isAnimate = anim!=null && animOneHand!=null;
+        isAnimate = !(anim==null);
     }
 
     public void FireGun()
@@ -56,19 +55,18 @@ public class Shotgun : MonoBehaviour
             pShot.GetComponent<Rigidbody>().AddForce(pShot.transform.forward * pelletSpeed);
         }
         canShoot=false;
-        if(isAnimate && !ArmManager.isBusy)
+        if (isAnimate) {
             anim.Play();
-        else if(isAnimate)
-            animOneHand.Play();
-        StartCoroutine(Reload());
+            StartCoroutine(Reload());
+        } else {
+            canShoot = true;
+        }
     }
 
     IEnumerator Reload()
     {
-        ArmManager.isBusy=true;
         yield return new WaitForSeconds(reloadTime);
         canShoot = true;
-        ArmManager.isBusy=false;
     }
 
     void Update() 

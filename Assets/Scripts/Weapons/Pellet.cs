@@ -6,6 +6,7 @@ public class Pellet : MonoBehaviour
     private float life = 5f;
     public float pelletSpeed;
     public int dmg;
+    int num;
     public bool playersBullet = false;
     //!bool collideDetect = false;
     //TODO Pellets will destory cuz when they spawn they trigger OnTriggerEnter, make a tag so that they dont get destroyed by eachother
