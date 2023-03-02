@@ -239,6 +239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8649613076853638562}
   - component: {fileID: 7961946055964912703}
+  - component: {fileID: 8649613076853638561}
   - component: {fileID: 7961946055964912700}
   - component: {fileID: 8649613076853638560}
   - component: {fileID: 4245268676769854621}
@@ -286,6 +287,18 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!114 &8649613076853638561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8649613076853638572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05f75df82adfb23479f1ed2a03388023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7961946055964912700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,8 +317,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   cam: {fileID: 8649613077721364478}
-  leftHand: {fileID: 0}
-  rightHand: {fileID: 0}
   canMove: 1
   grounded: 1
   fatigued: 0
@@ -314,10 +325,8 @@ MonoBehaviour:
   nrmSpeed: 25
   sprSpeed: 25
   crchSpeed: 15
-  speedMultiplier: 1
   speedCap: 30
   jumpForce: 20
-  canJump: 0
   jumpDelay: 0.5
   drag: 15
   airControl: 0.01
@@ -390,9 +399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b88ec8633f70c0428c72c9092462f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  infiniteHealth: 0
   health: 100
-  maxHealth: 0
   hudHealthBar: {fileID: 0}
   menuHealthBar: {fileID: 0}
 --- !u!136 &5150432699366685201
@@ -542,7 +549,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b6132f61ea23e408e9c01854b6ebfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clampX: 0
   speed: 10
   sensitivity: 500
   canvas: {fileID: 0}

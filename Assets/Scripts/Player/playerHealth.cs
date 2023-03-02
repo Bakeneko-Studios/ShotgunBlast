@@ -14,11 +14,7 @@ public class playerHealth : MonoBehaviour
     //public GameObject deathPanel;
 
     void Awake()
-    {
-        if(!Player.dev) infiniteHealth=false;
-        if(infiniteHealth) maxHealth=health=float.MaxValue;
-        else health=maxHealth;
-    }
+    {if(!Player.dev) infiniteHealth=false;}
 
     public void ChangeHealth(float amount)
     {
@@ -36,4 +32,18 @@ public class playerHealth : MonoBehaviour
         }
 
     }
+    void Start()
+    {
+        // scale = healthBar.transform.localScale.x / 100;
+        if(infiniteHealth) maxHealth=health=float.MaxValue;
+        else health=maxHealth;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+
 }
