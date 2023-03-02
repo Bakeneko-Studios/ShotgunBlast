@@ -22,7 +22,7 @@ public class Pump : Shotgun
     {
         cam = Camera.main.transform;
         anim = GetComponentInChildren<Animation>();
-        isAnimate = !(anim==null);
+        isAnimate = anim!=null && animOneHand!=null;
     }
 
     new public void FireGun()
@@ -30,12 +30,11 @@ public class Pump : Shotgun
         if(ammoInClip==0)
         {
             canShoot=false;
-            if (isAnimate)
-            {
+            if(isAnimate && !ArmManager.isBusy)
                 anim.Play();
-                StartCoroutine(Reload());
-            }
-            else canShoot = true;
+            else if(isAnimate)
+                animOneHand.Play();
+            StartCoroutine(Reload());
         }
         else
         {
@@ -67,12 +66,14 @@ public class Pump : Shotgun
 
     IEnumerator Reload()
     {
+        ArmManager.isBusy=true;
         while(ammoInClip<clipSize)
         {
             yield return new WaitForSeconds(reloadTime);
             ammoInClip++;
             canShoot=true;
         }
+        ArmManager.isBusy=false;
     }
 
     void Update() 

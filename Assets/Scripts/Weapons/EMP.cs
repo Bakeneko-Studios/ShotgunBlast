@@ -18,9 +18,6 @@ public class EMP : Shotgun
     {
         cam = Camera.main.transform;
         anim = GetComponentInChildren<Animation>();
-        if (anim != null) {
-            isAnimate = true;
-        }
     }
 
     new public void FireGun()
