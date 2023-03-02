@@ -33,8 +33,10 @@ public class movement : MonoBehaviour
     public float nrmSpeed;
     public float sprSpeed;
     public float crchSpeed;
+    public float speedMultiplier = 1;
     public float speedCap;
     public float jumpForce;
+    public bool canJump=true;
     public float jumpDelay;
     public float drag;
     public float airControl;
@@ -61,7 +63,7 @@ public class movement : MonoBehaviour
         velocity = vl.magnitude;
         nvvelocity = Mathf.Sqrt(vl.x*vl.x+vl.z*vl.z);
         bool wasGrounded = grounded;
-        grounded = Physics.Raycast(transform.position,Vector3.down,height*0.5f+0.2f,ground);
+        grounded = Physics.Raycast(transform.position,Vector3.down,height*0.5f+0.2f,ground,QueryTriggerInteraction.Ignore);
         Player.playerStatus = (grounded?Player.contact.ground:Player.contact.air);
 
         // if(!wasGrounded&&grounded)
@@ -103,7 +105,7 @@ public class movement : MonoBehaviour
                 {
                     Player.state=Player.MoveState.crouch;
                     //fatigued=false;
-                    speed=crchSpeed;
+                    speed=crchSpeed*speedMultiplier;
                     rb.drag=drag;
                 }
             }
@@ -121,7 +123,7 @@ public class movement : MonoBehaviour
             else
             {
                 Player.state=Player.MoveState.walk;
-                speed=nrmSpeed;
+                speed=nrmSpeed*speedMultiplier;
                 rb.drag=drag;
             }
         }
@@ -131,7 +133,7 @@ public class movement : MonoBehaviour
             rb.drag=0;
         }
 
-        if(Input.GetKeyDown(UserSettings.keybinds["jump"])&&canMove)
+        if(Input.GetKeyDown(UserSettings.keybinds["jump"])&&canMove&&canJump)
         {
             if(grounded)
             {
