@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class playerHealth : MonoBehaviour
 {
@@ -9,7 +10,8 @@ public class playerHealth : MonoBehaviour
     public float health = 100;
     public float maxHealth;
     public Image hudHealthBar;
-    public Image menuHealthBar;
+    // public Image menuHealthBar;
+    public TextMeshProUGUI hpText;
     private float scale;
     //public GameObject deathPanel;
 
@@ -18,6 +20,7 @@ public class playerHealth : MonoBehaviour
         if(!Player.dev) infiniteHealth=false;
         if(infiniteHealth) maxHealth=health=float.MaxValue;
         else health=maxHealth;
+        ChangeHealth(0);
     }
 
     public void ChangeHealth(float amount)
@@ -25,8 +28,9 @@ public class playerHealth : MonoBehaviour
         health += amount;
         if(health>maxHealth) health=maxHealth;
 
-        hudHealthBar.fillAmount=health/maxHealth;
-        menuHealthBar.fillAmount=health/maxHealth;
+        hudHealthBar.fillAmount = health/maxHealth;
+        // menuHealthBar.fillAmount = health/maxHealth;
+        hpText.text = health+" / "+maxHealth;
         if (health <= 0)
         {
             Debug.Log("ded");
@@ -34,6 +38,5 @@ public class playerHealth : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
         }
-
     }
 }

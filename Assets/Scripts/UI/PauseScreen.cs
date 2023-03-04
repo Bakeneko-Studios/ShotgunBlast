@@ -7,7 +7,6 @@ public class PauseScreen : MonoBehaviour
 {
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private  GameObject settingsController; //prefab
-    public GameObject menuHealthBar;
     public GameObject hudHealthBar;
     private GameObject UD;
     private GameObject currentlyOpened;

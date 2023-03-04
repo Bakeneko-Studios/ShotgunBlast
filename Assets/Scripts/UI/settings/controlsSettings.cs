@@ -66,8 +66,6 @@ public class controlsSettings : MonoBehaviour
         }
         //if no duplicates send values to scripts
         if(!duplicates) {
-            //PlayerAction keybind
-            playerAction.interactKey = UserSettings.keybinds["interact"];;
             saveVar();
         }
     }
