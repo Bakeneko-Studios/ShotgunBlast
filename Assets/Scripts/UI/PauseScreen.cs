@@ -28,7 +28,8 @@ public class PauseScreen : MonoBehaviour
                 mainPanel.SetActive(true);
                 hudHealthBar.SetActive(false);
                 // refreshHealthBar();
-                EventSystem.current.SetSelectedGameObject(defaultSelected); 
+                var eventSystem = EventSystem.current;
+                eventSystem.SetSelectedGameObject(defaultSelected, new BaseEventData(eventSystem)); 
             }
             else
             {
