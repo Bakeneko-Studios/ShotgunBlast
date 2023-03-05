@@ -16,6 +16,7 @@ public class EMPArm : Arm
         StartCoroutine(abilityDelay());
         abilityHitbox.localScale = Vector3.one*EMPRadius;
     }
+    void Awake() {instance=this;}
     void ability()
     {
         StartCoroutine(abilityDelay());

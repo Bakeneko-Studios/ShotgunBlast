@@ -17,6 +17,8 @@ public class SavedData
     //Controls
     public float sensitivityFlt;
     public Dictionary<string, KeyCode> inputKeyBinds;
+    //Dev
+    public bool debugHUD,infiniteHealth,enableFreecam,infiniteArms;
 
     public SavedData()
     {
@@ -32,5 +34,14 @@ public class SavedData
         //Controls
         sensitivityFlt = UserSettings.sensitivityFlt;
         inputKeyBinds = UserSettings.keybinds;
+        //Dev
+        debugHUD = UserSettings.debugHUD;
+        infiniteHealth = UserSettings.infiniteHealth;
+        enableFreecam = UserSettings.enableFreecam;
+        infiniteArms = UserSettings.infiniteArms;
+    }
+    public override string ToString()
+    {
+        return $"Quality Level: {gQualityInt}\nFOV: {FOVFlt}\nShow Health Bars: {healthBarBool}\nMaster Volume: {masterVolumeFlt}\nMusic Volume: {musicVolumeFlt}\nEffects Volume: {effectsVolumeFlt}\nSensitivity: {sensitivityFlt}\nKeybinds: {inputKeyBinds}";
     }
 }

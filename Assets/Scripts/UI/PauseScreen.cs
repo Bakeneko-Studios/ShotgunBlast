@@ -6,53 +6,58 @@ using UnityEngine.EventSystems;
 public class PauseScreen : MonoBehaviour
 {
     [SerializeField] private GameObject mainPanel;
-    [SerializeField] private  GameObject settingsController; //prefab
-    public GameObject hudHealthBar;
+    [SerializeField] private settingsController settingsController; //prefab
     private GameObject UD;
     private GameObject currentlyOpened;
     [SerializeField] private GameObject defaultSelected;
 
     void Awake() {
-        loadSettings(true);
+        // loadSettings(true);
         currentlyOpened = mainPanel;
+        SavingSystem.LoadUser();
     }
 
     void Update(){
         if (Input.GetKeyDown(UserSettings.keybinds["pause"]))
         {
             if (!Player.paused)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Player.paused=true;
-                Time.timeScale = 0;
-                mainPanel.SetActive(true);
-                hudHealthBar.SetActive(false);
-                // refreshHealthBar();
-                var eventSystem = EventSystem.current;
-                eventSystem.SetSelectedGameObject(defaultSelected, new BaseEventData(eventSystem)); 
-            }
+            {pause();}
             else
-            {
-                if(currentlyOpened != mainPanel) {
-                    mainPanel.SetActive(true);
-                    Destroy(currentlyOpened);
-                    currentlyOpened = mainPanel;
-                    saveVar();
-                } else {
-                    Time.timeScale = 1f;
-                    mainPanel.SetActive(false);
-                    hudHealthBar.SetActive(true);
-                    saveVar();
-                    Player.paused=false;
-                    Cursor.lockState = CursorLockMode.Locked;
-                }
-            }
+            {unpause();}
         }
     }
-
+    public void pause()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Player.paused=true;
+        Time.timeScale = 0;
+        mainPanel.SetActive(true);
+        var eventSystem = EventSystem.current;
+        eventSystem.SetSelectedGameObject(defaultSelected, new BaseEventData(eventSystem)); 
+    }
+    public void unpause()
+    {
+        if(currentlyOpened != mainPanel)
+        {
+            mainPanel.SetActive(true);
+            currentlyOpened.SetActive(false);
+            currentlyOpened = mainPanel;
+            saveVar();
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            mainPanel.SetActive(false);
+            saveVar();
+            Player.paused=false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
     public void mainePanelButton(GameObject thatPanel) {
-        currentlyOpened = Instantiate(thatPanel, this.transform);
+        currentlyOpened=thatPanel;
+        currentlyOpened.SetActive(true);
         mainPanel.SetActive(false);
+        if(thatPanel==settingsController.gameObject) settingsController.settingsButton(settingsController.subPanels[0]);
     }
 
     // public void refreshHealthBar() {
@@ -65,10 +70,10 @@ public class PauseScreen : MonoBehaviour
     //     }
     // }
 
-    void loadSettings(bool destory) {
-        GameObject tempSettingsController = Instantiate(settingsController, this.transform);
-        tempSettingsController.GetComponent<settingsController>().onlyLoadSettings = destory;
-    }
+    // void loadSettings(bool destory) {
+    //     GameObject tempSettingsController = Instantiate(settingsController, this.transform);
+    //     tempSettingsController.GetComponent<settingsController>().onlyLoadSettings = destory;
+    // }
 
     public void saveVar() {
         SavingSystem.SaveUser();

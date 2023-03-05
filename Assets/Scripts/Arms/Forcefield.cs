@@ -7,6 +7,7 @@ public class Forcefield : Arm
     public float radius;
     public float duration;
     [SerializeField] private Transform shield;
+    void Awake() {instance=this;}
     void Start()
     {
         cam = Camera.main.transform;

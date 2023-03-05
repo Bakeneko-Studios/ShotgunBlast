@@ -20,13 +20,13 @@ public class audioSettings : MonoBehaviour
     void Awake()
     {
         loadVar();
-        updateVolume();
     }
 
-    void updateVolume() {
+    public void updateVolume() {
         mainMixer.SetFloat("MasterMix", masterSlider.value);
         mainMixer.SetFloat("MusicMix", musicSlider.value);
         mainMixer.SetFloat("EffectsMix", effectsSlider.value);
+        saveVar();
     }
 
     void loadVar() {
@@ -39,23 +39,11 @@ public class audioSettings : MonoBehaviour
         UserSettings.masterVolumeFlt = masterSlider.value;
         UserSettings.musicVolumeFlt = musicSlider.value;
         UserSettings.effectsVolumeFlt = effectsSlider.value;
+        SavingSystem.SaveUser();
     }
 
     public void resetVar() {
         UserSettings.resetAudio();
+        loadVar();
     }
-
-    public void masterChange()
-    {
-        mainMixer.SetFloat("MasterMix", masterSlider.value);
-    }
-    public void musicChange()
-    {
-        mainMixer.SetFloat("MusicMix", masterSlider.value);
-    }
-    public void effectsChange()
-    {
-        mainMixer.SetFloat("EffectsMix", masterSlider.value);
-    }
-    
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class ReinforcedArm : Arm
 {
     public float yeetForce;
+    void Awake() {instance=this;}
     void Start()
     {
         cam = Camera.main.transform;

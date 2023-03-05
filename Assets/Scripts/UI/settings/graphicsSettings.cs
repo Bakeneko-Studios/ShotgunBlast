@@ -15,15 +15,8 @@ public class graphicsSettings : MonoBehaviour
     [SerializeField] private GameObject graphicsPanel;
     [SerializeField] private Slider FOV;
 
-    private Camera cam;
-
     void Awake() {
         loadVar();
-        updateGraphics();
-    }
-
-    void Start() {
-        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
 
     void Update()
@@ -36,7 +29,6 @@ public class graphicsSettings : MonoBehaviour
 
     public void updateGraphics() {
         QualitySettings.SetQualityLevel(preset.value,false);
-        Debug.Log(QualitySettings.GetQualityLevel());
         Camera.main.fieldOfView = FOV.value;
         saveVar();
     }
@@ -44,11 +36,14 @@ public class graphicsSettings : MonoBehaviour
     void loadVar() {
         preset.value = UserSettings.gQualityInt;
         FOV.value = UserSettings.FOVFlt;
+        QualitySettings.SetQualityLevel(preset.value,false);
+        Camera.main.fieldOfView = FOV.value;
     }
 
     void saveVar() {
         UserSettings.gQualityInt = preset.value;
         UserSettings.FOVFlt = FOV.value;
+        SavingSystem.SaveUser();
     }
 
     public void resettVar() {
