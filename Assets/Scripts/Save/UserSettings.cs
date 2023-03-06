@@ -61,11 +61,13 @@ public static class UserSettings
             {"pause",KeyCode.Escape},
             {"attack",KeyCode.Mouse0},
             {"charge",KeyCode.Mouse1},
+            {"reload",KeyCode.R},
             {"punch",KeyCode.V},
             {"ability",KeyCode.Q},
             {"freecam",KeyCode.Z},
             {"cycle arm",KeyCode.X}
         };
+        SavingSystem.SaveUser();
     }
     public static void resetGraphics()
     {

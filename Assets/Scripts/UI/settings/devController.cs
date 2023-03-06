@@ -19,7 +19,7 @@ public class devController : MonoBehaviour
 
     void Awake()
     {
-        hud = HUD.instance.debugPanel;
+        hud = F3Debug.instance.debugPanel;
         if(!Player.dev)
         {
             UserSettings.debugHUD=UserSettings.infiniteHealth=UserSettings.enableFreecam=UserSettings.infiniteArms=false;

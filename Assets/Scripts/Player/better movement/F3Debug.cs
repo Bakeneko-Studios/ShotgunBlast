@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class HUD : MonoBehaviour
+public class F3Debug : MonoBehaviour
 {
-    public static HUD instance;
+    public static F3Debug instance;
     public GameObject debugPanel;
     [SerializeField] private TextMeshProUGUI pos;
     [SerializeField] private TextMeshProUGUI ang;
@@ -14,15 +14,16 @@ public class HUD : MonoBehaviour
     [SerializeField] private TextMeshProUGUI vl2;
     [SerializeField] private TextMeshProUGUI con;
     [SerializeField] private TextMeshProUGUI sta;
-    [SerializeField] private Transform cam;
 
-    void Awake() {instance=this;}
+    void Awake() {
+        instance=this;
+    }
     void Update()
     {
-        Vector3 p = transform.position;
+        Vector3 p = movement.instance.transform.position;
         pos.text = "Pos: ["+p.x.ToString("F")+", "+p.y.ToString("F")+", "+p.z.ToString("F")+"]";
-        Vector3 d = transform.localEulerAngles;
-        Vector3 dd = cam.transform.localEulerAngles;
+        Vector3 d = movement.instance.transform.localEulerAngles;
+        Vector3 dd = Camera.main.transform.localEulerAngles;
         ang.text = "Ang: ["+(dd.x>180?dd.x-360:dd.x).ToString("F")+", "+(d.y>180?d.y-360:d.y).ToString("F")+", "+(d.z>180?d.z-360:d.z).ToString("F")+"]";
         dir.text = "Dir : ["+(d.y>180?"-X":"+X")+", "+(dd.x<180?"-Y":"+Y")+", "+(d.y<270&&d.y>90?"-Z":"+Z")+"]";
         vl1.text = "Vel: "+movement.velocity.ToString("F");

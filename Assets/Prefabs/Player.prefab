@@ -242,7 +242,6 @@ GameObject:
   - component: {fileID: 7961946055964912700}
   - component: {fileID: 8649613076853638560}
   - component: {fileID: 4245268676769854621}
-  - component: {fileID: 3224887463733073227}
   - component: {fileID: 25254466}
   - component: {fileID: 5150432699366685201}
   m_Layer: 8
@@ -357,27 +356,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 8649613077721364476}
   hint: {fileID: 0}
-  interactKey: 101
---- !u!114 &3224887463733073227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8649613076853638572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3913cca92736304b95fc6687838b3c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pos: {fileID: 0}
-  ang: {fileID: 0}
-  dir: {fileID: 0}
-  vl1: {fileID: 0}
-  vl2: {fileID: 0}
-  con: {fileID: 0}
-  sta: {fileID: 0}
-  cam: {fileID: 8649613077721364478}
 --- !u!114 &25254466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,11 +368,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b88ec8633f70c0428c72c9092462f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  infiniteHealth: 0
   health: 100
   maxHealth: 0
+  maxHealthCur: 0
   hudHealthBar: {fileID: 0}
-  menuHealthBar: {fileID: 0}
+  hpText: {fileID: 0}
 --- !u!136 &5150432699366685201
 CapsuleCollider:
   m_ObjectHideFlags: 0

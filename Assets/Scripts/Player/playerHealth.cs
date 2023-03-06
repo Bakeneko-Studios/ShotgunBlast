@@ -11,9 +11,6 @@ public class playerHealth : MonoBehaviour
     public float health = 100;
     public float maxHealth = 100;
     public float maxHealthCur;
-    public Image hudHealthBar;
-    // public Image menuHealthBar;
-    public TextMeshProUGUI hpText;
     private float scale;
     //public GameObject deathPanel;
 
@@ -33,9 +30,10 @@ public class playerHealth : MonoBehaviour
         health += amount;
         if(health>maxHealthCur) health=maxHealthCur;
 
-        hudHealthBar.fillAmount = health/maxHealthCur;
-        // menuHealthBar.fillAmount = health/maxHealth;
-        hpText.text = health+" / "+maxHealthCur;
+        HUD hudscript = HUD.instance;
+        hudscript.hudHealthBar.fillAmount = health/maxHealthCur;
+        // hudscript.menuHealthBar.fillAmount = health/maxHealth;
+        hudscript.hpText.text = health+" / "+maxHealthCur;
         if (health <= 0)
         {
             Debug.Log("ded");

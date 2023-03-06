@@ -6,14 +6,10 @@ using UnityEngine.EventSystems;
 public class settingsController : MonoBehaviour
 {
     public GameObject[] subPanels;
-    // public bool onlyLoadSettings;
     public GameObject pointer;
     [SerializeField] private GameObject defaultSelected;
 
     void Start() {
-        // if (onlyLoadSettings){ 
-        //     Destroy(this.gameObject);
-        // }
         EventSystem.current.SetSelectedGameObject(defaultSelected); 
     }
 

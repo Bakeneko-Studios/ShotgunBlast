@@ -25,19 +25,18 @@ public class RemapKeyBind : MonoBehaviour
             if(newInputstr.ToString() != "") { //try string KeyBinds
                 foreach(char c in newInputstr) {
                     KeyCode newInput = (KeyCode)c;
-                    UserSettings.keybinds[targetAction] = newInput;
+                    controlsSettings.keybindsClone[targetAction] = newInput;
                     controlsSettings.updateButtonText(targetAction,newInput.ToString(),true);
                 }
             } else { //try keybinds in List
                 foreach(KeyCode kc in notStringKeyCodes) {
                     if(Input.GetKey(kc)) {
                         KeyCode newInput = kc;
-                    UserSettings.keybinds[targetAction] = newInput;
+                    controlsSettings.keybindsClone[targetAction] = newInput;
                     controlsSettings.updateButtonText(targetAction,newInput.ToString(),true);
                     }
                 }
             }
-            UserSettings.keybinds["pause"] = KeyCode.Escape;; //reenable escape
             this.gameObject.SetActive(false);
         }
     }

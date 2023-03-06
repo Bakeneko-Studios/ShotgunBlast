@@ -15,6 +15,7 @@ public class PauseScreen : MonoBehaviour
         // loadSettings(true);
         currentlyOpened = mainPanel;
         SavingSystem.LoadUser();
+        UserSettings.keybinds["pause"] = KeyCode.Escape;
     }
 
     void Update(){
@@ -32,6 +33,7 @@ public class PauseScreen : MonoBehaviour
         Player.paused=true;
         Time.timeScale = 0;
         mainPanel.SetActive(true);
+        HUD.instance.gameObject.SetActive(false); //might add an animaiton here
         var eventSystem = EventSystem.current;
         eventSystem.SetSelectedGameObject(defaultSelected, new BaseEventData(eventSystem)); 
     }
@@ -48,6 +50,7 @@ public class PauseScreen : MonoBehaviour
         {
             Time.timeScale = 1f;
             mainPanel.SetActive(false);
+            HUD.instance.gameObject.SetActive(true);
             saveVar();
             Player.paused=false;
             Cursor.lockState = CursorLockMode.Locked;
