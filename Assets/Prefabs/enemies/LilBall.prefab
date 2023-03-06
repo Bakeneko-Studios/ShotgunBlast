@@ -303,19 +303,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  empHealth: 100
+  empResistance: 0
+  stunned: 0
+  stunTime: 5
   healthBar: {fileID: 5022279565140398492}
+  empHealthBar: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 264
   obstuctionMask:
     serializedVersion: 2
     m_Bits: 513
+  rb: {fileID: 0}
+  anim: {fileID: 5022279565595911995}
   wakeAnimation: BallDeploy
   deathAnimation: BallDeath
-  anim: {fileID: 5022279565595911995}
   attackAnimation: BallAttack
   turnSpeed: 5
   attackCooldownTime: 1
@@ -323,8 +329,8 @@ MonoBehaviour:
   attackScript: {fileID: 5292804293839900473}
   attackRange: 1.5
   canMove: 1
-  patrol: 1
   alwaysSeePlayer: 1
+  patrol: 1
   walkPointRange: 10
   sightRange: 15
   playerInSightRange: 0

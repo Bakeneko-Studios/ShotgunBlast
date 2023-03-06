@@ -226,13 +226,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  empHealth: 100
+  empResistance: 0
+  stunned: 0
+  stunTime: 5
   healthBar: {fileID: 6854296490504861910}
+  empHealthBar: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 264
   obstuctionMask:
     serializedVersion: 2
     m_Bits: 512
@@ -242,9 +247,9 @@ MonoBehaviour:
   deathAnimation: 
   attackAnimation: 
   turnSpeed: 5
-  attackCooldownTime: 1
+  attackCooldownTime: 3
   aimTolerance: 10
-  attackScript: {fileID: 0}
+  attackScript: {fileID: 6854296490144063679}
   attackRange: 8
   canMove: 1
   alwaysSeePlayer: 1
@@ -319,7 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d22f9981cdde34d459bb00369fce1a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bladeDamage: 40
+  bladeDamage: 10
   blades:
   - {fileID: 9192812494153949661}
   attackDuration: 0.5
