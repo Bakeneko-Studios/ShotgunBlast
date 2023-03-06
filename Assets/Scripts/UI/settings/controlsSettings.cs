@@ -33,35 +33,42 @@ public class controlsSettings : MonoBehaviour
         SavingSystem.SaveUser();
     }
 
-    Dictionary<string,KeyCode> keybindsClone = UserSettings.keybinds; //create a clone incase error
+    Dictionary<string,KeyCode> keybindsClone; //create a clone incase error
 
     public void ChangeKey(string action) {
         rmkb.gameObject.SetActive(true); //SetActive(false)-ed in rmkb
         rmkb.targetAction = action; //forward the action to change
+        keybindsClone = new Dictionary<string,KeyCode>(UserSettings.keybinds);
         UserSettings.keybinds["pause"] = KeyCode.None;
-        SavingSystem.SaveUser();
+        updateKeyBinds();
     }
 
-    // public void updateKeyBinds() { //put this one a button or exit idk. Convert dictionary to script
-    //     //check for duplicates
-    //     bool duplicates = false;
-    //     var dupe = UserSettings.keybinds.GroupBy(x => x.Value);
-    //     foreach (var group in dupe) {
-    //         if (group.Count() > 1)
-    //         {
-    //             duplicates = true;
-    //             string message = group.Key.ToString();
-    //             UserSettings.keybinds = keybindsClone; //revert changes
-    //             errorPanel.SetActive(true);
-    //             Debug.Log(message);
-    //             break;
-    //         }
-    //     }
-    //     //if no duplicates send values to scripts
-    //     if(!duplicates) {
-    //         saveVar();
-    //     }
-    // }
+    public void updateKeyBinds() { //put this one a button or exit idk. Convert dictionary to script
+        //check for duplicates
+        bool duplicates = false;
+        Dictionary<string,KeyCode> dupe = new Dictionary<string,KeyCode>(UserSettings.keybinds);
+        dupe.GroupBy(x => x.Value);
+        KeyCode[] keys = dupe.Values.ToArray();
+        for(int i=0; i<keys.Length-1; i++) {
+            if (keys[i] == keys[i+1])
+            {
+                duplicates = true;
+                string message = keys[i].ToString();
+                errorPanel.SetActive(true);
+                Debug.Log(message);
+                break;
+            }
+        }
+        //if no duplicates send values to scripts
+        if(!duplicates) {
+            SavingSystem.SaveUser();
+        }
+    }
+
+    public void CloneKeybinds() {
+        UserSettings.keybinds = new Dictionary<string,KeyCode>(keybindsClone); //revert changes
+        UserSettings.keybinds["pause"] = KeyCode.Escape;; //reenable escape
+    }
 
     float buttonScale = 50f;
     float buttonPosx = 217.4f;  
@@ -71,13 +78,13 @@ public class controlsSettings : MonoBehaviour
                 TextMeshProUGUI childtext = button.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
                 childtext.text = newInput;
                 //dynamicButtons
-                float len = newInput.Length;
-                if (len != 1) { //astetic touch
-                    len = (len + 1f) / 2f;
-                }
-                RectTransform buttonRTF = (button.GetChild(0) as RectTransform);
-                buttonRTF.sizeDelta = new Vector2(buttonScale * len ,buttonScale);
-                buttonRTF.localPosition = new Vector2(buttonPosx + buttonScale*len/2, buttonRTF.localPosition.y);
+                // float len = newInput.Length;
+                // if (len != 1) { //astetic touch
+                //     len = (len + 1f) / 2f;
+                // }
+                // RectTransform buttonRTF = (button.GetChild(0) as RectTransform);
+                // buttonRTF.sizeDelta = new Vector2(buttonScale * len ,buttonScale);
+                // buttonRTF.localPosition = new Vector2(buttonPosx + buttonScale*len/2, buttonRTF.localPosition.y);
                 if (select) EventSystem.current.SetSelectedGameObject(button.GetChild(0).gameObject);
             } 
         }
@@ -86,7 +93,6 @@ public class controlsSettings : MonoBehaviour
     public void resetKeyBinds()
     {
         UserSettings.resetKeybinds();
-        loadVar();
     }
     void loadVar() {
         sensitivitySlider.value = UserSettings.sensitivityFlt;
@@ -101,4 +107,16 @@ public class controlsSettings : MonoBehaviour
     public void resetVar() {
         UserSettings.resetControls();
     }
+    // IEnumerator closeErrorPanel()
+    // {
+    //     while(true)
+    //     {
+    //         if(Input.anyKey)
+    //         {
+    //             errorPanel.SetActive(false);
+    //             yield return new WaitForSeconds(0);
+    //             break;
+    //         }
+    //     }
+    // }
 }

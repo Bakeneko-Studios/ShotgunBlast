@@ -108,7 +108,7 @@ public class enemyFramework : MonoBehaviour
         {
             empHealthBarFront = empHealthBar.transform.Find("front");
         }
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = movement.instance.transform;
         if (canMove)
             agent = GetComponent<NavMeshAgent>();
         if (wakeAnimation != "")
