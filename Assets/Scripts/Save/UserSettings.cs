@@ -19,6 +19,11 @@ public static class UserSettings
     public static float effectsVolumeFlt = 1f;
     //Controls
     public static float sensitivityFlt = 70f;
+    //Dev
+    public static bool debugHUD = true;
+    public static bool infiniteHealth = false;
+    public static bool enableFreecam = true;
+    public static bool infiniteArms = false;
 
     //Game data
     public static List<Arm> unlockedArms = new List<Arm>();
@@ -66,15 +71,26 @@ public static class UserSettings
     {
         gQualityInt = 3;
         FOVFlt = 80f;
+        SavingSystem.SaveUser();
     }
     public static void resetAudio()
     {
         masterVolumeFlt = 1f;
         musicVolumeFlt = 1f;
         effectsVolumeFlt = 1f;
+        SavingSystem.SaveUser();
     }
     public static void resetControls()
     {
         sensitivityFlt = 70f;
+        SavingSystem.SaveUser();
+    }
+    public static void resetDev()
+    {
+        debugHUD = true;
+        infiniteHealth = false;
+        enableFreecam = true;
+        infiniteArms = false;
+        SavingSystem.SaveUser();
     }
 }

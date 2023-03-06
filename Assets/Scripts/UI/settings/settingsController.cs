@@ -5,15 +5,15 @@ using UnityEngine.EventSystems;
 
 public class settingsController : MonoBehaviour
 {
-    [SerializeField] private GameObject[] subPanels;
-    public bool onlyLoadSettings;
+    public GameObject[] subPanels;
+    // public bool onlyLoadSettings;
     public GameObject pointer;
     [SerializeField] private GameObject defaultSelected;
 
     void Start() {
-        if (onlyLoadSettings){ 
-            Destroy(this.gameObject);
-        }
+        // if (onlyLoadSettings){ 
+        //     Destroy(this.gameObject);
+        // }
         EventSystem.current.SetSelectedGameObject(defaultSelected); 
     }
 

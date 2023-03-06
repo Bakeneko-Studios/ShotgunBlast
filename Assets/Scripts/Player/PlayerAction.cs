@@ -9,7 +9,6 @@ public class PlayerAction : MonoBehaviour
     UnityEvent onInteract;
     public GameObject hint;
     private float interactRange = 5f;
-    public KeyCode interactKey = KeyCode.E;
     void Update()
     {
         RaycastHit hit;
@@ -19,7 +18,7 @@ public class PlayerAction : MonoBehaviour
             {
                 hint.SetActive(true);
                 onInteract = hit.collider.GetComponent<Interactable>().onInteract;
-                if (Input.GetKeyDown(interactKey))
+                if (Input.GetKeyDown(UserSettings.keybinds["interact"]))
                 {
                     onInteract.Invoke();
                     hint.SetActive(false);

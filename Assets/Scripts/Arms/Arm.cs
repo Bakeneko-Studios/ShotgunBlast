@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Arm : MonoBehaviour
 {
+    public static Arm instance;
     //general
     public int damage;
     public float punchCD;
@@ -19,6 +20,7 @@ public class Arm : MonoBehaviour
     [SerializeField] protected Animation abilityAnim;
     public float cameraShakeDuration;
     public float cameraShakeMagnitude;
+    void Awake() {instance=this;}
     void Start()
     {
         cam = Camera.main.transform;

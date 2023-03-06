@@ -5,6 +5,8 @@ using TMPro;
 
 public class HUD : MonoBehaviour
 {
+    public static HUD instance;
+    public GameObject debugPanel;
     [SerializeField] private TextMeshProUGUI pos;
     [SerializeField] private TextMeshProUGUI ang;
     [SerializeField] private TextMeshProUGUI dir;
@@ -14,10 +16,7 @@ public class HUD : MonoBehaviour
     [SerializeField] private TextMeshProUGUI sta;
     [SerializeField] private Transform cam;
 
-    void Awake()
-    {
-        this.enabled=!Player.dev;
-    }
+    void Awake() {instance=this;}
     void Update()
     {
         Vector3 p = transform.position;

@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class ArmManager : MonoBehaviour
 {
+    public static ArmManager instance;
     public static bool isBusy, canPunch;
-    public static readonly Arm[] arms = {new Arm(),new ReinforcedArm(),new Quake(),new Forcefield(),new EMPArm(),new Grapple(),new Tornado(),new Mech(),new Parasite()};
+    public static readonly Arm[] arms = {Arm.instance,ReinforcedArm.instance,Quake.instance,Forcefield.instance,EMPArm.instance,Grapple.instance,Tornado.instance,Mech.instance,Parasite.instance};
     public List<Arm> unlockedArms = new List<Arm>();
     public Queue<Arm> equippedArms = new Queue<Arm>();
     public bool randomArms;
     public float swapCooldown;
     public const int maxArms = 5;
+    public static bool infiniteArms;
     void Awake()
     {
-        if(Player.dev) unlockedArms = new List<Arm>(arms);
+        instance=this;
+        devReload();
+    }
+    public void devReload()
+    {
+        if(infiniteArms) unlockedArms = new List<Arm>(arms);
         else unlockedArms = UserSettings.unlockedArms;
         if(randomArms)
         {

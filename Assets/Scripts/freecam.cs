@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class freecam : MonoBehaviour
 {
+    public static freecam instance;
     public bool clampX;
     bool fc;
     Vector3 ogPosition;
@@ -13,10 +14,8 @@ public class freecam : MonoBehaviour
     float h,v;
     float mouseX,mouseY,xRotation;
     [SerializeField] Canvas canvas;
-    void Awake()
-    {
-        this.enabled=!Player.dev;
-    }
+    
+    void Awake() {instance=this;}
     void Update()
     {
         if(!Player.paused)

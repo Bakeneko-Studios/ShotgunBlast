@@ -6,6 +6,7 @@ public class Mech : Arm
 {
     public int ammo;
     public float duration;
+    void Awake() {instance=this;}
     void Start()
     {
         cam = Camera.main.transform;

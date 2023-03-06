@@ -6,6 +6,7 @@ public class Tornado : Arm
 {
     public float duration;
     [SerializeField] private GameObject[] blades;
+    void Awake() {instance=this;}
     void Start()
     {
         cam = Camera.main.transform;

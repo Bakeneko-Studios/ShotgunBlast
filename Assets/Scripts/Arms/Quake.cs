@@ -7,6 +7,7 @@ public class Quake : Arm
     public float quakeRadius;
     [SerializeField] private Transform abilityHitbox;
     private List<GameObject> targetsInRange = new List<GameObject>();
+    void Awake() {instance=this;}
     void Start()
     {
         cam = Camera.main.transform;

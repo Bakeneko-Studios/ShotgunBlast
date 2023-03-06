@@ -14,31 +14,23 @@ public class controlsSettings : MonoBehaviour
     [SerializeField] private Transform keyBindPanel;
     [SerializeField] private RemapKeyBind rmkb;
     [SerializeField] private GameObject errorPanel;
-
-    movement movement;
     PlayerAction playerAction;
-
-    MouseLook mouseLook;
 
     void Awake()
     {
         context();
         loadVar();
-        updateSensitivity();
-        updateKeyBinds();
     }
 
     void context() {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        mouseLook = player.GetComponent<MouseLook>();
-        movement = player.GetComponent<movement>();
+        GameObject player = movement.instance.gameObject;
         playerAction = player.GetComponent<PlayerAction>();
     }
 
     public void updateSensitivity() { //put on slider
-        mouseLook.sensitivity = sensitivitySlider.value*10;
+        MouseLook.instance.sensitivity = sensitivitySlider.value*10;
         sensitivityText.text = sensitivitySlider.value.ToString();
-        saveVar();
+        SavingSystem.SaveUser();
     }
 
     Dictionary<string,KeyCode> keybindsClone = UserSettings.keybinds; //create a clone incase error
@@ -47,30 +39,29 @@ public class controlsSettings : MonoBehaviour
         rmkb.gameObject.SetActive(true); //SetActive(false)-ed in rmkb
         rmkb.targetAction = action; //forward the action to change
         UserSettings.keybinds["pause"] = KeyCode.None;
+        SavingSystem.SaveUser();
     }
 
-    public void updateKeyBinds() { //put this one a button or exit idk. Convert dictionary to script
-        //check for duplicates
-        bool duplicates = false;
-        var dupe = UserSettings.keybinds.GroupBy(x => x.Value);
-        foreach (var group in dupe) {
-            if (group.Count() > 1)
-            {
-                duplicates = true;
-                string message = group.Key.ToString();
-                UserSettings.keybinds = keybindsClone; //revert changes
-                errorPanel.SetActive(true);
-                Debug.Log(message);
-                break;
-            }
-        }
-        //if no duplicates send values to scripts
-        if(!duplicates) {
-            //PlayerAction keybind
-            playerAction.interactKey = UserSettings.keybinds["interact"];;
-            saveVar();
-        }
-    }
+    // public void updateKeyBinds() { //put this one a button or exit idk. Convert dictionary to script
+    //     //check for duplicates
+    //     bool duplicates = false;
+    //     var dupe = UserSettings.keybinds.GroupBy(x => x.Value);
+    //     foreach (var group in dupe) {
+    //         if (group.Count() > 1)
+    //         {
+    //             duplicates = true;
+    //             string message = group.Key.ToString();
+    //             UserSettings.keybinds = keybindsClone; //revert changes
+    //             errorPanel.SetActive(true);
+    //             Debug.Log(message);
+    //             break;
+    //         }
+    //     }
+    //     //if no duplicates send values to scripts
+    //     if(!duplicates) {
+    //         saveVar();
+    //     }
+    // }
 
     float buttonScale = 50f;
     float buttonPosx = 217.4f;  
@@ -92,31 +83,22 @@ public class controlsSettings : MonoBehaviour
         }
     }
 
-    void Start() {
-        foreach (var item in UserSettings.keybinds) {
-            updateButtonText(item.Key,item.Value.ToString(),false);
-        }
-    }
-
     public void resetKeyBinds()
     {
         UserSettings.resetKeybinds();
+        loadVar();
+    }
+    void loadVar() {
+        sensitivitySlider.value = UserSettings.sensitivityFlt;
+        MouseLook.instance.sensitivity = sensitivitySlider.value*10;
+        sensitivityText.text = sensitivitySlider.value.ToString();
         foreach (var item in UserSettings.keybinds)
         {
             updateButtonText(item.Key,item.Value.ToString(),false);
         }
     }
-    void loadVar() {
-        sensitivitySlider.value = UserSettings.sensitivityFlt;
-    }
-
-    void saveVar() {
-        //sensitivity
-        UserSettings.sensitivityFlt = sensitivitySlider.value;
-    }
 
     public void resetVar() {
         UserSettings.resetControls();
-        saveVar();
     }
 }

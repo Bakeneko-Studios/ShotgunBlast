@@ -5,6 +5,7 @@ using UnityEngine;
 public class Grapple : Arm
 {
     public float range;
+    void Awake() {instance=this;}
     void Start()
     {
         cam = Camera.main.transform;
