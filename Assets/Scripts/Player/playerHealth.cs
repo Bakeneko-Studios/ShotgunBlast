@@ -12,7 +12,7 @@ public class playerHealth : MonoBehaviour
     public float maxHealth = 100;
     public float maxHealthCur;
     private float scale;
-    //public GameObject deathPanel;
+    public GameObject deathPanel;
 
     void Start()
     {
@@ -33,13 +33,16 @@ public class playerHealth : MonoBehaviour
         HUD hudscript = HUD.instance;
         hudscript.hudHealthBar.fillAmount = health/maxHealthCur;
         // hudscript.menuHealthBar.fillAmount = health/maxHealth;
-        hudscript.hpText.text = health+" / "+maxHealthCur;
         if (health <= 0)
         {
             Debug.Log("ded");
-            //deathPanel.SetActive(true);
+            hudscript.hpText.text = "0 / "+maxHealthCur; //prevent neative health numbers becayse that is stupid
+            DeathUI.instance.deathPanel.SetActive(true);
+            DeathUI.instance.deathEvent();
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
+        } else {
+            hudscript.hpText.text = health+" / "+maxHealthCur;
         }
     }
 }
