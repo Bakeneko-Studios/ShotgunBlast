@@ -1784,6 +1784,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &380623942 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8980185203958113186, guid: 6ef78bd7ffc2a774e8b4980a1cf7ffc5, type: 3}
+  m_PrefabInstance: {fileID: 537788659}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &384014986
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42647,6 +42652,10 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 25254466, guid: 62f998d093f403c4ba34ca00a209961a, type: 3}
+      propertyPath: deathPanel
+      value: 
+      objectReference: {fileID: 380623942}
     - target: {fileID: 25254466, guid: 62f998d093f403c4ba34ca00a209961a, type: 3}
       propertyPath: hudHealthBar
       value: 
