@@ -20,6 +20,7 @@ public class movement : MonoBehaviour
     public bool canSlide = true;
     public static float velocity;
     public static float nvvelocity;
+    public static float yvelocity;
     private float speed;
     float h;
     float v;
@@ -62,6 +63,7 @@ public class movement : MonoBehaviour
         vl = rb.velocity;
         velocity = vl.magnitude;
         nvvelocity = Mathf.Sqrt(vl.x*vl.x+vl.z*vl.z);
+        yvelocity = vl.y;
         bool wasGrounded = grounded;
         grounded = Physics.Raycast(transform.position,Vector3.down,height*0.5f+0.2f,ground,QueryTriggerInteraction.Ignore);
         Player.playerStatus = (grounded?Player.contact.ground:Player.contact.air);
@@ -149,7 +151,8 @@ public class movement : MonoBehaviour
                 if(Physics.Raycast(cam.position,cam.forward,out hit,0.8f))
                 {
                     rb.AddForce(hit.normal*wallbounceForce,ForceMode.Impulse);
-                    rb.AddForce(Vector3.up*12f,ForceMode.Impulse);
+                    rb.velocity = new Vector3(rb.velocity.x,0,rb.velocity.z);
+                    rb.AddForce(Vector3.up*10f,ForceMode.Impulse);
                 }
             }
         }
@@ -157,7 +160,7 @@ public class movement : MonoBehaviour
         if(Input.GetKeyDown(UserSettings.keybinds["crouch"]))
         {
             transform.localScale = new Vector3(transform.localScale.x,crouchScale,transform.localScale.z);
-            transform.position = new Vector3(transform.position.x,transform.position.y-(yScale-crouchScale),transform.position.z);
+            transform.Translate(Vector3.up*-(yScale-crouchScale));
             leftHand.transform.localScale = new Vector3(1,1/crouchScale,1);
             rightHand.transform.localScale = new Vector3(1,1/crouchScale,1);
         }
@@ -165,7 +168,7 @@ public class movement : MonoBehaviour
         {
             leftHand.transform.localScale = Vector3.one;
             rightHand.transform.localScale = Vector3.one;
-            transform.position = new Vector3(transform.position.x,transform.position.y+(yScale-crouchScale),transform.position.z);
+            transform.Translate(Vector3.up*(yScale-crouchScale));
             transform.localScale = new Vector3(transform.localScale.x,yScale,transform.localScale.z);
         }
     }
@@ -181,7 +184,7 @@ public class movement : MonoBehaviour
             }
             else if(grounded) rb.AddForce(direction.normalized*speed*10f,ForceMode.Force);
             else rb.AddForce(direction.normalized*speed*10f*airControl,ForceMode.Force);
-            rb.AddForce(0,onSlope()?0:gravity,0,ForceMode.Force);
+            rb.AddForce(Vector3.up*(onSlope()?0:gravity),ForceMode.Force);
         }
     }
     IEnumerator impactForce(float time)
