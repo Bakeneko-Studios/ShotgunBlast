@@ -402,7 +402,6 @@ GameObject:
   - component: {fileID: 8649613077721364479}
   - component: {fileID: 4245268676650945091}
   - component: {fileID: 4132382625809703052}
-  - component: {fileID: 532033257355496292}
   - component: {fileID: 2677245234765488468}
   m_Layer: 8
   m_Name: Camera
@@ -528,27 +527,6 @@ MonoBehaviour:
   speed: 10
   sensitivity: 500
   canvas: {fileID: 0}
---- !u!114 &532033257355496292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8649613077721364473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 894e2da4c091dae4396b76cabed40e43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  volume: {fileID: 0}
-  image: {fileID: 0}
-  maxIntensity: 3
-  duration: 2
-  dmgColor: {r: 1, g: 0, b: 0, a: 0.49803922}
-  healColor: {r: 0, g: 1, b: 0, a: 0.49803922}
-  boostColor: {r: 0, g: 0, b: 1, a: 0.49803922}
-  deathColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  flashColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &2677245234765488468
 MonoBehaviour:
   m_ObjectHideFlags: 0

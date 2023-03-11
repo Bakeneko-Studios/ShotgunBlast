@@ -40,10 +40,10 @@ public class playerHealth : MonoBehaviour
     }
     public void ChangeHealth(float amount)
     {
-        if(amount>0 && health<maxHealthCur) ScreenFlash.instance.HealFlash();
+        if(amount>0 && health<maxHealthCur) ScreenFlash.instance.RegenFlash();
         else if(amount<0)
         {
-            ScreenFlash.instance.DmgFlash();
+            ScreenFlash.instance.Flash("dmgColor");
             cd=healCooldown;
         }
         
@@ -55,7 +55,7 @@ public class playerHealth : MonoBehaviour
         // hudscript.menuHealthBar.fillAmount = health/maxHealth;
         if (health <= 0)
         {
-            ScreenFlash.instance.DeathFlash();
+            ScreenFlash.instance.Flash("deathColor");
             CancelInvoke();
             Debug.Log("ded");
             hudscript.hpText.text = "0 / "+maxHealthCur; //prevent neative health numbers becayse that is stupid
