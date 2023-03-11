@@ -54,11 +54,11 @@ public class ScreenFlash : MonoBehaviour
 
     IEnumerator HealingEffect(Color flashColor)
     {
-        duration *= 0.33f;
-        float endTime = Time.time+duration;
+        float d = duration * 0.33f;
+        float endTime = Time.time+d;
         while(Time.time < endTime)
         {
-            float t = Mathf.Clamp01((endTime-Time.time)/duration);
+            float t = Mathf.Clamp01((endTime-Time.time)/d);
             Color color = Color.Lerp(Color.clear,flashColor,t);
             Color lightColor = color; lightColor.a = color.a * 0.5f;
             HealL.color = HealR.color = lightColor;
