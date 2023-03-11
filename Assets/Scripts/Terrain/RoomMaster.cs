@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class RoomMaster : MonoBehaviour
 {
-    [Header("Monitor States")]
+    [Header("Properties")]
+    [SerializeField] private Room theRoom;
+    public Vector2 dimention;//room dimention (x,z)
+    public List<Locker> lockers;//locks the room when entered
+
+    [Header("Room Status")]
     [SerializeField]private bool isEntered;
     [SerializeField]private bool isCleared;
     [SerializeField]private bool roomDone;
@@ -15,25 +19,34 @@ public class RoomMaster : MonoBehaviour
     [SerializeField]private int enemyWaves;
     [SerializeField]private int currentWave;
 
-    [Header("Custom Stuff")]
-    public Transform roomPosi;
-    public List<Locker> lockers;
-    //*public GameObject Dummy;
-    public EnemyMatrix EM;
+    [Header("Enemies")]
+    public int[] enemyCount;//waves x how many enemies each wave
+    public GameObject[] enemyList;//list of enemies (have to give each one a difficulty index)
+    public Transform spawnParent;//the enemy spawn location will be dependent on this, so place it at 0,0
 
-    [Header("Audio")]
-    [SerializeField] AudioSource AS;
-    [SerializeField] AudioClip lockdownSound;
-    [SerializeField] AudioClip downSound;
-    [SerializeField] AudioClip reenforceSound;
-    [SerializeField] AudioClip unlockSound;
-    private bool shouted;
+    [SerializeField] private Vector3[] enemyLoc; //list of enemy locations
+    [SerializeField] private int difficulty;
 
-    Vector2 perimeterX;
+    //Constants
+    private float posiPadding = 5f; //padding for the parameter of the map
+    private float spawnPadding = 2f; //padding between enemies spawned
+    private float spawnY = 10f; //enemy spawn elivation to prevent clipping into the ground, 
+
+    //Variables
+    float xLoc;
+    float zLoc;
+    bool reserved;
+    Vector2 perimeterX;//Global position without padding to detect player entry
     Vector2 perimeterZ;
     Transform player;
     void Start() 
     {
+        theRoom = new Room(this.gameObject, 
+                            new Vector3(0, 0, dimention.y/2 + 1),
+                            new Vector3(dimention.x/2 + 1, 0, 0),
+                            new Vector3(0, 0, dimention.y/2 - 1),
+                            new Vector3(dimention.x/2 - 1, 0, 0));
+
         isEntered = false;
         isCleared = false;
         roomDone = false;
@@ -41,17 +54,11 @@ public class RoomMaster : MonoBehaviour
         waveCleared = true;
         waveSpawned = false;
 
-        enemyWaves = EM.waves;
         currentWave = 1;
 
-        shouted = false;
+        perimeterX = new Vector2(transform.position.x-(dimention.x/2), transform.position.x+(dimention.x/2));
+        perimeterZ = new Vector2(transform.position.z-(dimention.y/2), transform.position.z+(dimention.y/2));
 
-        foreach (Locker locker in lockers)
-        {
-            locker.Open();
-        }
-        perimeterX = new Vector2(transform.position.x, transform.position.x+roomPosi.position.x);
-        perimeterZ = new Vector2(transform.position.z, transform.position.z+roomPosi.position.z);
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
     void Update() 
@@ -60,7 +67,6 @@ public class RoomMaster : MonoBehaviour
         {
             if (!isEntered)
             {
-                //Debug.Log(1);
                 //Detect player in perimeter or not, lock when does
                 bool isInX = player.position.x>=perimeterX.x && player.position.x<=perimeterX.y;
                 bool isInZ = player.position.z>=perimeterZ.x && player.position.z<=perimeterZ.y;
@@ -72,45 +78,26 @@ public class RoomMaster : MonoBehaviour
             }
             if (isEntered && !isCleared)
             {
-                //Debug.Log(2);
-                //Debug.Log("CR" + currentWave);
                 //Player is in room and room is not cleared, spawn enemies
                 if (currentWave <= enemyWaves)
                 {
                     if (!waveSpawned && waveCleared)
                     {
-                        if (currentWave==1)
-                            AS.PlayOneShot(lockdownSound);
-                        else
-                            AS.PlayOneShot(reenforceSound);
-                        //Debug.Log(3);
                         waveSpawned = true;
-                        enemyRem = EM.enemyCount[currentWave-1];//tot enemies spawned
+                        enemyRem = enemyCount[currentWave-1];//tot enemies spawned
                         //spawn wave of enemies
-                        doEnemyWave();
-                        //*Instantiate(Dummy, new Vector3(85, currentWave, 13), Quaternion.identity, transform);
+                        spawnWave();
                         waveCleared = false;
                     }
                     if (waveSpawned && !waveCleared)
                     {
-                        //Debug.Log(4);
                         GameObject[] remEnemies = GameObject.FindGameObjectsWithTag("Enemy");
                         enemyRem = remEnemies.Length;
-                        //Debug.Log("EnemyRem: " + enemyRem);
-
-                        if (enemyRem==3 && !shouted)
-                        {
-                            AS.PlayOneShot(downSound);
-                            shouted = true;
-                        }
-
                         if (enemyRem == 0)
                         {
                             currentWave+=1;
                             waveCleared = true;
                             waveSpawned = false;
-
-                            shouted = false;
                         }
                     }
                 }
@@ -122,8 +109,6 @@ public class RoomMaster : MonoBehaviour
             }
             if (isEntered && isCleared)
             {
-                AS.PlayOneShot(unlockSound);
-                //Debug.Log(69);
                 //Player cleared the room
                 freeRoom();
                 roomDone = true;
@@ -144,10 +129,69 @@ public class RoomMaster : MonoBehaviour
             locker.gameObject.SetActive(false);
         }
     }
-
-    //Enemies Spawn and stuff
-    void doEnemyWave()
+    public void openLockers()
     {
-        EM.spawnWave(new Vector2(roomPosi.localPosition.x, roomPosi.localPosition.z));
+        foreach (Locker locker in lockers)
+        {
+            locker.Open();
+        }
+    }
+
+    //Enemy Spawn
+    public void setDifficulty(int d)
+    {
+        difficulty = d;
+        //! How much difficulty per wave (howmany waves is randomized or set)
+        //! Allocate enemies per wave
+        //! 1: fodder, add to fill the gaps, 3+: normal enemies 7+: eliete enemies
+        //! Scale enemy health and damage to which stage so that the difficulty index is not inflated
+    }
+
+    public void spawnWave()
+    {
+        randomLocation();
+        foreach (Vector3 aLoc in enemyLoc)
+        {
+            GameObject spawnedEnemy = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity, spawnParent);
+            spawnedEnemy.transform.localPosition = aLoc;
+        }
+    }
+    void randomLocation()
+    {
+        //List of enemy Locations
+        enemyLoc = new Vector3[enemyCount[currentWave-1]];
+        //make it all 0 for now
+        for (int i = 0; i < enemyCount[currentWave-1]; i++)
+        {
+            enemyLoc[i] = Vector3.zero;
+        }
+
+        //Randomize x and z coords + check if reserved + add to reserved w/ padding
+        for (int i = 0; i < enemyCount[currentWave-1]; i++)
+        {
+            reserved = true;
+            //check if reserved
+            while (reserved)
+            {
+                reserved = false;
+                xLoc = Random.Range(-dimention.x/2 + posiPadding, dimention.x/2 - posiPadding);
+                zLoc = Random.Range(-dimention.y/2 + posiPadding, dimention.y/2 - posiPadding);
+
+                foreach (Vector3 rLoc in enemyLoc)
+                {
+                    float xMin = rLoc.x-spawnPadding;
+                    float xMax = rLoc.x+spawnPadding;
+                    float zMin = rLoc.z-spawnPadding;
+                    float zMax = rLoc.z+spawnPadding;
+                    if (xLoc>xMin && xLoc<xMax && zLoc>zMin && zLoc<zMax)
+                    {
+                        reserved = true;
+                        //break;//this may decrease looping time and make the programm faster idk maybe
+                    }
+                }
+            }
+            //add to enemy loctation list
+            enemyLoc[i] = new Vector3(xLoc, spawnY, zLoc);
+        }
     }
 }

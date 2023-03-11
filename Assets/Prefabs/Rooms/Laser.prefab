@@ -5495,3 +5495,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startX: 0
   startZ: 0
+  maxY: 0
+  minY: 0

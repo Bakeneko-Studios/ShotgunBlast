@@ -17,4 +17,12 @@ using UnityEngine;
         southDoor=r.southDoor;
         westDoor=r.westDoor;
     }
+    public Room(GameObject a, Vector3 n, Vector3 e,  Vector3 s,  Vector3 w)
+    {
+        structure = a;
+        northDoor = n;
+        eastDoor = e;
+        southDoor = s;
+        westDoor = w;
+    }
 }
