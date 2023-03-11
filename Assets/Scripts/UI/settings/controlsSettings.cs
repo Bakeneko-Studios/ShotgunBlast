@@ -73,8 +73,8 @@ public class controlsSettings : MonoBehaviour
         UserSettings.keybinds["pause"] = KeyCode.Escape; //reenable escape
     }
 
-    float buttonScale = 50f;
-    float buttonPosx = 217.4f;  
+    // float buttonScale = 50f;
+    // float buttonPosx = 217.4f;  
     public void updateButtonText(string action,string newInput,bool select) {
         foreach (Transform button in keyBindPanel) {
             if(button.name == action) {
