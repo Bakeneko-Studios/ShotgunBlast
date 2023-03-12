@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PauseScreen : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class PauseScreen : MonoBehaviour
     private GameObject UD;
     private GameObject currentlyOpened;
     [SerializeField] private GameObject defaultSelected;
+    [SerializeField] private Image Healthbar;
+    [SerializeField] private TMP_Text HPDisplay;
 
     void Awake() {
         // loadSettings(true);
@@ -28,16 +32,23 @@ public class PauseScreen : MonoBehaviour
             {unpause();}
         }
     }
-    public void pause()
+    public void pause() //mechanics
     {
         Cursor.lockState = CursorLockMode.None;
         Player.paused=true;
-        Time.timeScale = 0;
+        Time.timeScale = 0;;
         mainPanel.SetActive(true);
         HUD.instance.gameObject.SetActive(false); //might add an animaiton here
-        var eventSystem = EventSystem.current;
-        eventSystem.SetSelectedGameObject(defaultSelected, new BaseEventData(eventSystem)); 
+        RefreshPage();
     }
+    public void RefreshPage() { // everything related to Gui
+        var eventSystem = EventSystem.current;
+        eventSystem.SetSelectedGameObject(defaultSelected, new BaseEventData(eventSystem));
+        playerHealth ph = playerHealth.instance;
+        Healthbar.fillAmount = ph.health / ph.maxHealthCur;
+        HPDisplay.text = "HP:" + ph.health + "/" + ph.maxHealthCur;
+    }
+
     public void unpause()
     {
         if(currentlyOpened != mainPanel)
