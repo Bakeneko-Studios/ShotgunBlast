@@ -7,6 +7,7 @@ using TMPro;
 public class HUD : MonoBehaviour
 {
     public static HUD instance;
+    public GameObject hint;
 
     [Header("Weapon Display")]
     public GameObject Weapon;
@@ -20,6 +21,7 @@ public class HUD : MonoBehaviour
     
     void Start() {
         instance=this;
+        playerHealth.instance.GetComponent<PlayerAction>().hint = hint; //force feed anda's code
     }
 
     public void ChangeHealth(float healthPercent) {

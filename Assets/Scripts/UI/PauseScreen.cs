@@ -13,11 +13,16 @@ public class PauseScreen : MonoBehaviour
     private GameObject UD;
     private GameObject currentlyOpened;
     [SerializeField] private GameObject defaultSelected;
+    [Header("Loading")]
+    [SerializeField] private GameObject LoadingScreen;
+
+    [Header("Local References")]
     [SerializeField] private Image Healthbar;
     [SerializeField] private TMP_Text HPDisplay;
+    [SerializeField] private GameObject GunDisplay;
 
     void Awake() {
-        // loadSettings(true);
+        StartCoroutine(LoadGame());
         currentlyOpened = mainPanel;
         SavingSystem.LoadUser();
         UserSettings.keybinds["pause"] = KeyCode.Escape;
@@ -38,7 +43,7 @@ public class PauseScreen : MonoBehaviour
         Player.paused=true;
         Time.timeScale = 0;;
         mainPanel.SetActive(true);
-        ScreenFlash.instance.StopAllCoroutines();
+        ScreenFlash.instance.TermiateallAnimations();
         HUD.instance.gameObject.SetActive(false); //might add an animaiton here
         RefreshPage();
     }
@@ -48,6 +53,7 @@ public class PauseScreen : MonoBehaviour
         playerHealth ph = playerHealth.instance;
         Healthbar.fillAmount = ph.health / ph.maxHealthCur;
         HPDisplay.text = "HP:" + ph.health + "/" + ph.maxHealthCur;
+        if (HUD.instance.Weapon) GunDisplay.SetActive(true) ; //gun
     }
 
     public void unpause()
@@ -69,6 +75,18 @@ public class PauseScreen : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
         }
     }
+
+    IEnumerator LoadGame() {
+        //Debug.Log("yee");
+        //Time.timeScale = 0f;
+        //LoadingScreen.SetActive(true);
+        settingsController.gameObject.SetActive(true);
+        yield return null;
+        settingsController.gameObject.SetActive(false);
+        //LoadingScreen.SetActive(false);
+        //Time.timeScale = 1f;
+    }
+
     public void mainePanelButton(GameObject thatPanel) {
         currentlyOpened=thatPanel;
         currentlyOpened.SetActive(true);

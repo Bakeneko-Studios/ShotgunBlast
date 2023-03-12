@@ -12,7 +12,6 @@ public class playerHealth : MonoBehaviour
     public float maxHealth = 100;
     public float maxHealthCur;
     private float scale;
-    public GameObject deathPanel;
     public float healCooldown;
     public float timeBetweenHeals;
     private float cd;
