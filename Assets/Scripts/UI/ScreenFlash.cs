@@ -67,6 +67,12 @@ public class ScreenFlash : MonoBehaviour
         HealL.color = HealR.color = Color.clear;
     }
 
+    public void TermiateallAnimations() {
+        StopAllCoroutines();
+        flashL.color = flashR.color = Color.clear;
+        HealL.color = HealR.color = Color.clear;
+    }
+
 
     // IEnumerator flashEffect(Color flashColor)
     // {

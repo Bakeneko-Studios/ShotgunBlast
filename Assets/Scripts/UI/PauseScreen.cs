@@ -38,6 +38,7 @@ public class PauseScreen : MonoBehaviour
         Player.paused=true;
         Time.timeScale = 0;;
         mainPanel.SetActive(true);
+        ScreenFlash.instance.StopAllCoroutines();
         HUD.instance.gameObject.SetActive(false); //might add an animaiton here
         RefreshPage();
     }
