@@ -27,8 +27,9 @@ public class DungeonGenV3 : MonoBehaviour
 
     [System.Serializable] class RoomType
     {
-        public Room room;
+        public GameObject roomObject;
         public int count;
+        public Room room;
     }
 
     private bool valid=true;
@@ -80,11 +81,11 @@ public class DungeonGenV3 : MonoBehaviour
     {
         if(!valid) {Debug.LogWarning("invalid config, can't generate"); return;}
 
-
         attempt:
         //initialize rooms list
         foreach (RoomType type in types)
         {
+            type.room = type.roomObject.GetComponent<RoomMaster>().theRoom;
             for (int i = 0; i < type.count; i++)
                 rooms.Add(new Room(type.room));
         }

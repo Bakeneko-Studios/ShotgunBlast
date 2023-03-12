@@ -19448,11 +19448,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theRoom:
-    structure: {fileID: 0}
-    northDoor: {x: 0, y: 0, z: 0}
-    eastDoor: {x: 0, y: 0, z: 0}
-    southDoor: {x: 0, y: 0, z: 0}
-    westDoor: {x: 0, y: 0, z: 0}
+    structure: {fileID: 6182821778373742473}
+    northDoor: {x: 0, y: 0, z: 25.5}
+    eastDoor: {x: 25.5, y: 0, z: 0}
+    southDoor: {x: 0, y: 0, z: -25.5}
+    westDoor: {x: -25.5, y: 0, z: 0}
   dimention: {x: 50, y: 50}
   lockers: []
   isEntered: 0
