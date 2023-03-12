@@ -5,7 +5,7 @@ using UnityEngine;
 public class RoomMaster : MonoBehaviour
 {
     [Header("Properties")]
-    [SerializeField] private Room theRoom;
+    public Room theRoom;
     public Vector2 dimention;//room dimention (x,z)
     public List<Locker> lockers;//locks the room when entered
 
@@ -41,12 +41,6 @@ public class RoomMaster : MonoBehaviour
     Transform player;
     void Start() 
     {
-        theRoom = new Room(this.gameObject, 
-                            new Vector3(0, 0, dimention.y/2 + 1),
-                            new Vector3(dimention.x/2 + 1, 0, 0),
-                            new Vector3(0, 0, dimention.y/2 - 1),
-                            new Vector3(dimention.x/2 - 1, 0, 0));
-
         isEntered = false;
         isCleared = false;
         roomDone = false;

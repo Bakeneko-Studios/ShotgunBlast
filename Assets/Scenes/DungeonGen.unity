@@ -477,9 +477,10 @@ MonoBehaviour:
     eastDoor: {x: 5, y: 0, z: 0}
     southDoor: {x: 0, y: 0, z: -5}
     westDoor: {x: -5, y: 0, z: 0}
+  door: {fileID: 3880773989952343933, guid: 58de4753dca943643943de2852e6803f, type: 3}
   parent: {fileID: 2090968582}
   hallwayParent: {fileID: 1455071121}
-  hallwaySegment: {fileID: 328914751}
+  hallwaySegment: {fileID: 5903125200239151069, guid: 706b42575db7597438be3cba32f7f30e, type: 3}
   segmentLength: 1
   gridX: 5
   gridZ: 5
@@ -493,7 +494,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1104782667}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 74.148636, y: 34.52175, z: 76.098976}
+  m_LocalPosition: {x: 75, y: 0, z: 75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

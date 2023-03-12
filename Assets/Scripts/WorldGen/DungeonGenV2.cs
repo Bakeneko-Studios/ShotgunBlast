@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class worldgenv2 : MonoBehaviour
+public class DungeonGenV2 : MonoBehaviour
 {
     class Cell
     {
