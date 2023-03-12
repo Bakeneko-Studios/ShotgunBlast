@@ -192,10 +192,10 @@ public class DungeonGenV3 : MonoBehaviour
         {
             switch (hallways[i+1]-hallways[i])
             {
-                case Vector3 v1 when v1.x>0: for (int j = 0; j < v1.x; j+=segmentLength)  {GameObject.Instantiate(hallwaySegment, hallways[i] + new Vector3(j+segmentLength/2, 0, segmentLength/2),  Quaternion.Euler(0,90,0), hallwayParent);} break;
-                case Vector3 v2 when v2.x<0: for (int j = 0; j < -v2.x; j+=segmentLength) {GameObject.Instantiate(hallwaySegment, hallways[i] + new Vector3(-j+segmentLength/2, 0, segmentLength/2), Quaternion.Euler(0,-90,0), hallwayParent);} break;
-                case Vector3 v3 when v3.z>0: for (int j = 0; j < v3.z; j+=segmentLength)  {GameObject.Instantiate(hallwaySegment, hallways[i] + new Vector3(segmentLength/2, 0, j+segmentLength/2),  Quaternion.Euler(0,0,0), hallwayParent);} break;
-                case Vector3 v4 when v4.z<0: for (int j = 0; j < -v4.z; j+=segmentLength) {GameObject.Instantiate(hallwaySegment, hallways[i] + new Vector3(segmentLength/2, 0, -j+segmentLength/2), Quaternion.Euler(0,180,0), hallwayParent);} break;
+                case Vector3 v1 when v1.x>0: for (int j = 0; j <= v1.x; j+=segmentLength)  {GameObject.Instantiate(hallwaySegment, hallways[i] + new Vector3(j+segmentLength/2, 0, segmentLength/2),  Quaternion.Euler(0,90,0), hallwayParent);} break;
+                case Vector3 v2 when v2.x<0: for (int j = 0; j <= -v2.x; j+=segmentLength) {GameObject.Instantiate(hallwaySegment, hallways[i] + new Vector3(-j+segmentLength/2, 0, segmentLength/2), Quaternion.Euler(0,-90,0), hallwayParent);} break;
+                case Vector3 v3 when v3.z>0: for (int j = 0; j <= v3.z; j+=segmentLength)  {GameObject.Instantiate(hallwaySegment, hallways[i] + new Vector3(segmentLength/2, 0, j+segmentLength/2),  Quaternion.Euler(0,0,0), hallwayParent);} break;
+                case Vector3 v4 when v4.z<0: for (int j = 0; j <= -v4.z; j+=segmentLength) {GameObject.Instantiate(hallwaySegment, hallways[i] + new Vector3(segmentLength/2, 0, -j+segmentLength/2), Quaternion.Euler(0,180,0), hallwayParent);} break;
                 default: throw new System.Exception("VEIFWEFGUOYDHIUYG#OEWDUOMIYWEGFFUCKKKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             }
         }
