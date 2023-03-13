@@ -36,10 +36,11 @@ public class DungeonGenV3 : MonoBehaviour
     [SerializeField] RoomType[] types;
     [SerializeField] private Room startRoom;
     [SerializeField] private Room endRoom;
-    [SerializeField] private GameObject door;
     [SerializeField] private Transform parent;
     [SerializeField] private Transform hallwayParent;
-    public GameObject hallwaySegment;
+    [SerializeField] private GameObject hallwaySegment;
+    [SerializeField] private GameObject door;
+    [SerializeField] private GameObject block;
     public int segmentLength;
     [SerializeField] private Cell[,] grid;
     [Range(2,100)] public int gridX;
@@ -48,6 +49,7 @@ public class DungeonGenV3 : MonoBehaviour
     [Range(0.25f,1)]public float doorSpawnRate = 0.5f;
     Cell start,end,lastRoom;
     List<Room> rooms = new List<Room>();
+    List<Room> placedRooms = new List<Room>();
     List<Vector3> hallways = new List<Vector3>();
 
     void Awake()
@@ -98,6 +100,7 @@ public class DungeonGenV3 : MonoBehaviour
         start = new Cell(new Room(startRoom),Random.Range(0,gridX),Random.Range(0,gridZ),cellSize);
         grid[start.x,start.z]=start;
         start.place(cellSize,parent);
+        placedRooms.Add(start.room);
         Debug.Log($"Start: [{start.x},{start.z}]");
         
         //place first room
@@ -112,6 +115,7 @@ public class DungeonGenV3 : MonoBehaviour
             case 3: room1 = new Cell(rooms[r], start.x-1, start.z, cellSize); hallways.Add(start.room.westDoor);  hallways.Add(room1.room.eastDoor);  break;
             default: clear(); Debug.LogWarning("restarting (1)"); goto attempt;
         }
+        placedRooms.Add(room1.room);
 
         //start pathfinding from first room
         bool e = pathfind(room1,r);
@@ -138,6 +142,7 @@ public class DungeonGenV3 : MonoBehaviour
         }
         grid[end.x,end.z]=end;
         end.place(cellSize,parent);
+        placedRooms.Add(end.room);
 
         //place hallways
         bool walls = connect();
@@ -146,6 +151,7 @@ public class DungeonGenV3 : MonoBehaviour
         //place doors
         bool dooors = doors();
         if(!dooors) {clear(); Debug.LogWarning("restarting (6)"); goto attempt;}
+        blockExits();
 
         Debug.Log("dungeon generated sucessfully");
     }
@@ -158,6 +164,7 @@ public class DungeonGenV3 : MonoBehaviour
         rooms.RemoveAt(r);
         grid[c.x,c.z]=c;
         c.place(cellSize,parent);
+        placedRooms.Add(c.room);
         Debug.Log($"{c.room.structure.name}: [{c.x},{c.z}]");
 
         //find valid paths for next rooms(s)
@@ -219,11 +226,23 @@ public class DungeonGenV3 : MonoBehaviour
         return true;
     }
 
+    void blockExits()
+    {
+        foreach (Room r in placedRooms)
+        {
+            if(!hallways.Contains(r.northDoor)) {GameObject g = GameObject.Instantiate(block, r.northDoor, Quaternion.Euler(0,180,0), hallwayParent); r.structure.TryGetComponent<RoomMaster>(out RoomMaster rm); if(rm!=null) rm.lockers.Add(g.GetComponent<Locker>());}
+            if(!hallways.Contains(r.eastDoor))  {GameObject g = GameObject.Instantiate(block, r.eastDoor,  Quaternion.Euler(0,-90,0), hallwayParent); r.structure.TryGetComponent<RoomMaster>(out RoomMaster rm); if(rm!=null) rm.lockers.Add(g.GetComponent<Locker>());}
+            if(!hallways.Contains(r.southDoor)) {GameObject g = GameObject.Instantiate(block, r.southDoor, Quaternion.Euler(0,0,0),   hallwayParent); r.structure.TryGetComponent<RoomMaster>(out RoomMaster rm); if(rm!=null) rm.lockers.Add(g.GetComponent<Locker>());}
+            if(!hallways.Contains(r.westDoor))  {GameObject g = GameObject.Instantiate(block, r.westDoor,  Quaternion.Euler(0,90,0),  hallwayParent); r.structure.TryGetComponent<RoomMaster>(out RoomMaster rm); if(rm!=null) rm.lockers.Add(g.GetComponent<Locker>());}
+        }
+    }
+
     public void clear()
     {
         foreach (Transform t in parent) {if(t.name!=hallwayParent.name) Destroy(t.gameObject);}
         foreach (Transform t in hallwayParent) {Destroy(t.gameObject);}
         rooms.Clear();
+        placedRooms.Clear();
         hallways.Clear();
         grid=null;
     }
