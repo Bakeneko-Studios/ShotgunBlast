@@ -145,15 +145,15 @@ public class DungeonGenV3 : MonoBehaviour
         placedRooms.Add(end.room);
 
         //place hallways
-        bool walls = connect();
-        if(!walls) {clear(); Debug.LogWarning("restarting (5)"); goto attempt;}
+        if(!connect()) {clear(); Debug.LogWarning("restarting (5)"); goto attempt;}
 
         //place doors
-        bool dooors = doors();
-        if(!dooors) {clear(); Debug.LogWarning("restarting (6)"); goto attempt;}
+        if(!doors()) {clear(); Debug.LogWarning("restarting (6)"); goto attempt;}
         blockExits();
 
         Debug.Log("dungeon generated sucessfully");
+
+        movement.instance.transform.position = new Vector3(cellSize*(start.x+0.5f),movement.instance.height/2,cellSize*(start.z+0.5f));
     }
 
     bool pathfind(Cell c, int r)
