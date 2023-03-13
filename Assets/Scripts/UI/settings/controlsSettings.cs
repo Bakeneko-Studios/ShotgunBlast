@@ -17,13 +17,15 @@ public class controlsSettings : MonoBehaviour
     [SerializeField] private GameObject freecamKey;
     PlayerAction playerAction;
 
-    void Awake()
+    void Start()
     {
         context();
         loadVar();
     }
     void OnEnable() {
         refreshAllKeysDisplay();
+        context();
+        loadVar();
     }
 
     void context() {

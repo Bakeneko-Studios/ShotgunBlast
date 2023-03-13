@@ -9,7 +9,7 @@ public class settingsController : MonoBehaviour
     public GameObject pointer;
     [SerializeField] private GameObject defaultSelected;
 
-    void Start() {
+    void OnEnable() {
         EventSystem.current.SetSelectedGameObject(defaultSelected); 
     }
 
