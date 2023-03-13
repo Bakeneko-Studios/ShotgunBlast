@@ -120,13 +120,6 @@ public class RoomMaster : MonoBehaviour
     {
         foreach (Locker locker in lockers)
         {
-            locker.gameObject.SetActive(false);
-        }
-    }
-    public void openLockers()
-    {
-        foreach (Locker locker in lockers)
-        {
             locker.Open();
         }
     }

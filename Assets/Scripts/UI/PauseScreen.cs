@@ -53,7 +53,7 @@ public class PauseScreen : MonoBehaviour
         playerHealth ph = playerHealth.instance;
         Healthbar.fillAmount = ph.health / ph.maxHealthCur;
         HPDisplay.text = "HP:" + ph.health + "/" + ph.maxHealthCur;
-        if (HUD.instance.Weapon) GunDisplay.SetActive(true) ; //gun
+        if (HUD.instance.yesgun) GunDisplay.SetActive(true); //gun
     }
 
     public void unpause()
@@ -64,6 +64,7 @@ public class PauseScreen : MonoBehaviour
             currentlyOpened.SetActive(false);
             currentlyOpened = mainPanel;
             saveVar();
+            RefreshPage();
         }
         else
         {

@@ -26,6 +26,6 @@ public class ItemPickup : MonoBehaviour
         myGun.transform.SetParent(gunHolder.transform);
         //Maybe set soecuak transform (diffrent gun sizes)
         myGun.transform.localPosition = Vector3.zero;
-        HUD.instance.Weapon.SetActive(true);
+        HUD.instance.ChangeGun(true);
     }
 }

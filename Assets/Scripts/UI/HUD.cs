@@ -11,6 +11,7 @@ public class HUD : MonoBehaviour
 
     [Header("Weapon Display")]
     public GameObject Weapon;
+    public bool yesgun;
     
     [Header("Healthbar Display")]
     [SerializeField] private Image hudHealthBar;
@@ -22,6 +23,11 @@ public class HUD : MonoBehaviour
     void Start() {
         instance=this;
         playerHealth.instance.GetComponent<PlayerAction>().hint = hint; //force feed anda's code
+    }
+
+    public void ChangeGun(bool y) {
+        HUD.instance.Weapon.SetActive(y);
+        yesgun = y;
     }
 
     public void ChangeHealth(float healthPercent) {
