@@ -50,7 +50,7 @@ public class playerHealth : MonoBehaviour
         if(health>maxHealthCur) health=maxHealthCur;
 
         HUD hudscript = HUD.instance;
-        hudscript.ChangeHealth(health/maxHealthCur);
+        if(hudscript.gameObject.activeInHierarchy) hudscript.ChangeHealth(health/maxHealthCur);
         // hudscript.menuHealthBar.fillAmount = health/maxHealth;
         if (health <= 0)
         {
