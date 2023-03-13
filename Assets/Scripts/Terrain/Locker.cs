@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Locker : MonoBehaviour
 {
-    public bool IsOpen = false;
+    public bool IsOpen;
     [SerializeField]private float Speed;
     [SerializeField]private Vector3 SlideDirection = Vector3.up;
     [SerializeField]private float SlideAmount;
@@ -16,6 +16,7 @@ public class Locker : MonoBehaviour
     private void Awake()
     {
         StartPosition = transform.position;
+        Open();
     }
     public void Open()
     {

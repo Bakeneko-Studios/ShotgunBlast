@@ -436,7 +436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b079813cb1e295f45abfd03d62920ae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsOpen: 1
-  Speed: 0
+  IsOpen: 0
+  Speed: 5
   SlideDirection: {x: 0, y: 1, z: 0}
-  SlideAmount: 0
+  SlideAmount: 50

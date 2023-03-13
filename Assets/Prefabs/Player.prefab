@@ -316,7 +316,7 @@ MonoBehaviour:
   speedMultiplier: 1
   speedCap: 30
   jumpForce: 20
-  canJump: 0
+  canJump: 1
   jumpDelay: 0.5
   drag: 15
   airControl: 0.01
@@ -371,7 +371,6 @@ MonoBehaviour:
   health: 100
   maxHealth: 0
   maxHealthCur: 0
-  deathPanel: {fileID: 0}
   healCooldown: 0
   timeBetweenHeals: 0
   naturalRegen: 0
@@ -501,7 +500,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0

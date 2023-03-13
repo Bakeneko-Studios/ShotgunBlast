@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &799576689776235378
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 799576689776235380}
+  - component: {fileID: 799576689776235381}
+  m_Layer: 0
+  m_Name: gen3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &799576689776235380
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799576689776235378}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 75, y: 0, z: 75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &799576689776235381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799576689776235378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a12dd2a76ac7d4cbb394c2d0905029, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  types:
+  - roomObject: {fileID: 6182821778373742473, guid: f799af2c40e15c245bcd64e51b354396, type: 3}
+    count: 3
+    room:
+      structure: {fileID: 6182821778373742473, guid: f799af2c40e15c245bcd64e51b354396, type: 3}
+      northDoor: {x: 0, y: 0, z: 25.5}
+      eastDoor: {x: 25.5, y: 0, z: 0}
+      southDoor: {x: 0, y: 0, z: -25.5}
+      westDoor: {x: -25.5, y: 0, z: 0}
+  - roomObject: {fileID: 6604447405429409103, guid: d5538b7ce226a6246961fe8f538a6629, type: 3}
+    count: 3
+    room:
+      structure: {fileID: 6604447405429409103, guid: d5538b7ce226a6246961fe8f538a6629, type: 3}
+      northDoor: {x: 0, y: 0, z: 15.5}
+      eastDoor: {x: 15.5, y: 0, z: 0}
+      southDoor: {x: 0, y: 0, z: -15.5}
+      westDoor: {x: -15.5, y: 0, z: 0}
+  startRoom:
+    structure: {fileID: 0}
+    northDoor: {x: 0, y: 0, z: 5.5}
+    eastDoor: {x: 5.5, y: 0, z: 0}
+    southDoor: {x: 0, y: 0, z: -5.5}
+    westDoor: {x: -5.5, y: 0, z: 0}
+  endRoom:
+    structure: {fileID: 0}
+    northDoor: {x: 0, y: 0, z: 5.5}
+    eastDoor: {x: 5.5, y: 0, z: 0}
+    southDoor: {x: 0, y: 0, z: -5.5}
+    westDoor: {x: -5.5, y: 0, z: 0}
+  parent: {fileID: 0}
+  hallwayParent: {fileID: 0}
+  hallwaySegment: {fileID: 5903125200239151069, guid: 706b42575db7597438be3cba32f7f30e, type: 3}
+  door: {fileID: 3880773989952343933, guid: 58de4753dca943643943de2852e6803f, type: 3}
+  block: {fileID: 0}
+  segmentLength: 1
+  gridX: 5
+  gridZ: 5
+  cellSize: 60
+  doorSpawnRate: 0.5

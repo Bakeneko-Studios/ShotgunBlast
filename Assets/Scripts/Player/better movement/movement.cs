@@ -37,7 +37,7 @@ public class movement : MonoBehaviour
     public float speedMultiplier = 1;
     public float speedCap;
     public float jumpForce;
-    public bool canJump=true;
+    public bool canJump;
     public float jumpDelay;
     public float drag;
     public float airControl;

@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 87e40503c347b2a45b73d5b05e0c45bd
+  - enabled: 1
+    path: Assets/Scenes/Demo/DemoFinal.unity
+    guid: 73cc139415835d54baeaf9d6e35eacba
+  - enabled: 1
+    path: Assets/Scenes/Demo/RestingGround.unity
+    guid: 4eda9c0bfd4839548b68b1b891c9a908
   m_configObjects: {}
