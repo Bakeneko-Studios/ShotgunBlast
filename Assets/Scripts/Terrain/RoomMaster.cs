@@ -67,7 +67,7 @@ public class RoomMaster : MonoBehaviour
                 bool isInZ = player.position.z>=perimeterZ.x && player.position.z<=perimeterZ.y;
                 if (isInX && isInZ)
                 {
-                    //lockRoom();
+                    lockRoom();
                     isEntered = true;
                 }
             }
@@ -110,14 +110,14 @@ public class RoomMaster : MonoBehaviour
             }
         }
     }
-    void lockRoom()
+    public void lockRoom()
     {
         foreach (Locker locker in lockers)
         {
             locker.Close();
         }
     }
-    void freeRoom()
+    public void freeRoom()
     {
         foreach (Locker locker in lockers)
         {
