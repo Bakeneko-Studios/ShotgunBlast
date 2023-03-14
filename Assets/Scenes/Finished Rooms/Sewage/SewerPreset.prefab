@@ -10927,15 +10927,7 @@ MonoBehaviour:
     southDoor: {x: 0, y: 0, z: -50.5}
     westDoor: {x: -38, y: 0, z: 0}
   dimention: {x: 75, y: 100}
-  lockers:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  lockers: []
   RandomWave: 0
   isEntered: 0
   isCleared: 0
