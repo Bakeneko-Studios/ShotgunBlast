@@ -507,6 +507,16 @@ MonoBehaviour:
   loadingScreenLines:
   - Need a hand? Try talking to the arms dealer
   - This arm goes hand in hand with the shotgun
+  - Also try electron!
+  - Wait there's walljumping?
+  - loading the shotguns
+  - bones in my bones
+  - can we put this in loading screen
+  - Made by bakeneko
+  - the cake is a lie
+  - alt + f4 for a free shotgun
+  - We're not adding assman
+  - Pochita is that you? Oh wait it's just a roomba
   loadingBar: {fileID: 1900902190}
   text: {fileID: 494599222}
 --- !u!114 &642898916
