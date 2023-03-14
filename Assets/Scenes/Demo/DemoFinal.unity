@@ -187,9 +187,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1811584024}
     - target: {fileID: 799576689776235381, guid: 4d96ce313923cc94892a0e5936b48c98, type: 3}
+      propertyPath: cellSize
+      value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: 799576689776235381, guid: 4d96ce313923cc94892a0e5936b48c98, type: 3}
       propertyPath: hallwayParent
       value: 
       objectReference: {fileID: 1401151107}
+    - target: {fileID: 799576689776235381, guid: 4d96ce313923cc94892a0e5936b48c98, type: 3}
+      propertyPath: types.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 799576689776235381, guid: 4d96ce313923cc94892a0e5936b48c98, type: 3}
       propertyPath: endRoom.structure
       value: 
@@ -229,6 +237,34 @@ PrefabInstance:
     - target: {fileID: 799576689776235381, guid: 4d96ce313923cc94892a0e5936b48c98, type: 3}
       propertyPath: startRoom.southDoor.z
       value: -10.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 799576689776235381, guid: 4d96ce313923cc94892a0e5936b48c98, type: 3}
+      propertyPath: types.Array.data[2].count
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 799576689776235381, guid: 4d96ce313923cc94892a0e5936b48c98, type: 3}
+      propertyPath: types.Array.data[2].roomObject
+      value: 
+      objectReference: {fileID: 2223634375793738448, guid: 1b11c390d3b795443a7b8a1650deafad, type: 3}
+    - target: {fileID: 799576689776235381, guid: 4d96ce313923cc94892a0e5936b48c98, type: 3}
+      propertyPath: types.Array.data[2].room.structure
+      value: 
+      objectReference: {fileID: 6604447405429409103, guid: d5538b7ce226a6246961fe8f538a6629, type: 3}
+    - target: {fileID: 799576689776235381, guid: 4d96ce313923cc94892a0e5936b48c98, type: 3}
+      propertyPath: types.Array.data[2].room.eastDoor.x
+      value: 15.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 799576689776235381, guid: 4d96ce313923cc94892a0e5936b48c98, type: 3}
+      propertyPath: types.Array.data[2].room.westDoor.x
+      value: -15.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 799576689776235381, guid: 4d96ce313923cc94892a0e5936b48c98, type: 3}
+      propertyPath: types.Array.data[2].room.northDoor.z
+      value: 15.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 799576689776235381, guid: 4d96ce313923cc94892a0e5936b48c98, type: 3}
+      propertyPath: types.Array.data[2].room.southDoor.z
+      value: -15.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d96ce313923cc94892a0e5936b48c98, type: 3}
@@ -326,7 +362,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1160787367}
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 5, y: 21.45, z: 4}
+  m_LocalPosition: {x: 5, y: 50, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
