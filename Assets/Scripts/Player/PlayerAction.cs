@@ -8,7 +8,11 @@ public class PlayerAction : MonoBehaviour
     [SerializeField] Camera cam;
     UnityEvent onInteract;
     public GameObject hint;
-    private float interactRange = 5f;
+    private float interactRange = 7f;
+    void Start() 
+    {
+        hint = GameObject.FindGameObjectWithTag("MotherLovingHint");
+    }
     void Update()
     {
         RaycastHit hit;

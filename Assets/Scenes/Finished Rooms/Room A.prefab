@@ -14113,9 +14113,10 @@ MonoBehaviour:
   enemyRem: 0
   enemyWaves: 3
   currentWave: 0
-  enemyCount: 070000000c00000008000000
+  enemyCount: 010000000300000002000000
   enemyList:
   - {fileID: 5022279565753710128, guid: b0b0e327099132f4fb01a6554e574e8d, type: 3}
+  - {fileID: 4516750500576887696, guid: e8c57938b65cf0b45b6ad84b88b238fa, type: 3}
   spawnParent: {fileID: 2151581405040990851}
   enemyLoc: []
   difficulty: 0
