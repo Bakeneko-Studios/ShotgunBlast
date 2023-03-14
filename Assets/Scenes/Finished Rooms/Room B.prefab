@@ -816,7 +816,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4333
+  m_VersionIndex: 4342
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -6509,7 +6509,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 7274
+  m_VersionIndex: 7283
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -6660,6 +6660,7 @@ MonoBehaviour:
     westDoor: {x: -15.5, y: 0, z: 0}
   dimention: {x: 30, y: 30}
   lockers: []
+  RandomWave: 1
   isEntered: 0
   isCleared: 0
   roomDone: 0

@@ -19305,7 +19305,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 9426
+  m_VersionIndex: 9441
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -19425,7 +19425,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6182821778373742473}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19455,15 +19455,16 @@ MonoBehaviour:
     westDoor: {x: -25.5, y: 0, z: 0}
   dimention: {x: 50, y: 50}
   lockers: []
+  RandomWave: 1
   isEntered: 0
   isCleared: 0
   roomDone: 0
   waveCleared: 0
   waveSpawned: 0
   enemyRem: 0
-  enemyWaves: 5
+  enemyWaves: 3
   currentWave: 0
-  enemyCount: 3200000005000000050000000500000005000000
+  enemyCount: 070000000c00000008000000
   enemyList:
   - {fileID: 5022279565753710128, guid: b0b0e327099132f4fb01a6554e574e8d, type: 3}
   spawnParent: {fileID: 2151581405040990851}

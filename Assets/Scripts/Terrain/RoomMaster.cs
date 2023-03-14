@@ -8,6 +8,7 @@ public class RoomMaster : MonoBehaviour
     public Room theRoom;
     public Vector2 dimention;//room dimention (x,z)
     public List<Locker> lockers;//locks the room when entered
+    public bool RandomWave;
 
     [Header("Room Status")]
     [SerializeField]private bool isEntered;
@@ -66,7 +67,7 @@ public class RoomMaster : MonoBehaviour
                 bool isInZ = player.position.z>=perimeterZ.x && player.position.z<=perimeterZ.y;
                 if (isInX && isInZ)
                 {
-                    lockRoom();
+                    //lockRoom();
                     isEntered = true;
                 }
             }
@@ -136,11 +137,17 @@ public class RoomMaster : MonoBehaviour
 
     public void spawnWave()
     {
-        randomLocation();
-        foreach (Vector3 aLoc in enemyLoc)
+        if (RandomWave)
+        {
+            randomLocation();
+            foreach (Vector3 aLoc in enemyLoc)
+            {
+                GameObject spawnedEnemy = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity, spawnParent);
+                spawnedEnemy.transform.localPosition = aLoc;
+            }
+        }else
         {
             GameObject spawnedEnemy = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity, spawnParent);
-            spawnedEnemy.transform.localPosition = aLoc;
         }
     }
     void randomLocation()
