@@ -17,13 +17,7 @@ public class controlsSettings : MonoBehaviour
     [SerializeField] private GameObject freecamKey;
     PlayerAction playerAction;
 
-    void Start()
-    {
-        context();
-        loadVar();
-    }
-    void OnEnable() {
-        refreshAllKeysDisplay();
+    void Start() {
         context();
         loadVar();
     }

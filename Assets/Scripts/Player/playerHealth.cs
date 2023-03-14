@@ -49,15 +49,14 @@ public class playerHealth : MonoBehaviour
         health += amount;
         if(health>maxHealthCur) health=maxHealthCur;
 
-        HUD hudscript = HUD.instance;
-        if(hudscript.gameObject.activeInHierarchy) hudscript.ChangeHealth(health/maxHealthCur);
+        if(HUD.instance.gameObject.activeInHierarchy) HUD.instance.ChangeHealth(health/maxHealthCur);
         // hudscript.menuHealthBar.fillAmount = health/maxHealth;
         if (health <= 0)
         {
             ScreenFlash.instance.Flash("deathColor");
             CancelInvoke();
             Debug.Log("ded");
-            hudscript.hpText.text = "0 / "+maxHealthCur; //prevent neative health numbers becayse that is stupid
+            HUD.instance.hpText.text = "0 / "+maxHealthCur; //prevent neative health numbers becayse that is stupid
             DeathUI.instance.deathPanel.SetActive(true);
             DeathUI.instance.deathEvent();
             Cursor.lockState = CursorLockMode.None;
@@ -65,7 +64,7 @@ public class playerHealth : MonoBehaviour
         }
         else
         {
-            hudscript.hpText.text = health+" / "+maxHealthCur;
+            HUD.instance.hpText.text = health+" / "+maxHealthCur;
         }
     }
     void heal()

@@ -20,8 +20,10 @@ public class HUD : MonoBehaviour
     // public Image menuHealthBar;
     public TextMeshProUGUI hpText;
     
-    void Start() {
-        instance=this;
+    void Awake() { instance=this; }
+    
+    void Start()
+    {
         playerHealth.instance.GetComponent<PlayerAction>().hint = hint; //force feed anda's code
     }
 
