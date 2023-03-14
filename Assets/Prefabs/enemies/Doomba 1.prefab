@@ -591,9 +591,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 90
   m_CollisionDetection: 0
 --- !u!65 &1533587205910170381
 BoxCollider:
@@ -606,8 +606,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.030711267, y: 0.03477583, z: 0.035214692}
-  m_Center: {x: -0.0025103826, y: 0.021772435, z: -0.0016606979}
+  m_Size: {x: 0.038567554, y: 0.047751646, z: 0.04110779}
+  m_Center: {x: -0.0003752887, y: 0.018921303, z: 0.0010153198}
 --- !u!114 &640452006968908179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,6 +641,7 @@ MonoBehaviour:
   wakeAnimation: 
   deathAnimation: 
   attackAnimation: 
+  awake: 0
   turnSpeed: 5
   attackCooldownTime: 3
   aimTolerance: 10
@@ -692,7 +693,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4516750500576887696}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.03
   m_Speed: 6
@@ -704,6 +705,6 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.05
-  m_BaseOffset: 0
+  m_BaseOffset: 0.005
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
