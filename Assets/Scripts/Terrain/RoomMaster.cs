@@ -31,7 +31,7 @@ public class RoomMaster : MonoBehaviour
     //Constants
     private float posiPadding = 5f; //padding for the parameter of the map
     private float spawnPadding = 2f; //padding between enemies spawned
-    private float spawnY = 10f; //enemy spawn elivation to prevent clipping into the ground, 
+    private float spawnY = 7f; //enemy spawn elivation to prevent clipping into the ground, 
 
     //Variables
     float xLoc;
@@ -142,12 +142,14 @@ public class RoomMaster : MonoBehaviour
             randomLocation();
             foreach (Vector3 aLoc in enemyLoc)
             {
-                GameObject spawnedEnemy = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity, spawnParent);
+                int enemyType = Random.Range(0, enemyList.Length);
+                GameObject spawnedEnemy = Instantiate(enemyList[enemyType], Vector3.zero, Quaternion.identity, spawnParent);
                 spawnedEnemy.transform.localPosition = aLoc;
             }
         }else
         {
             GameObject spawnedEnemy = Instantiate(enemyList[0], Vector3.zero, Quaternion.identity, spawnParent);
+            spawnedEnemy.transform.localPosition = Vector3.zero;
         }
     }
     void randomLocation()

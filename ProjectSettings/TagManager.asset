@@ -9,6 +9,7 @@ TagManager:
   - projectile
   - RoomPosi
   - Enemy
+  - MotherLovingHint
   layers:
   - Default
   - TransparentFX

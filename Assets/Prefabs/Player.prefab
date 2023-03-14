@@ -413,8 +413,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   cam: {fileID: 8649613077721364478}
-  leftHand: {fileID: 0}
-  rightHand: {fileID: 0}
+  leftHand: {fileID: 4944231608882375474}
+  rightHand: {fileID: 4944231609365239287}
   canMove: 1
   grounded: 1
   fatigued: 0
