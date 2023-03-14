@@ -266,6 +266,8 @@ GameObject:
   - component: {fileID: 5022279565753710130}
   - component: {fileID: 5022279565753710131}
   - component: {fileID: 5022279565753710135}
+  - component: {fileID: 5049885450574710338}
+  - component: {fileID: 2348730176040892362}
   m_Layer: 0
   m_Name: LilBall
   m_TagString: Enemy
@@ -318,15 +320,16 @@ MonoBehaviour:
   obstuctionMask:
     serializedVersion: 2
     m_Bits: 513
-  rb: {fileID: 0}
+  rb: {fileID: 5049885450574710338}
   anim: {fileID: 5022279565595911995}
   wakeAnimation: BallDeploy
   deathAnimation: BallDeath
   attackAnimation: BallAttack
+  awake: 0
   turnSpeed: 5
   attackCooldownTime: 1
   aimTolerance: 100
-  attackScript: {fileID: 5292804293839900473}
+  attackScript: {fileID: 5022279565753710128}
   attackRange: 1.5
   canMove: 1
   alwaysSeePlayer: 1
@@ -343,7 +346,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5022279565753710128}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 6
@@ -371,6 +374,39 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.98605204
   m_Center: {x: -0.0062094927, y: 0.08061814, z: -0.014024019}
+--- !u!54 &5049885450574710338
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5022279565753710128}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 90
+  m_CollisionDetection: 0
+--- !u!114 &2348730176040892362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5022279565753710128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d22f9981cdde34d459bb00369fce1a1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bladeDamage: 5
+  blades:
+  - {fileID: 5022279564256207832}
+  - {fileID: 5022279564707930462}
+  attackDuration: 0.5
 --- !u!1001 &5022279564352582248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -520,22 +556,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5745fc4d586c4f5489b9ca1d65bd6252, type: 3}
   m_PrefabInstance: {fileID: 5022279564352582248}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &5022279565595911998
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5292804293839900473}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!135 &5022279565595911996
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -557,7 +577,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5292804293839900473}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: cd8b27fda936c2444b950b608bd4ed7f, type: 2}
   m_CullingMode: 0
@@ -569,23 +589,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5022279565595911999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5292804293839900473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d22f9981cdde34d459bb00369fce1a1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bladeDamage: 5
-  blades:
-  - {fileID: 5022279564256207832}
-  - {fileID: 5022279564707930462}
-  attackDuration: 0.5
 --- !u!1 &5970475717557676887 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7536249854315554497, guid: 5745fc4d586c4f5489b9ca1d65bd6252, type: 3}

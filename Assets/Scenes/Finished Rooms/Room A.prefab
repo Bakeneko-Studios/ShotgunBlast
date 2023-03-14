@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1532831454}
   - component: {fileID: 1532831453}
   - component: {fileID: 1532831452}
+  - component: {fileID: 8827412223843199916}
   m_Layer: 6
   m_Name: Floor
   m_TagString: Untagged
@@ -344,6 +345,36 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &8827412223843199916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532831450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 9bd3f7f87826ea242a5f99f7d9c6c23b, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &2151581405040990850
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,8 +424,8 @@ GameObject:
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 9
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &6182821778308897776
 Transform:
@@ -14027,6 +14058,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6182821778373742472}
   - component: {fileID: 6182821778373742479}
+  - component: {fileID: 8222948645984300061}
   m_Layer: 6
   m_Name: Room A
   m_TagString: Untagged
@@ -14087,3 +14119,18 @@ MonoBehaviour:
   spawnParent: {fileID: 2151581405040990851}
   enemyLoc: []
   difficulty: 0
+--- !u!114 &8222948645984300061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6182821778373742473}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3637b9140ba25141a19b12ed5ba9c07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surfaces:
+  - {fileID: 8827412223843199916}
+  - {fileID: 0}

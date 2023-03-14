@@ -37,7 +37,7 @@ public class enemyFramework : MonoBehaviour
     public string wakeAnimation;
     public string deathAnimation; 
     public string attackAnimation;
-    private bool awake = false; // need to run animation first
+    public bool awake = false; // need to run animation first
 
 
     [Header("Movement & Attack")]
@@ -94,6 +94,8 @@ public class enemyFramework : MonoBehaviour
         awake = true;
     }
 
+    
+
     void Start()
     {
         if (attackScript == null)
@@ -111,15 +113,15 @@ public class enemyFramework : MonoBehaviour
         player = movement.instance.transform;
         if (canMove)
             agent = GetComponent<NavMeshAgent>();
-        if (wakeAnimation != "")
-        {
-            //anim.Play(wakeAnimation);
-            StartCoroutine("wakeUp");
-        }
-        else
-        {
-            awake = true;
-        }
+        //if (wakeAnimation != "")
+        //{
+        //    //anim.Play(wakeAnimation);
+        //    StartCoroutine("wakeUp");
+        //}
+        //else
+        //{
+        //    awake = true;
+        //}
         InvokeRepeating("empHeal",10f,1f);
     }
 
@@ -199,6 +201,7 @@ public class enemyFramework : MonoBehaviour
     void Update()
     {
         if (!awake || stunned) return;
+
 
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
@@ -281,8 +284,30 @@ public class enemyFramework : MonoBehaviour
         }
     }
 
-    
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            rb.isKinematic = true;
+            if (anim!=null)
+                anim.enabled = true;
+            GetComponent<NavMeshAgent>().enabled = true;
+            if (wakeAnimation != "")
+            {
+                StartCoroutine("wakeUp");
+            }
+            else
+            {
+                awake = true;
+            }
+        }
+
+    }
+
 }
+
+
 
 
 #if UNITY_EDITOR
