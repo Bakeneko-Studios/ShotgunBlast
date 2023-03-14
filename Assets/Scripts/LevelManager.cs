@@ -7,10 +7,12 @@ public class LevelManager : MonoBehaviour
 {
     public void ExitLevel()
     {
-        SceneManager.LoadScene("RestingGround");
+        SceneManager.LoadScene("LoadingScreen");
+        LoadingScreen.SceneToLoad = "RestingGround";
     }
     public void ExitRest()
     {
-        SceneManager.LoadScene("DemoFinal");
+        SceneManager.LoadScene("LoadingScreen");
+        LoadingScreen.SceneToLoad = "DemoFinal";
     }
 }
