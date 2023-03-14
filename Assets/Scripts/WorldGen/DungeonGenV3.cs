@@ -234,7 +234,6 @@ public class DungeonGenV3 : MonoBehaviour
         if(door==null) throw new System.Exception("Missing door object");
         if(block==null) throw new System.Exception("Missing wall object");
 
-        Debug.Log(start.room.eastDoor);
         if(!hallways.Contains(start.room.northDoor)) {GameObject.Instantiate(block, start.room.northDoor, Quaternion.Euler(0,180,0), hallwayParent);}
         if(!hallways.Contains(start.room.eastDoor))  {GameObject.Instantiate(block, start.room.eastDoor,  Quaternion.Euler(0,-90,0), hallwayParent);}
         if(!hallways.Contains(start.room.southDoor)) {GameObject.Instantiate(block, start.room.southDoor, Quaternion.Euler(0,0,0),   hallwayParent);}
