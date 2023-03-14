@@ -284,7 +284,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8649613077855814007}
-  m_LocalRotation: {x: -0.006371927, y: 0.000000059604645, z: -4.656613e-10, w: -0.99997973}
+  m_LocalRotation: {x: -0.22674394, y: -0.00000017881393, z: -0.000000044703484, w: 0.97395444}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -523,8 +523,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8649613078597710626}
-  m_LocalRotation: {x: 0, y: -0.833626, z: 0, w: 0.5523294}
-  m_LocalPosition: {x: 278.85846, y: 1.0000001, z: 56.63013}
+  m_LocalRotation: {x: 0, y: 0.70504135, z: 0, w: -0.7091662}
+  m_LocalPosition: {x: 59.232475, y: 1, z: 275.03064}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -633,9 +633,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b88ec8633f70c0428c72c9092462f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 3.4028235e+38
   maxHealth: 100
-  maxHealthCur: 100
+  maxHealthCur: 3.4028235e+38
   healCooldown: 0
   timeBetweenHeals: 0
   naturalRegen: 0
