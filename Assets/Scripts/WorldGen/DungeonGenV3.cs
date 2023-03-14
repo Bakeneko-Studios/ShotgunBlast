@@ -22,7 +22,10 @@ public class DungeonGenV3 : MonoBehaviour
         }
         public Vector3[] doors;
         public void place(int cellSize, Transform parent)
-        {GameObject.Instantiate(room.structure,new Vector3((x+0.5f)*cellSize,0,(z+0.5f)*cellSize),new Quaternion(),parent);}
+        {
+            GameObject g = GameObject.Instantiate(room.structure,new Vector3((x+0.5f)*cellSize,0,(z+0.5f)*cellSize),new Quaternion(),parent);
+            transforms.Add(g.transform);
+        }
     }
 
     [System.Serializable] class RoomType
@@ -49,8 +52,9 @@ public class DungeonGenV3 : MonoBehaviour
     [Range(0.25f,1)]public float doorSpawnRate = 0.5f;
     Cell start,end,lastRoom;
     List<Room> rooms = new List<Room>();
-    List<Room> placedRooms = new List<Room>();
+    [SerializeField] List<Room> placedRooms = new List<Room>();
     List<Vector3> hallways = new List<Vector3>();
+    public static List<Transform> transforms = new List<Transform>();
 
     void Awake()
     {
@@ -149,7 +153,6 @@ public class DungeonGenV3 : MonoBehaviour
 
         //place doors
         if(!doors()) {clear(); Debug.LogWarning("restarting (6)"); goto attempt;}
-        blockExits();
 
         Debug.Log("dungeon generated sucessfully");
 
@@ -209,38 +212,58 @@ public class DungeonGenV3 : MonoBehaviour
         return true;
     }
 
+    // bool doors()
+    // {
+    //     if(door==null) throw new System.Exception("Missing door object");
+    //     for (int i = 0; i < hallways.Count; i+=2)
+    //     {
+    //         switch (hallways[i+1]-hallways[i])
+    //         {
+    //             case Vector3 v1 when v1.x>0: GameObject g1 = GameObject.Instantiate(door, hallways[i], Quaternion.Euler(0,90,0),  hallwayParent); GameObject.Instantiate(door, hallways[i+1], Quaternion.Euler(0,90,0), hallwayParent);  break;
+    //             case Vector3 v2 when v2.x<0: GameObject g2 = GameObject.Instantiate(door, hallways[i], Quaternion.Euler(0,-90,0), hallwayParent); GameObject.Instantiate(door, hallways[i+1], Quaternion.Euler(0,-90,0), hallwayParent); break;
+    //             case Vector3 v3 when v3.z>0: GameObject g3 = GameObject.Instantiate(door, hallways[i], Quaternion.Euler(0,0,0),   hallwayParent); GameObject.Instantiate(door, hallways[i+1], Quaternion.Euler(0,0,0), hallwayParent);   break;
+    //             case Vector3 v4 when v4.z<0: GameObject g4 = GameObject.Instantiate(door, hallways[i], Quaternion.Euler(0,180,0), hallwayParent); GameObject.Instantiate(door, hallways[i+1], Quaternion.Euler(0,180,0), hallwayParent); break;
+    //             default: throw new System.Exception("VEIFWEFGUOYDHIUYG#OEWDUOMIYWEGFFUCKKKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+    //         }
+    //     }
+    //     return true;
+    // }
+
     bool doors()
     {
         if(door==null) throw new System.Exception("Missing door object");
-        for (int i = 0; i < hallways.Count; i+=2)
+        if(block==null) throw new System.Exception("Missing wall object");
+
+        Debug.Log(start.room.eastDoor);
+        if(!hallways.Contains(start.room.northDoor)) {GameObject.Instantiate(block, start.room.northDoor, Quaternion.Euler(0,180,0), hallwayParent);}
+        if(!hallways.Contains(start.room.eastDoor))  {GameObject.Instantiate(block, start.room.eastDoor,  Quaternion.Euler(0,-90,0), hallwayParent);}
+        if(!hallways.Contains(start.room.southDoor)) {GameObject.Instantiate(block, start.room.southDoor, Quaternion.Euler(0,0,0),   hallwayParent);}
+        if(!hallways.Contains(start.room.westDoor))  {GameObject.Instantiate(block, start.room.westDoor,  Quaternion.Euler(0,90,0),  hallwayParent);}
+        
+        if(!hallways.Contains(end.room.northDoor)) {GameObject.Instantiate(block, end.room.northDoor, Quaternion.Euler(0,180,0), hallwayParent);}
+        if(!hallways.Contains(end.room.eastDoor))  {GameObject.Instantiate(block, end.room.eastDoor,  Quaternion.Euler(0,-90,0), hallwayParent);}
+        if(!hallways.Contains(end.room.southDoor)) {GameObject.Instantiate(block, end.room.southDoor, Quaternion.Euler(0,0,0),   hallwayParent);}
+        if(!hallways.Contains(end.room.westDoor))  {GameObject.Instantiate(block, end.room.westDoor,  Quaternion.Euler(0,90,0),  hallwayParent);}
+        
+        foreach (Transform t in transforms)
         {
-            switch (hallways[i+1]-hallways[i])
+            if(t.TryGetComponent<RoomMaster>(out RoomMaster rm))
             {
-                case Vector3 v1 when v1.x>0: GameObject.Instantiate(door, hallways[i], Quaternion.Euler(0,90,0), hallwayParent);  GameObject.Instantiate(door, hallways[i+1], Quaternion.Euler(0,90,0), hallwayParent); break;
-                case Vector3 v2 when v2.x<0: GameObject.Instantiate(door, hallways[i], Quaternion.Euler(0,-90,0), hallwayParent); GameObject.Instantiate(door, hallways[i+1], Quaternion.Euler(0,-90,0), hallwayParent); break;
-                case Vector3 v3 when v3.z>0: GameObject.Instantiate(door, hallways[i], Quaternion.Euler(0,0,0), hallwayParent);   GameObject.Instantiate(door, hallways[i+1], Quaternion.Euler(0,0,0), hallwayParent); break;
-                case Vector3 v4 when v4.z<0: GameObject.Instantiate(door, hallways[i], Quaternion.Euler(0,180,0), hallwayParent); GameObject.Instantiate(door, hallways[i+1], Quaternion.Euler(0,180,0), hallwayParent); break;
-                default: throw new System.Exception("VEIFWEFGUOYDHIUYG#OEWDUOMIYWEGFFUCKKKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                if(hallways.Contains(t.transform.position+rm.theRoom.northDoor)) {GameObject g = GameObject.Instantiate(door, t.transform.position+rm.theRoom.northDoor, Quaternion.Euler(0,180,0), hallwayParent); rm.lockers.Add(g.GetComponent<Locker>());} else {GameObject.Instantiate(block, t.transform.position+rm.theRoom.northDoor, Quaternion.Euler(0,180,0), hallwayParent);}
+                if(hallways.Contains(t.transform.position+rm.theRoom.eastDoor))  {GameObject g = GameObject.Instantiate(door, t.transform.position+rm.theRoom.eastDoor,  Quaternion.Euler(0,-90,0), hallwayParent); rm.lockers.Add(g.GetComponent<Locker>());} else {GameObject.Instantiate(block, t.transform.position+rm.theRoom.eastDoor,  Quaternion.Euler(0,-90,0), hallwayParent);}
+                if(hallways.Contains(t.transform.position+rm.theRoom.southDoor)) {GameObject g = GameObject.Instantiate(door, t.transform.position+rm.theRoom.southDoor, Quaternion.Euler(0,0,0),   hallwayParent); rm.lockers.Add(g.GetComponent<Locker>());} else {GameObject.Instantiate(block, t.transform.position+rm.theRoom.southDoor, Quaternion.Euler(0,0,0),   hallwayParent);}
+                if(hallways.Contains(t.transform.position+rm.theRoom.westDoor))  {GameObject g = GameObject.Instantiate(door, t.transform.position+rm.theRoom.westDoor,  Quaternion.Euler(0,90,0),  hallwayParent); rm.lockers.Add(g.GetComponent<Locker>());} else {GameObject.Instantiate(block, t.transform.position+rm.theRoom.westDoor,  Quaternion.Euler(0,90,0),  hallwayParent);}
+                rm.freeRoom();
             }
         }
         return true;
-    }
-
-    void blockExits()
-    {
-        foreach (Room r in placedRooms)
-        {
-            if(!hallways.Contains(r.northDoor)) {GameObject g = GameObject.Instantiate(block, r.northDoor, Quaternion.Euler(0,180,0), hallwayParent); r.structure.TryGetComponent<RoomMaster>(out RoomMaster rm); if(rm!=null) rm.lockers.Add(g.GetComponent<Locker>());}
-            if(!hallways.Contains(r.eastDoor))  {GameObject g = GameObject.Instantiate(block, r.eastDoor,  Quaternion.Euler(0,-90,0), hallwayParent); r.structure.TryGetComponent<RoomMaster>(out RoomMaster rm); if(rm!=null) rm.lockers.Add(g.GetComponent<Locker>());}
-            if(!hallways.Contains(r.southDoor)) {GameObject g = GameObject.Instantiate(block, r.southDoor, Quaternion.Euler(0,0,0),   hallwayParent); r.structure.TryGetComponent<RoomMaster>(out RoomMaster rm); if(rm!=null) rm.lockers.Add(g.GetComponent<Locker>());}
-            if(!hallways.Contains(r.westDoor))  {GameObject g = GameObject.Instantiate(block, r.westDoor,  Quaternion.Euler(0,90,0),  hallwayParent); r.structure.TryGetComponent<RoomMaster>(out RoomMaster rm); if(rm!=null) rm.lockers.Add(g.GetComponent<Locker>());}
-        }
     }
 
     public void clear()
     {
         foreach (Transform t in parent) {if(t.name!=hallwayParent.name) Destroy(t.gameObject);}
         foreach (Transform t in hallwayParent) {Destroy(t.gameObject);}
+        transforms.Clear();
         rooms.Clear();
         placedRooms.Clear();
         hallways.Clear();

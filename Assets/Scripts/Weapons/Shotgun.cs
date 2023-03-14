@@ -38,7 +38,7 @@ public class Shotgun : MonoBehaviour
     {
         cam = Camera.main.transform;
         anim = GetComponentInChildren<Animation>();
-        isAnimate = anim!=null && animOneHand!=null;
+        isAnimate = anim!=null;
     }
 
     public void FireGun()
@@ -57,7 +57,7 @@ public class Shotgun : MonoBehaviour
         }
         canShoot=false;
         if(isAnimate && !ArmManager.isBusy)
-            anim.Play();
+            GetComponent<Animator>().SetTrigger("spin");
         else if(isAnimate)
             animOneHand.Play();
         StartCoroutine(Reload());
