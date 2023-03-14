@@ -40,6 +40,7 @@ public class LoadingUI : MonoBehaviour
     void NextScene() {
         //Debug.Log(LoadingScreen.SceneToLoad);
         if (LoadingScreen.SceneToLoad != null) {
+            //GameObject.FindGameObjectWithTag("Player").SetActive(true);
             SceneManager.LoadScene(LoadingScreen.SceneToLoad);
         }
     }

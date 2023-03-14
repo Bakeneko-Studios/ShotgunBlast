@@ -5,6 +5,9 @@ using UnityEngine;
 public class Minimap : MonoBehaviour
 {
     public Transform player;
+    void Start() {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
     void LateUpdate() 
     {
         Vector3 newPosition = player.position;
