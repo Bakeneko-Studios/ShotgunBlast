@@ -7,7 +7,7 @@ public class RestingGround : MonoBehaviour
 {
     public Transform SpawnHere;
 
-    void Start() {
+    void Awake() {
         GameObject prefabPlayer = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/savedPlayer.prefab");
         GameObject player = Instantiate(prefabPlayer);
         player.transform.position = SpawnHere.position;
