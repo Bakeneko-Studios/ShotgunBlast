@@ -10860,9 +10860,9 @@ MonoBehaviour:
   theRoom:
     structure: {fileID: 2223634375793738448}
     northDoor: {x: 0, y: 0, z: 50.5}
-    eastDoor: {x: 38, y: 0, z: 0}
+    eastDoor: {x: 38.5, y: 0, z: 0}
     southDoor: {x: 0, y: 0, z: -50.5}
-    westDoor: {x: -38, y: 0, z: 0}
+    westDoor: {x: -38.5, y: 0, z: 0}
   dimention: {x: 75, y: 100}
   lockers: []
   RandomWave: 0
