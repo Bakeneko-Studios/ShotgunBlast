@@ -62,8 +62,8 @@ public class DungeonGenV3 : MonoBehaviour
     }
     void Start()
     {
+        clear();
         generate();
-        //movement.instance.transform.position = new Vector3(cellSize*(start.x+0.5f),movement.instance.height/2,cellSize*(start.z+0.5f));
     }
 
     void validate()
