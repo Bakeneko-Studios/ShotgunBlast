@@ -63,7 +63,7 @@ public class DungeonGenV3 : MonoBehaviour
     void Start()
     {
         generate();
-        movement.instance.transform.position = new Vector3(cellSize*(start.x+0.5f),movement.instance.height/2,cellSize*(start.z+0.5f));
+        //movement.instance.transform.position = new Vector3(cellSize*(start.x+0.5f),movement.instance.height/2,cellSize*(start.z+0.5f));
     }
 
     void validate()
@@ -157,7 +157,7 @@ public class DungeonGenV3 : MonoBehaviour
 
         Debug.Log("dungeon generated sucessfully");
 
-        //movement.instance.transform.position = new Vector3(cellSize*(start.x+0.5f),movement.instance.height/2,cellSize*(start.z+0.5f));
+        movement.instance.transform.position = new Vector3(cellSize*(start.x+0.5f),movement.instance.height/2,cellSize*(start.z+0.5f));
     }
 
     bool pathfind(Cell c, int r)
