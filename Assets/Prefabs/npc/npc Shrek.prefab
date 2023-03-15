@@ -92,7 +92,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1207686080879010665}
-  - component: {fileID: 1887738763532044008}
+  - component: {fileID: 4036642230929498545}
+  - component: {fileID: 2392612782648839396}
   m_Layer: 0
   m_Name: npc Shrek
   m_TagString: Untagged
@@ -123,7 +124,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1887738763532044008
+--- !u!136 &4036642230929498545
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984188283009792467}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 4.557282
+  m_Height: 22.392838
+  m_Direction: 1
+  m_Center: {x: 0.0411129, y: 10.696412, z: 0}
+--- !u!114 &2392612782648839396
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,9 +147,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1984188283009792467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f242e53f49fdf94782cfbb1bdc3d296, type: 3}
+  m_Script: {fileID: 11500000, guid: cfa937111ebaa2d49a637a150aad2517, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3065739338273411761}
+        m_TargetAssemblyTypeName: DialogueBox, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3376610795304297973
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,6 +760,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce54ee189706bd14badd3e01c4e3e002, type: 3}
+--- !u!114 &3065739338273411761 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5075778777668519109, guid: ce54ee189706bd14badd3e01c4e3e002, type: 3}
+  m_PrefabInstance: {fileID: 7853002629085681268}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f242e53f49fdf94782cfbb1bdc3d296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6216623996516249990 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4232990981409564658, guid: ce54ee189706bd14badd3e01c4e3e002, type: 3}
