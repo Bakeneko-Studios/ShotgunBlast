@@ -19,9 +19,11 @@ public class ScreenFlash : MonoBehaviour
     void Awake() {instance=this;}
     void Start()
     {
-        volume = Camera.main.GetComponent<PostProcessVolume>();
-        volume.profile.TryGetSettings(out Bloom bloom);
-        if(bloom!=null) intensity = bloom.intensity;
+        if(Camera.main.TryGetComponent<PostProcessVolume>(out volume))
+        {
+            volume.profile.TryGetSettings(out Bloom bloom);
+            if(bloom!=null) intensity = bloom.intensity;
+        }
     }
 
     public void Flash(string colorName)

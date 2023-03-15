@@ -8,6 +8,7 @@ public class Locker : MonoBehaviour
     [SerializeField]private float Speed;
     [SerializeField]private Vector3 SlideDirection = Vector3.up;
     [SerializeField]private float SlideAmount;
+    [SerializeField] private Animator anim;
 
     private Vector3 StartPosition;
 
@@ -22,11 +23,13 @@ public class Locker : MonoBehaviour
     {
         if (!IsOpen)
         {
-            if (AnimationCoroutine != null)
-            {
-                StopCoroutine(AnimationCoroutine);
-            }
-            AnimationCoroutine = StartCoroutine(DoSlidingOpen()); 
+            IsOpen=true;
+            anim.SetBool("isOpen",true);
+            // if (AnimationCoroutine != null)
+            // {
+            //     StopCoroutine(AnimationCoroutine);
+            // }
+            // AnimationCoroutine = StartCoroutine(DoSlidingOpen()); 
         }
     }
     private IEnumerator DoSlidingOpen()
@@ -47,11 +50,13 @@ public class Locker : MonoBehaviour
     {
         if (IsOpen)
         {
-            if (AnimationCoroutine != null)
-            {
-                StopCoroutine(AnimationCoroutine);
-            }
-            AnimationCoroutine = StartCoroutine(DoSlidingClose());
+            IsOpen=false;
+            anim.SetBool("isOpen",false);
+            // if (AnimationCoroutine != null)
+            // {
+            //     StopCoroutine(AnimationCoroutine);
+            // }
+            // AnimationCoroutine = StartCoroutine(DoSlidingClose());
         }
     }
     private IEnumerator DoSlidingClose()
