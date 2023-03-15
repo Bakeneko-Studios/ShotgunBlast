@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class RoomMaster : MonoBehaviour
 {
@@ -9,6 +10,11 @@ public class RoomMaster : MonoBehaviour
     public Vector2 dimention;//room dimention (x,z)
     public List<Locker> lockers;//locks the room when entered
     public bool RandomWave;
+
+    [Header("Audio")]
+    public AudioSource AS;
+    public AudioClip lockdown;
+    public AudioClip clear;
 
     [Header("Room Status")]
     [SerializeField]private bool isEntered;
@@ -68,6 +74,7 @@ public class RoomMaster : MonoBehaviour
                 if (isInX && isInZ)
                 {
                     lockRoom();
+                    AS.PlayOneShot(lockdown);
                     isEntered = true;
                 }
             }
@@ -106,6 +113,7 @@ public class RoomMaster : MonoBehaviour
             {
                 //Player cleared the room
                 freeRoom();
+                AS.PlayOneShot(clear);
                 roomDone = true;
             }
         }
