@@ -398,6 +398,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3880773989952343935}
   - component: {fileID: 5329307380386429712}
+  - component: {fileID: 8592804427706250630}
   m_Layer: 0
   m_Name: RoomLocker
   m_TagString: Untagged
@@ -413,7 +414,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3880773989952343933}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 79, y: 8, z: 11}
+  m_LocalPosition: {x: 79, y: 0, z: 11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -440,3 +441,24 @@ MonoBehaviour:
   Speed: 5
   SlideDirection: {x: 0, y: 1, z: 0}
   SlideAmount: 50
+  anim: {fileID: 8592804427706250630}
+--- !u!95 &8592804427706250630
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3880773989952343933}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: be5fe33787b086649ab4cbc159f630fa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

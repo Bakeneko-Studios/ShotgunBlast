@@ -249,6 +249,7 @@ public class DungeonGenV3 : MonoBehaviour
         {
             if(t.TryGetComponent<RoomMaster>(out RoomMaster rm))
             {
+                Debug.Log(t.position);
                 if(hallways.Contains(t.transform.position+rm.theRoom.northDoor)) {GameObject g = GameObject.Instantiate(door, t.transform.position+rm.theRoom.northDoor, Quaternion.Euler(0,180,0), hallwayParent); rm.lockers.Add(g.GetComponent<Locker>());} else {GameObject.Instantiate(block, t.transform.position+rm.theRoom.northDoor, Quaternion.Euler(0,180,0), hallwayParent);}
                 if(hallways.Contains(t.transform.position+rm.theRoom.eastDoor))  {GameObject g = GameObject.Instantiate(door, t.transform.position+rm.theRoom.eastDoor,  Quaternion.Euler(0,-90,0), hallwayParent); rm.lockers.Add(g.GetComponent<Locker>());} else {GameObject.Instantiate(block, t.transform.position+rm.theRoom.eastDoor,  Quaternion.Euler(0,-90,0), hallwayParent);}
                 if(hallways.Contains(t.transform.position+rm.theRoom.southDoor)) {GameObject g = GameObject.Instantiate(door, t.transform.position+rm.theRoom.southDoor, Quaternion.Euler(0,0,0),   hallwayParent); rm.lockers.Add(g.GetComponent<Locker>());} else {GameObject.Instantiate(block, t.transform.position+rm.theRoom.southDoor, Quaternion.Euler(0,0,0),   hallwayParent);}
