@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5071683994356729801}
   m_Layer: 6
-  m_Name: "Salle de D\xE9part"
+  m_Name: Starting Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

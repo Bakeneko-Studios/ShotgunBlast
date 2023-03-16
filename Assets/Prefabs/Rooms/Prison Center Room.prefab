@@ -10861,7 +10861,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2408704939079648166}
   m_Layer: 0
-  m_Name: "F\xE4ngelsets Centrum \uFF08Prison Center Room)"
+  m_Name: Prison Center Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
