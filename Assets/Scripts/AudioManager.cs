@@ -3,14 +3,17 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    GameObject player;
+    public AudioSource AS;
+    public AudioClip backGround;
+    void Start() 
     {
-        
+        player = this.gameObject;
+        AS = GetComponent<AudioSource>();
+        AS.loop = true;
+        AS.PlayOneShot(backGround);
     }
-
-    // Update is called once per frame
-    void Update()
+    void Update() 
     {
         
     }
