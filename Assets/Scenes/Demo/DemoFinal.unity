@@ -240,11 +240,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 799576689776235381, guid: 4d96ce313923cc94892a0e5936b48c98, type: 3}
       propertyPath: types.Array.data[0].count
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 799576689776235381, guid: 4d96ce313923cc94892a0e5936b48c98, type: 3}
       propertyPath: types.Array.data[1].count
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 799576689776235381, guid: 4d96ce313923cc94892a0e5936b48c98, type: 3}
       propertyPath: types.Array.data[2].count
@@ -570,7 +570,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
