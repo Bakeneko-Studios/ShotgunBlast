@@ -1953,7 +1953,7 @@ GameObject:
   - component: {fileID: 537232146927605095}
   - component: {fileID: 5083584851625213041}
   m_Layer: 6
-  m_Name: Endraum
+  m_Name: End Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
