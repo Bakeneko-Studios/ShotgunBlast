@@ -75,7 +75,7 @@ public class RoomMaster : MonoBehaviour
                 if (isInX && isInZ)
                 {
                     lockRoom();
-                    AS.PlayOneShot(lockdown);
+                    //AS.PlayOneShot(lockdown);
                     isEntered = true;
                 }
             }
@@ -114,7 +114,7 @@ public class RoomMaster : MonoBehaviour
             {
                 //Player cleared the room
                 freeRoom();
-                AS.PlayOneShot(clear);
+                //AS.PlayOneShot(clear);
                 roomDone = true;
             }
         }
