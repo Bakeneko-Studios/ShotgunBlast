@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEditor;
+// using UnityEditor;
 
 public class LevelManager : MonoBehaviour
 {
@@ -15,8 +15,8 @@ public class LevelManager : MonoBehaviour
     public void switchSceneWithPlayer(string SceneName)
     {
         GameObject Player = movement.instance.gameObject;
-        string localPath = "Assets/Prefabs/savedPlayer.prefab";
-        PrefabUtility.SaveAsPrefabAsset(Player,localPath);
+        // string localPath = "Assets/Prefabs/savedPlayer.prefab";
+        // PrefabUtility.SaveAsPrefabAsset(Player,localPath);
 
         SceneManager.LoadScene("LoadingScreen");
         LoadingScreen.SceneToLoad = SceneName;

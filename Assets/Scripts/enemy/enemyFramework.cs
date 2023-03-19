@@ -310,26 +310,26 @@ public class enemyFramework : MonoBehaviour
 
 
 
-#if UNITY_EDITOR
-[CustomEditor(typeof(enemyFramework))]
-public class enemyFramework_Editor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector(); // for other non-HideInInspector fields
+// #if UNITY_EDITOR
+// [CustomEditor(typeof(enemyFramework))]
+// public class enemyFramework_Editor : Editor
+// {
+//     public override void OnInspectorGUI()
+//     {
+//         DrawDefaultInspector(); // for other non-HideInInspector fields
         
-        enemyFramework script = (enemyFramework)target;
+//         enemyFramework script = (enemyFramework)target;
 
-        // draw checkbox for the bool
-        //script.alwaysSeePlayer = EditorGUILayout.Toggle("Always See Player", script.alwaysSeePlayer);
+//         // draw checkbox for the bool
+//         //script.alwaysSeePlayer = EditorGUILayout.Toggle("Always See Player", script.alwaysSeePlayer);
 
-        if (!script.alwaysSeePlayer) // if bool is true, dont show other fields
-        {
-            script.patrol = EditorGUILayout.Toggle("Patrol?", script.patrol);
-            script.walkPointRange = EditorGUILayout.FloatField("Walk Point Range", script.walkPointRange);
-            script.sightRange = EditorGUILayout.FloatField("Sight Range", script.sightRange);
-            script.viewAngle = EditorGUILayout.FloatField("View Angle", script.viewAngle);
-        }
-    }
-}
-#endif
+//         if (!script.alwaysSeePlayer) // if bool is true, dont show other fields
+//         {
+//             script.patrol = EditorGUILayout.Toggle("Patrol?", script.patrol);
+//             script.walkPointRange = EditorGUILayout.FloatField("Walk Point Range", script.walkPointRange);
+//             script.sightRange = EditorGUILayout.FloatField("Sight Range", script.sightRange);
+//             script.viewAngle = EditorGUILayout.FloatField("View Angle", script.viewAngle);
+//         }
+//     }
+// }
+// #endif

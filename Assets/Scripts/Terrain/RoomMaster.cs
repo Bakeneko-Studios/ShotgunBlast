@@ -61,6 +61,7 @@ public class RoomMaster : MonoBehaviour
         perimeterZ = new Vector2(transform.position.z-(dimention.y/2), transform.position.z+(dimention.y/2));
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        AS = GetComponent<AudioSource>();
     }
     void Update() 
     {

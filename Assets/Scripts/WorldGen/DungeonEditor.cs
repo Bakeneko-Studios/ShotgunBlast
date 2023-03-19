@@ -1,20 +1,20 @@
-using UnityEngine;
-using UnityEditor;
+// using UnityEngine;
+// using UnityEditor;
 
-[CustomEditor(typeof(DungeonGenV3))]
-public class DungeonEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {            
-        DungeonGenV3 gen = (DungeonGenV3)target;
+// [CustomEditor(typeof(DungeonGenV3))]
+// public class DungeonEditor : Editor
+// {
+//     public override void OnInspectorGUI()
+//     {            
+//         DungeonGenV3 gen = (DungeonGenV3)target;
         
-        GUILayout.Label("DO NOT USE IN EDITOR MODE");
-        if(GUILayout.Button("Generate"))
-        {
-            gen.clear();
-            gen.generate();
-        }
+//         GUILayout.Label("DO NOT USE IN EDITOR MODE");
+//         if(GUILayout.Button("Generate"))
+//         {
+//             gen.clear();
+//             gen.generate();
+//         }
         
-        DrawDefaultInspector();
-    }
-}
+//         DrawDefaultInspector();
+//     }
+// }
