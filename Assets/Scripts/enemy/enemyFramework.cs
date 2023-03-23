@@ -11,7 +11,9 @@ using UnityEditor;
 
 public class enemyFramework : MonoBehaviour
 {
+
     // Start is called before the first frame update
+    public ParticleSystem deathParticle;
 
     [Header("Basic Info")]
     public float health = 100;
@@ -144,6 +146,8 @@ public class enemyFramework : MonoBehaviour
             
             if (deathAnimation != "")
                 anim.Play(deathAnimation);
+            if (deathParticle != null)
+                deathParticle.Play();
             StartCoroutine("waitLife", 2); // destory object after certain time
             agent.enabled = false;
             enabled = false;
