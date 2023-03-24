@@ -16,31 +16,31 @@ public class DialogueBox : MonoBehaviour
     public void OnInteract() {
         OnChat = 0;
         bar.SetActive(true);
-        //NextLine();
-        StartCoroutine(AutoLine());
+        NextLine();
+        //StartCoroutine(AutoLine());
         var eventSystem = EventSystem.current;
-        eventSystem.SetSelectedGameObject(bar);
+        eventSystem.SetSelectedGameObject(bar.transform.GetChild(0).gameObject);
         mv = movement.instance;
         mv.enabled = false;
         Cursor.lockState = CursorLockMode.None;
     }
 
-    // public void NextLine() {
-    //     text.text = dialogue[OnChat];
-    //     if (OnChat < dialogue.Length) {
-    //         OnChat ++;
-    //     } else {
-    //         bar.SetActive(false);
-    //         mv.enabled = true;
-    //         Cursor.lockState = CursorLockMode.Locked;
-    //     }
-    // }
+    public void NextLine() {
+        if (OnChat < dialogue.Length) {
+            text.text = dialogue[OnChat];
+            OnChat ++;
+        } else {
+            bar.SetActive(false);
+            mv.enabled = true;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
 
     IEnumerator AutoLine() {
         yield return Running();
         bar.SetActive(false);
-             mv.enabled = true;
-             Cursor.lockState = CursorLockMode.Locked;
+        mv.enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     IEnumerator Running() {
