@@ -176,14 +176,14 @@ public class movement : MonoBehaviour
     {
         if(canMove)
         {
-            direction = player.forward*v+player.right*h;
+            if(grounded) direction = player.forward*v+player.right*h;
+            else direction = (player.forward*v).normalized*airControl*(v<=0?5:1)+(player.right*h).normalized*airControl*2;
             if(onSlope()&&Player.state!=Player.MoveState.air)
             {
                 rb.AddForce(Vector3.ProjectOnPlane(direction,slopeCast.normal).normalized*speed*12.5f,ForceMode.Force);
                 if(rb.velocity.y>0) rb.AddForce(Vector3.down*80f,ForceMode.Force);
             }
-            else if(grounded) rb.AddForce(direction.normalized*speed*10f,ForceMode.Force);
-            else rb.AddForce(direction.normalized*speed*10f*airControl,ForceMode.Force);
+            else rb.AddForce(direction*speed*10f,ForceMode.Force);
             rb.AddForce(Vector3.up*(onSlope()?0:gravity),ForceMode.Force);
         }
     }
