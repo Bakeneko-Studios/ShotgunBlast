@@ -18,13 +18,13 @@ public class PlayerAction : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, interactRange))
         {
-            if (hit.collider.GetComponent<Interactable>() != false)
+            var a = hit.collider.GetComponent<Interactable>();
+            if (a!=null)
             {
                 hint.SetActive(true);
-                onInteract = hit.collider.GetComponent<Interactable>().onInteract;
                 if (Input.GetKeyDown(UserSettings.keybinds["interact"]))
                 {
-                    onInteract.Invoke();
+                    a.OnInteract();
                     hint.SetActive(false);
                 }
             }

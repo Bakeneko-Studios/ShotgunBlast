@@ -55,7 +55,7 @@ public class BRRRRRRRRRRRRRRRRRRRR : Shotgun
     IEnumerator Reload()
     {
         ArmManager.isBusy=true;
-        yield return new WaitForSeconds(reloadTime);
+        yield return new WaitForSeconds(reloadTime/Player.firerateMultiplier);
         ammoInClip = 69420;
         canShoot = true;
         ArmManager.isBusy=false;

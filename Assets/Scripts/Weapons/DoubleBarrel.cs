@@ -57,14 +57,14 @@ public class DoubleBarrel : Shotgun
     
     IEnumerator shotDelay()
     {
-        yield return new WaitForSeconds(fireRate);
+        yield return new WaitForSeconds(fireRate/Player.firerateMultiplier);
         canShoot=true;
     }
 
     IEnumerator Reload()
     {
         ArmManager.isBusy=true;
-        yield return new WaitForSeconds(reloadTime);
+        yield return new WaitForSeconds(reloadTime/Player.firerateMultiplier);
         ammoInClip = 2;
         canShoot = true;
         ArmManager.isBusy=false;

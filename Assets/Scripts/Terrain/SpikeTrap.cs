@@ -27,7 +27,7 @@ public class SpikeTrap : MonoBehaviour
         if(other.collider.CompareTag("Player"))
         {
             movement.instance.rb.velocity=Vector3.zero;
-            movement.instance.speedMultiplier-=slowPercent;
+            Player.speedMultiplier-=slowPercent;
             movement.instance.canJump=false;
             InvokeRepeating("ouch",0,1);
         }
@@ -36,7 +36,7 @@ public class SpikeTrap : MonoBehaviour
         if(other.collider.CompareTag("Player"))
         {
             movement.instance.canJump=true;
-            movement.instance.speedMultiplier+=slowPercent;
+            Player.speedMultiplier+=slowPercent;
             CancelInvoke();
         }
     }

@@ -34,7 +34,6 @@ public class movement : MonoBehaviour
     public float nrmSpeed;
     public float sprSpeed;
     public float crchSpeed;
-    public float speedMultiplier = 1;
     public float speedCap;
     public float jumpForce;
     public bool canJump;
@@ -50,7 +49,11 @@ public class movement : MonoBehaviour
     private float yScale;
     public float maxSlopeAngle;
 
-    private void Awake() {instance=this;}
+    private void Awake()
+    {
+        instance=this;
+        Player.reset();
+    }
     void Start()
     {
         rb=GetComponent<Rigidbody>();
@@ -107,7 +110,7 @@ public class movement : MonoBehaviour
                 {
                     Player.state=Player.MoveState.crouch;
                     //fatigued=false;
-                    speed=crchSpeed*speedMultiplier;
+                    speed=crchSpeed*Player.speedMultiplier;
                     rb.drag=drag;
                 }
             }
@@ -125,7 +128,7 @@ public class movement : MonoBehaviour
             else
             {
                 Player.state=Player.MoveState.walk;
-                speed=nrmSpeed*speedMultiplier;
+                speed=nrmSpeed*Player.speedMultiplier;
                 rb.drag=drag;
             }
         }
@@ -176,7 +179,7 @@ public class movement : MonoBehaviour
     {
         if(canMove)
         {
-            if(grounded) direction = player.forward*v+player.right*h;
+            if(grounded) direction = (player.forward*v+player.right*h).normalized;
             else direction = (player.forward*v).normalized*airControl*(v<=0?5:1)+(player.right*h).normalized*airControl*2;
             if(onSlope()&&Player.state!=Player.MoveState.air)
             {
@@ -184,7 +187,7 @@ public class movement : MonoBehaviour
                 if(rb.velocity.y>0) rb.AddForce(Vector3.down*80f,ForceMode.Force);
             }
             else rb.AddForce(direction*speed*10f,ForceMode.Force);
-            rb.AddForce(Vector3.up*(onSlope()?0:gravity),ForceMode.Force);
+            if(!onSlope()) rb.AddForce(Vector3.up*gravity,ForceMode.Force);
         }
     }
     IEnumerator impactForce(float time)

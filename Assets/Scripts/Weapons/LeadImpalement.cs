@@ -48,7 +48,7 @@ public class LeadImpalement : Shotgun
     IEnumerator Reload()
     {
         ArmManager.isBusy=true;
-        yield return new WaitForSeconds(reloadTime);
+        yield return new WaitForSeconds(reloadTime/Player.firerateMultiplier);
         canShoot = true;
         ArmManager.isBusy=false;
     }

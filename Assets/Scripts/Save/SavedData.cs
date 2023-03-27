@@ -20,6 +20,9 @@ public class SavedData
     //Dev
     public bool debugHUD,infiniteHealth,enableFreecam,infiniteArms;
 
+    //Player Data
+    public int ballz;
+
     public SavedData()
     {
         //Settings Data
@@ -39,6 +42,9 @@ public class SavedData
         infiniteHealth = UserSettings.infiniteHealth;
         enableFreecam = UserSettings.enableFreecam;
         infiniteArms = UserSettings.infiniteArms;
+
+        //Player Data
+        ballz = Player.ballz;
     }
     public override string ToString()
     {

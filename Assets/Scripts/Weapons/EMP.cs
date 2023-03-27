@@ -40,7 +40,7 @@ public class EMP : Shotgun
 
     IEnumerator shootDelay()
     {
-        yield return new WaitForSeconds(fireRate);
+        yield return new WaitForSeconds(fireRate/Player.firerateMultiplier);
         canShoot=true;
     }
 

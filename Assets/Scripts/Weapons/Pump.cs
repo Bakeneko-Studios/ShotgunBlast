@@ -60,7 +60,7 @@ public class Pump : Shotgun
 
     IEnumerator shotDelay()
     {
-        yield return new WaitForSeconds(fireRate);
+        yield return new WaitForSeconds(fireRate/Player.firerateMultiplier);
         canShoot=true;
     }
 
@@ -69,7 +69,7 @@ public class Pump : Shotgun
         ArmManager.isBusy=true;
         while(ammoInClip<clipSize)
         {
-            yield return new WaitForSeconds(reloadTime);
+            yield return new WaitForSeconds(reloadTime/Player.firerateMultiplier);
             ammoInClip++;
             canShoot=true;
         }

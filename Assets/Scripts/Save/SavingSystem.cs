@@ -54,6 +54,8 @@ public static class SavingSystem
                     UserSettings.effectsVolumeFlt = data.effectsVolumeFlt;
                     UserSettings.sensitivityFlt = data.sensitivityFlt;
                     UserSettings.keybinds = data.inputKeyBinds;
+
+                    Player.ballz = data.ballz;
                 }
             }
         }

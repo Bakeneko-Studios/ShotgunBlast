@@ -66,6 +66,10 @@ public class enemyFramework : MonoBehaviour
     [HideInInspector] public bool playerInSightRange, playerInAttackRange;
     [HideInInspector] [Range(0,360)] public float viewAngle = 90f;
 
+    //drops
+    public GameObject cashDrop;
+    public int minLoot, maxLoot;
+
 
     IEnumerator waitLife(float life)
     {
@@ -151,6 +155,7 @@ public class enemyFramework : MonoBehaviour
             StartCoroutine("waitLife", 2); // destory object after certain time
             agent.enabled = false;
             enabled = false;
+            CashDrop.DropCash(minLoot,maxLoot,transform);
         }
 
     }

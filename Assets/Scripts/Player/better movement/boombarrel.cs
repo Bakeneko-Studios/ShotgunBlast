@@ -20,7 +20,7 @@ public class boombarrel : MonoBehaviour
         if(dist<blastRadius)
         {
             float dmg = (scaling/((1/((1+scaling)*blastRadius*maxDmg))*(dist+scaling*blastRadius)))-scaling*maxDmg;
-            Player.hp-=dmg;
+            playerHealth.instance.ChangeHealth(-dmg);
             movement.instance.rb.AddForce((movement.instance.transform.position-this.transform.position).normalized*dmg*forceMultiplier,ForceMode.Impulse);
         }
         Destroy(this.gameObject);

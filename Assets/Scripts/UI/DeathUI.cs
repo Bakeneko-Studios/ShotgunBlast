@@ -39,8 +39,8 @@ public class DeathUI : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void ReturnToShop(LevelManager lm) {
+    public void ReturnToShop() {
         Time.timeScale = 1;
-        lm.switchScene("RestingGround");
+        LevelManager.instance.switchScene("RestingGround");
     }
 }
