@@ -24,5 +24,7 @@ public class ShotgunPickup : Interactable
         //Maybe set soecuak transform (diffrent gun sizes)
         myGun.transform.localPosition = Vector3.zero;
         HUD.instance.ChangeGun(true);
+
+        Destroy(this.gameObject);
     }
 }

@@ -7,6 +7,6 @@ public class ItemSpinny : MonoBehaviour
     public float spinRate;
     void Update()
     {
-        transform.Rotate(0,spinRate*Time.deltaTime,0);
+        transform.Rotate(0, 0, spinRate*Time.deltaTime);
     }
 }

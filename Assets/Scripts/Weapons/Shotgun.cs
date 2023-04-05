@@ -18,6 +18,7 @@ public class Shotgun : MonoBehaviour
     protected Animation anim;
     protected Animation animOneHand;
     public List<Quaternion> pelletAngles;
+    public List<GameObject> pellets;
     [HideInInspector]public bool isAnimate;
     //Variables
     public bool canShoot;
@@ -49,6 +50,7 @@ public class Shotgun : MonoBehaviour
         {
             pelletAngles[i] = Random.rotation;
             GameObject pShot = Instantiate(pellet, bulletExit.position, cam.rotation);
+            pellets.Add(pShot);
 
             pShot.GetComponent<Pellet>().playersBullet = true; // avoid friendly fire from enemies
 
@@ -75,5 +77,6 @@ public class Shotgun : MonoBehaviour
     {
         if (Input.GetKeyDown(UserSettings.keybinds["attack"]) && canShoot && Time.timeScale>0)
             FireGun();
-    }   
+    }
+    
 }
