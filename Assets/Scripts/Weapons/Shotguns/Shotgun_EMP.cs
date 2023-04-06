@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EMP : Shotgun
+public class Shotgun_EMP : Shotgun
 {
-    public float fireRate = 2f;
     void Awake()
     {
         pelletAngles = new List<Quaternion>();
@@ -20,7 +19,7 @@ public class EMP : Shotgun
         anim = GetComponentInChildren<Animation>();
     }
 
-    new public void FireGun()
+    public override void FireGun()
     {
         if(cam.GetComponent<cameraShake>()!=null)
             StartCoroutine(cam.GetComponent<cameraShake>().shakeCamera(cameraShakeDuration, cameraShakeMagnitude));
@@ -35,13 +34,7 @@ public class EMP : Shotgun
             pShot.GetComponent<Rigidbody>().AddForce(pShot.transform.forward * pelletSpeed);
         }
         canShoot=false;
-        StartCoroutine(shootDelay());
-    }
-
-    IEnumerator shootDelay()
-    {
-        yield return new WaitForSeconds(fireRate/Player.firerateMultiplier);
-        canShoot=true;
+        StartCoroutine(shotDelay());
     }
 
     void Update() 

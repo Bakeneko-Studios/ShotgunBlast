@@ -294,19 +294,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6254167e420f9714497dbc5600fb20e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pelletCount: 10
   spreadAngle: 7
   pelletSpeed: 4000
   reloadTime: 3
+  fireRate: 0.3
+  ammoCapacity: 8
   pellet: {fileID: 879660532207597176, guid: fbee47f6501b43e4d9fcc3c420c95c0b, type: 3}
   bulletExit: {fileID: 3792973230484147996}
-  pelletAngles: []
+  anim: {fileID: 0}
+  animOneHand: {fileID: 0}
   isAnimate: 0
   canShoot: 0
+  pelletCount: 10
+  pelletAngles: []
   cameraShakeDuration: 0.2
   cameraShakeMagnitude: 0.4
-  ammoInClip: 2
-  fireRate: 0.3
 --- !u!95 &3792973231916593519
 Animator:
   serializedVersion: 4

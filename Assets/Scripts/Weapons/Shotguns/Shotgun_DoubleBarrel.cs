@@ -2,12 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TripleBarrel : Shotgun
+public class Shotgun_DoubleBarrel : Shotgun
 {
-    //Gun Stats
-    public int ammoInClip = 2;
-    public float fireRate = 1f;
-
     void Awake()
     {
         pelletAngles = new List<Quaternion>();
@@ -24,7 +20,7 @@ public class TripleBarrel : Shotgun
         isAnimate = anim!=null && animOneHand!=null;
     }
 
-    new public void FireGun()
+    public override void FireGun()
     {
         if(ammoInClip==0)
         {
@@ -53,21 +49,6 @@ public class TripleBarrel : Shotgun
             ammoInClip--;
             StartCoroutine(shotDelay());
         }
-    }
-
-    IEnumerator shotDelay()
-    {
-        yield return new WaitForSeconds(fireRate/Player.firerateMultiplier);
-        canShoot=true;
-    }
-
-    IEnumerator Reload()
-    {
-        ArmManager.isBusy=true;
-        yield return new WaitForSeconds(reloadTime/Player.firerateMultiplier);
-        ammoInClip = 3;
-        canShoot = true;
-        ArmManager.isBusy=false;
     }
 
     void Update() 

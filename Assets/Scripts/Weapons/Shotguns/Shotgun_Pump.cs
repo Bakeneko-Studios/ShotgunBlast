@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BRRRRRRRRRRRRRRRRRRRR : Shotgun
+public class Shotgun_Pump : Shotgun
 {
-    //Gun Stats
-    public int ammoInClip = 69420;
     void Awake()
     {
         pelletAngles = new List<Quaternion>();
@@ -22,7 +20,7 @@ public class BRRRRRRRRRRRRRRRRRRRR : Shotgun
         isAnimate = anim!=null && animOneHand!=null;
     }
 
-    new public void FireGun()
+    public override void FireGun()
     {
         if(ammoInClip==0)
         {
@@ -31,11 +29,13 @@ public class BRRRRRRRRRRRRRRRRRRRR : Shotgun
                 anim.Play();
             else if(isAnimate)
                 animOneHand.Play();
-            StartCoroutine(Reload());
+            StartCoroutine(ReloadSingle());
         }
         else
         {
             canShoot=false;
+            anim.Stop();
+            StopAllCoroutines();
             if(cam.GetComponent<cameraShake>()!=null)
                 StartCoroutine(cam.GetComponent<cameraShake>().shakeCamera(cameraShakeDuration, cameraShakeMagnitude));
             for (int i=0; i<pelletCount; i++)
@@ -49,23 +49,15 @@ public class BRRRRRRRRRRRRRRRRRRRR : Shotgun
                 pShot.GetComponent<Rigidbody>().AddForce(pShot.transform.forward * pelletSpeed);
             }
             ammoInClip--;
+            StartCoroutine(shotDelay());
         }
-    }
-
-    IEnumerator Reload()
-    {
-        ArmManager.isBusy=true;
-        yield return new WaitForSeconds(reloadTime/Player.firerateMultiplier);
-        ammoInClip = 69420;
-        canShoot = true;
-        ArmManager.isBusy=false;
     }
 
     void Update() 
     {
-        if (Input.GetKey(UserSettings.keybinds["attack"]) && canShoot && Time.timeScale>0)
+        if (Input.GetKeyDown(UserSettings.keybinds["attack"]) && canShoot && Time.timeScale>0)
             FireGun();
         else if(Input.GetKeyDown(UserSettings.keybinds["reload"]))
-            StartCoroutine(Reload());
+            StartCoroutine(ReloadSingle());
     }   
 }

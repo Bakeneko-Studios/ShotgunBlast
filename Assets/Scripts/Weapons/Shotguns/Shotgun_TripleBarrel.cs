@@ -2,12 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Auto : Shotgun
+public class Shotgun_TripleBarrel : Shotgun
 {
-    //Gun Stats
-    public int ammoInClip = 8;
-    public float fireRate = 0.5f;
-
     void Awake()
     {
         pelletAngles = new List<Quaternion>();
@@ -24,7 +20,7 @@ public class Auto : Shotgun
         isAnimate = anim!=null && animOneHand!=null;
     }
 
-    new public void FireGun()
+    public override void FireGun()
     {
         if(ammoInClip==0)
         {
@@ -39,7 +35,7 @@ public class Auto : Shotgun
         {
             canShoot=false;
             if(cam.GetComponent<cameraShake>()!=null)
-               StartCoroutine(cam.GetComponent<cameraShake>().shakeCamera(cameraShakeDuration, cameraShakeMagnitude));
+                StartCoroutine(cam.GetComponent<cameraShake>().shakeCamera(cameraShakeDuration, cameraShakeMagnitude));
             for (int i=0; i<pelletCount; i++)
             {
                 pelletAngles[i] = Random.rotation;
@@ -55,26 +51,11 @@ public class Auto : Shotgun
         }
     }
 
-    IEnumerator shotDelay()
-    {
-        yield return new WaitForSeconds(fireRate/Player.firerateMultiplier);
-        canShoot=true;
-    }
-
-    IEnumerator Reload()
-    {
-        ArmManager.isBusy=true;
-        yield return new WaitForSeconds(reloadTime/Player.firerateMultiplier);
-        ammoInClip = 8;
-        canShoot = true;
-        ArmManager.isBusy=false;
-    }
-
     void Update() 
     {
-        if (Input.GetKey(UserSettings.keybinds["attack"]) && canShoot && Time.timeScale>0)
+        if (Input.GetKeyDown(UserSettings.keybinds["attack"]) && canShoot && Time.timeScale>0)
             FireGun();
         else if(Input.GetKeyDown(UserSettings.keybinds["reload"]))
             StartCoroutine(Reload());
-    }   
+    }
 }

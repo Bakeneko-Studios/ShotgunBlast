@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeadImpalement : Shotgun
+public class Shotgun_BRRRRRRRRRRRRRRRRRRRR : Shotgun
 {
     void Awake()
     {
@@ -20,10 +20,20 @@ public class LeadImpalement : Shotgun
         isAnimate = anim!=null && animOneHand!=null;
     }
 
-    new public void FireGun()
+    public override void FireGun()
     {
-        if (canShoot && Time.timeScale>0)
+        if(ammoInClip==0)
         {
+            canShoot=false;
+            if(isAnimate && !ArmManager.isBusy)
+                anim.Play();
+            else if(isAnimate)
+                animOneHand.Play();
+            StartCoroutine(Reload());
+        }
+        else
+        {
+            canShoot=false;
             if(cam.GetComponent<cameraShake>()!=null)
                 StartCoroutine(cam.GetComponent<cameraShake>().shakeCamera(cameraShakeDuration, cameraShakeMagnitude));
             for (int i=0; i<pelletCount; i++)
@@ -36,26 +46,15 @@ public class LeadImpalement : Shotgun
                 pShot.transform.rotation = Quaternion.RotateTowards(pShot.transform.rotation, pelletAngles[i], spreadAngle);
                 pShot.GetComponent<Rigidbody>().AddForce(pShot.transform.forward * pelletSpeed);
             }
-            canShoot=false;
-            if(isAnimate && !ArmManager.isBusy)
-                anim.Play();
-            else if(isAnimate)
-                animOneHand.Play();
-            StartCoroutine(Reload());
+            ammoInClip--;
         }
-    }
-
-    IEnumerator Reload()
-    {
-        ArmManager.isBusy=true;
-        yield return new WaitForSeconds(reloadTime/Player.firerateMultiplier);
-        canShoot = true;
-        ArmManager.isBusy=false;
     }
 
     void Update() 
     {
-        if (Input.GetKeyDown(UserSettings.keybinds["attack"]))
+        if (Input.GetKey(UserSettings.keybinds["attack"]) && canShoot && Time.timeScale>0)
             FireGun();
+        else if(Input.GetKeyDown(UserSettings.keybinds["reload"]))
+            StartCoroutine(Reload());
     }   
 }
