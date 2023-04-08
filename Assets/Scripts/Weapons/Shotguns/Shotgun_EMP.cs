@@ -13,11 +13,6 @@ public class Shotgun_EMP : Shotgun
         }
         canShoot = true;
     }
-    void Start()
-    {
-        cam = Camera.main.transform;
-        anim = GetComponentInChildren<Animation>();
-    }
 
     public override void FireGun()
     {

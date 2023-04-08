@@ -17,7 +17,7 @@ public static class Player
     public static bool invincible = false;
     public static float firerateMultiplier = 1;
     public static int ballz;
-    public static float ballzMultiplier;
+    public static float ballzMultiplier = 1;
 
     public static void reset()
     {

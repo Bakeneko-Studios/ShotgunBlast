@@ -14,7 +14,7 @@ public class ReinforcedArm : Arm
         canMorb = false;
         StartCoroutine(abilityDelay());
     }
-    void ability()
+    new void ability()
     {
         StartCoroutine(abilityDelay());
         RaycastHit hit;
@@ -28,19 +28,5 @@ public class ReinforcedArm : Arm
         }
         if(cam.GetComponent<cameraShake>()!=null)
             StartCoroutine(cam.GetComponent<cameraShake>().shakeCamera(cameraShakeDuration,cameraShakeMagnitude));
-    }
-    IEnumerator punchDelay()
-    {
-        ArmManager.canPunch=false;
-        yield return new WaitForSeconds(punchCD);
-        ArmManager.canPunch=true;
-    }
-    IEnumerator abilityDelay()
-    {
-        ArmManager.isBusy=true;
-        canMorb=false;
-        yield return new WaitForSeconds(abilityCD);
-        canMorb=true;
-        ArmManager.isBusy=false;
     }
 }

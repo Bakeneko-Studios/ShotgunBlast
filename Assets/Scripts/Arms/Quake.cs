@@ -17,7 +17,7 @@ public class Quake : Arm
         StartCoroutine(abilityDelay());
         abilityHitbox.localScale = new Vector3(quakeRadius,1,quakeRadius);
     }
-    void ability()
+    new void ability()
     {
         slam();
     }
@@ -33,21 +33,6 @@ public class Quake : Arm
         if(cam.GetComponent<cameraShake>()!=null)
             StartCoroutine(cam.GetComponent<cameraShake>().shakeCamera(cameraShakeDuration,cameraShakeMagnitude));
     }
-    IEnumerator punchDelay()
-    {
-        ArmManager.canPunch=false;
-        yield return new WaitForSeconds(punchCD);
-        ArmManager.canPunch=true;
-    }
-    IEnumerator abilityDelay()
-    {
-        ArmManager.isBusy=true;
-        canMorb=false;
-        yield return new WaitForSeconds(abilityCD);
-        canMorb=true;
-        ArmManager.isBusy=false;
-    }
-
     private void OnTriggerEnter(Collider other)
     {if(other.CompareTag("enemy")) targetsInRange.Add(other.gameObject);}
     private void OnTriggerExit(Collider other) 

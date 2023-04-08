@@ -69,6 +69,7 @@ public class enemyFramework : MonoBehaviour
     //drops
     public GameObject cashDrop;
     public int minLoot, maxLoot;
+    public bool dead;
 
 
     IEnumerator waitLife(float life)
@@ -133,29 +134,33 @@ public class enemyFramework : MonoBehaviour
 
     public void ChangeHealth(float amount)
     {
-        // Change the health by the amount specified in the amount variable
-
-        if (healthBar != null)
-            if (healthBar.activeSelf == false)
-                healthBar.SetActive(true);
-
-        health += amount;
-        if (healthBarFront != null)
-            healthBarFront.transform.localScale = new Vector3(health * scale, healthBarFront.transform.localScale.y, healthBarFront.transform.localScale.z);
-        //healthBarText.text = health + "/1000";
-        if (health <= 0)
+        if(!dead)
         {
+            // Change the health by the amount specified in the amount variable
+
             if (healthBar != null)
-                healthBar.SetActive(false);
-            
-            if (deathAnimation != "")
-                anim.Play(deathAnimation);
-            if (deathParticle != null)
-                deathParticle.Play();
-            StartCoroutine("waitLife", 2); // destory object after certain time
-            agent.enabled = false;
-            enabled = false;
-            CashDrop.DropCash(minLoot,maxLoot,transform);
+                if (healthBar.activeSelf == false)
+                    healthBar.SetActive(true);
+
+            health += amount;
+            if (healthBarFront != null)
+                healthBarFront.transform.localScale = new Vector3(health * scale, healthBarFront.transform.localScale.y, healthBarFront.transform.localScale.z);
+            //healthBarText.text = health + "/1000";
+            if (health <= 0)
+            {
+                dead=true;
+                if (healthBar != null)
+                    healthBar.SetActive(false);
+                
+                if (deathAnimation != "")
+                    anim.Play(deathAnimation);
+                if (deathParticle != null)
+                    deathParticle.Play();
+                StartCoroutine("waitLife", 2); // destory object after certain time
+                agent.enabled = false;
+                enabled = false;
+                CashDrop.DropCash(cashDrop,minLoot,maxLoot,transform);
+            }
         }
 
     }

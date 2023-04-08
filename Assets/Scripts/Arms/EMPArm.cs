@@ -17,7 +17,7 @@ public class EMPArm : Arm
         abilityHitbox.localScale = Vector3.one*EMPRadius;
     }
     void Awake() {instance=this;}
-    void ability()
+    new void ability()
     {
         StartCoroutine(abilityDelay());
         foreach (GameObject g in targetsInRange)
@@ -26,20 +26,6 @@ public class EMPArm : Arm
         }
         if(cam.GetComponent<cameraShake>()!=null)
             StartCoroutine(cam.GetComponent<cameraShake>().shakeCamera(cameraShakeDuration,cameraShakeMagnitude));
-    }
-    IEnumerator punchDelay()
-    {
-        ArmManager.canPunch=false;
-        yield return new WaitForSeconds(punchCD);
-        ArmManager.canPunch=true;
-    }
-    IEnumerator abilityDelay()
-    {
-        ArmManager.isBusy=true;
-        canMorb=false;
-        yield return new WaitForSeconds(abilityCD);
-        canMorb=true;
-        ArmManager.isBusy=false;
     }
     private void OnTriggerEnter(Collider other)
     {if(other.CompareTag("enemy")) targetsInRange.Add(other.gameObject);}

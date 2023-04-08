@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2760401778414195994}
   - component: {fileID: 2295488273554531322}
   - component: {fileID: 7675056134058183276}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 7641416431478733255}
   - component: {fileID: 1438498014531555161}
   - component: {fileID: 7417604204893459334}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6807865181614531234}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Chainsaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 6795793683776960195}
   - component: {fileID: 162109646320212073}
   - component: {fileID: 7632341362737155480}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: healthbar (canvas)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 3819857942442939258}
   - component: {fileID: 3064049384141746835}
   - component: {fileID: 8016610989713143913}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -383,7 +383,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5316407415401232211}
   - component: {fileID: 2234090868648519665}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -525,9 +525,57 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -8235928539902655403, guid: 54ce557ed2a3155428f4c8af7f7e6334, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8174050027338853629, guid: 54ce557ed2a3155428f4c8af7f7e6334, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -7812692066263437501, guid: 54ce557ed2a3155428f4c8af7f7e6334, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -7659735744987302095, guid: 54ce557ed2a3155428f4c8af7f7e6334, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -5151492872390713093, guid: 54ce557ed2a3155428f4c8af7f7e6334, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -3189575019860089800, guid: 54ce557ed2a3155428f4c8af7f7e6334, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -517612683283965903, guid: 54ce557ed2a3155428f4c8af7f7e6334, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 411437418563802142, guid: 54ce557ed2a3155428f4c8af7f7e6334, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 54ce557ed2a3155428f4c8af7f7e6334, type: 3}
       propertyPath: m_Name
       value: Doomba
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 54ce557ed2a3155428f4c8af7f7e6334, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1743584774994667072, guid: 54ce557ed2a3155428f4c8af7f7e6334, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3314310328905924201, guid: 54ce557ed2a3155428f4c8af7f7e6334, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6399255652337475280, guid: 54ce557ed2a3155428f4c8af7f7e6334, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54ce557ed2a3155428f4c8af7f7e6334, type: 3}
@@ -577,6 +625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91022cf1a77eedb4c8e0d9bd1797c8cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathParticle: {fileID: 0}
   health: 100
   empHealth: 100
   empResistance: 0
@@ -598,6 +647,7 @@ MonoBehaviour:
   wakeAnimation: 
   deathAnimation: 
   attackAnimation: 
+  awake: 0
   turnSpeed: 5
   attackCooldownTime: 3
   aimTolerance: 10
@@ -611,6 +661,10 @@ MonoBehaviour:
   playerInSightRange: 0
   playerInAttackRange: 0
   viewAngle: 194
+  cashDrop: {fileID: 2489159260555744067, guid: 211b0fab35b011d49955990cca33554f, type: 3}
+  minLoot: 50
+  maxLoot: 100
+  dead: 0
 --- !u!114 &1048855356467435116
 MonoBehaviour:
   m_ObjectHideFlags: 0

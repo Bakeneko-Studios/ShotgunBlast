@@ -14,9 +14,15 @@ public abstract class Gun : MonoBehaviour
     protected Transform cam;
     [SerializeField] protected Animation anim;
     [SerializeField] protected Animation animOneHand;
-    [HideInInspector]public bool isAnimate;
+    [HideInInspector] public bool isAnimate;
     public bool canShoot;
 
+    void Awake()
+    {
+        cam = Camera.main.transform;
+        anim = GetComponentInChildren<Animation>();
+        isAnimate = anim!=null;
+    }
     public abstract void FireGun();
     protected IEnumerator Reload()
     {
@@ -32,5 +38,4 @@ public abstract class Gun : MonoBehaviour
         yield return new WaitForSeconds(fireRate/Player.firerateMultiplier);
         canShoot=true;
     }
-
 }

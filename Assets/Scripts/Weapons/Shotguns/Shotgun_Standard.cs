@@ -13,12 +13,6 @@ public class Shotgun_Standard : Shotgun
         }
         canShoot = true;
     }
-    void Start()
-    {
-        cam = Camera.main.transform;
-        anim = GetComponentInChildren<Animation>();
-        isAnimate = anim!=null;
-    }
 
     public override void FireGun()
     {
@@ -46,5 +40,5 @@ public class Shotgun_Standard : Shotgun
     {
         if (Input.GetKeyDown(UserSettings.keybinds["attack"]) && canShoot && Time.timeScale>0)
             FireGun();
-    }   
+    }
 }

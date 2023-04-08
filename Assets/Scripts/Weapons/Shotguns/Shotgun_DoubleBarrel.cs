@@ -13,12 +13,6 @@ public class Shotgun_DoubleBarrel : Shotgun
         }
         canShoot = true;
     }
-    void Start()
-    {
-        cam = Camera.main.transform;
-        anim = GetComponentInChildren<Animation>();
-        isAnimate = anim!=null && animOneHand!=null;
-    }
 
     public override void FireGun()
     {

@@ -2,19 +2,14 @@ using UnityEngine;
 
 public class CashDrop : Interactable
 {
-    public static GameObject drop;
-    public int min,max;
-    public int amount;
-    private void Awake()
-    {
-        amount = Random.Range(min,max);
-    }
+    private int min,max;
     public override void OnInteract()
     {
-        Player.ChangeBallz(amount);
+        Player.ChangeBallz(Random.Range(min,max));
+        Debug.Log("Ballz: "+Player.ballz);
         Destroy(this.gameObject);
     }
-    public static void DropCash(int min,int max,Transform t)
+    public static void DropCash(GameObject drop,int min,int max,Transform t)
     {
         CashDrop c = GameObject.Instantiate(drop,t.position,t.rotation).GetComponent<CashDrop>();
         c.min = min;

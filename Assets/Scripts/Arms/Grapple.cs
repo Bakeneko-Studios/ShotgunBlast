@@ -6,69 +6,62 @@ using UnityEngine.UI;
 public class Grapple : Arm
 {
     public float range;
-    public float speed;
+    public float force;
     public bool attached;
+    [SerializeField] private Transform attachedObject;
     public GameObject grappleObject;
     GameObject grapple;
+    Rigidbody rb;
     bool hasTarget;
     RaycastHit hit;
+    [SerializeField] private LayerMask mask;
     [SerializeField] private Image indicator;
     
     void Awake() {instance=this;}
     void Start()
     {
+        grapple = GameObject.Instantiate(grappleObject);
+        grapple.SetActive(false);
+        rb = GetComponent<Rigidbody>();
         cam = Camera.main.transform;
         anim = GetComponent<Animation>();
         isAnimate = !(anim==null);
         canMorb = false;
         StartCoroutine(abilityDelay());
     }
-    void ability()
+    new void ability()
     {
         if(hasTarget)
         {
-            grapple = GameObject.Instantiate(grappleObject);
-            grapple.transform.position = transform.position;
-            grapple.AddComponent<Rigidbody>();
-            grapple.GetComponent<Rigidbody>().velocity = (hit.point - transform.position).normalized * speed;
+            grapple.SetActive(true);
             attached = true;
+            attachedObject = hit.transform;
+            movement.instance.gravity = 4.9f;
         }
         else attached = false;
     }
-    void Update()
+    void FixedUpdate()
     {
         hasTarget=false;
         indicator.gameObject.SetActive(false);
-        if(Physics.Raycast(transform.position, Camera.main.transform.forward, out hit, range))
+        if(Physics.Raycast(cam.position, cam.forward, out hit, range, mask))
         {
-            if(hit.collider.CompareTag("enemy"))
-            {
-                hasTarget=true;
-                indicator.gameObject.SetActive(true);
-            }
+            hasTarget=true;
+            indicator.gameObject.SetActive(true);
         }
         if(attached)
         {
-            GetComponent<Rigidbody>().velocity = grapple.GetComponent<Rigidbody>().velocity;
             if (Input.GetKeyUp(UserSettings.keybinds["ability"]))
             {
-                Destroy(grapple);
+                grapple.SetActive(false);
                 attached = false;
+                movement.instance.gravity = 19.6f;
             }
+            Vector3 pos = (transform.position+attachedObject.position)/2;
+            grapple.transform.position = pos;
+            grapple.transform.rotation = Quaternion.LookRotation(attachedObject.position - transform.position);
+            grapple.transform.localScale = new Vector3(Vector3.Distance(transform.position, attachedObject.transform.position),0,0);
+            rb.AddForce(pos.normalized*force*Time.deltaTime);
         }
-    }
-    IEnumerator punchDelay()
-    {
-        ArmManager.canPunch=false;
-        yield return new WaitForSeconds(punchCD);
-        ArmManager.canPunch=true;
-    }
-    IEnumerator abilityDelay()
-    {
-        ArmManager.isBusy=true;
-        canMorb=false;
-        yield return new WaitForSeconds(abilityCD);
-        canMorb=true;
-        ArmManager.isBusy=false;
     }
 }

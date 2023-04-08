@@ -43,12 +43,20 @@ public class Arm : MonoBehaviour
     }
     public void useAbility()
     {ability();}
-    void ability()
+    protected void ability()
     {}
-    IEnumerator punchDelay()
+    protected IEnumerator punchDelay()
     {
         ArmManager.canPunch=false;
         yield return new WaitForSeconds(punchCD);
         ArmManager.canPunch=true;
+    }
+    protected IEnumerator abilityDelay()
+    {
+        ArmManager.isBusy=true;
+        canMorb=false;
+        yield return new WaitForSeconds(abilityCD);
+        canMorb=true;
+        ArmManager.isBusy=false;
     }
 }
