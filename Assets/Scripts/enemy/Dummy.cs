@@ -4,16 +4,14 @@ using UnityEngine;
 
 public class Dummy : MonoBehaviour
 {
-    public int HitPoints = 100;
-    public void minusHP(int dmg)
+    public float HitPoints = 100;
+    public void minusHP(float dmg)
     {
         HitPoints -= dmg;
     }
     void Update() 
     {
         if (HitPoints <= 0)
-        {
             Destroy(this.gameObject);
-        }
     }
 }

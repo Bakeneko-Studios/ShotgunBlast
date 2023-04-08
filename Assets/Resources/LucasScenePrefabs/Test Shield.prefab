@@ -110,4 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee1df860651f2974b9634375fe421b0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
+  health: 200
+  normColor: {r: 0.48235294, g: 0.68235296, b: 0.90588236, a: 0.5882353}
+  dmgColor: {r: 1, g: 0.34052238, b: 0.32704395, a: 0.5882353}
+  animationTime: 0.5

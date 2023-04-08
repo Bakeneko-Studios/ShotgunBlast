@@ -136,7 +136,7 @@ public static class CustomMenuItems
             return;
         }
         GameObject instance = GameObject.Instantiate(prefab);
-        Undo.RegisterCreatedObjectUndo(instance, "Instantiate dashing chainsaw psyco");
+        Undo.RegisterCreatedObjectUndo(instance, "Instantiate Dashing Chainsaw Psyco");
         Selection.activeObject = instance;
     }
 
@@ -148,7 +148,43 @@ public static class CustomMenuItems
             return;
         }
         GameObject instance = GameObject.Instantiate(prefab);
-        Undo.RegisterCreatedObjectUndo(instance, "Instantiate doomba");
+        Undo.RegisterCreatedObjectUndo(instance, "Instantiate Doomba");
+        Selection.activeObject = instance;
+    }
+
+    [MenuItem("GameObject/NPCs/Dummy")]
+    private static void InstantiateDummy(MenuCommand menuCommand) {
+        GameObject prefab = Resources.Load<GameObject>("NPCs/Dummy");
+        if (prefab == null) {
+            Debug.LogError("Prefab not found.");
+            return;
+        }
+        GameObject instance = GameObject.Instantiate(prefab);
+        Undo.RegisterCreatedObjectUndo(instance, "Instantiate Dummy");
+        Selection.activeObject = instance;
+    }
+
+    [MenuItem("GameObject/NPCs/Shrek")]
+    private static void InstantiateShrek(MenuCommand menuCommand) {
+        GameObject prefab = Resources.Load<GameObject>("NPCs/npc Shrek");
+        if (prefab == null) {
+            Debug.LogError("Prefab not found.");
+            return;
+        }
+        GameObject instance = GameObject.Instantiate(prefab);
+        Undo.RegisterCreatedObjectUndo(instance, "Instantiate NPC Shrek");
+        Selection.activeObject = instance;
+    }
+
+    [MenuItem("GameObject/NPCs/Shield")]
+    private static void InstantiateShield(MenuCommand menuCommand) {
+        GameObject prefab = Resources.Load<GameObject>("LucasScenePrefabs/Test Shield");
+        if (prefab == null) {
+            Debug.LogError("Prefab not found.");
+            return;
+        }
+        GameObject instance = GameObject.Instantiate(prefab);
+        Undo.RegisterCreatedObjectUndo(instance, "Instantiate Shield");
         Selection.activeObject = instance;
     }
 

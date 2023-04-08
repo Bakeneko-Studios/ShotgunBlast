@@ -24,6 +24,10 @@ public class Shotgun_StandardV2 : ShotgunV2
             Physics.Raycast(bulletExit.position,cam.transform.forward+raycastAngles[i], out RaycastHit hit, float.PositiveInfinity);
             if(hit.collider.TryGetComponent<enemyFramework>(out enemyFramework ef))
                 ef.ChangeHealth(-damage*Player.damageMultiplier);
+            else if(hit.collider.TryGetComponent<Dummy>(out Dummy d))
+                d.minusHP(-damage*Player.damageMultiplier);
+            else if(hit.collider.TryGetComponent<Shield>(out Shield s))
+                s.StartCoroutine(s.takeDamage(damage*Player.damageMultiplier));
             TrailRenderer trail = Instantiate(bulletTrail, bulletExit.position, Quaternion.identity);
             StartCoroutine(BulletTravel(trail, hit));
         }
