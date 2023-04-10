@@ -7,9 +7,7 @@ public class Shotgun_StandardV2 : ShotgunV2
     protected override void Start()
     {
         base.Start();
-        raycastAngles = new List<Vector3>();
-        for (int i = raycastAngles.Count; i < raycastCount; i++)
-            raycastAngles.Add(RandomDirection());
+        GenerateRandomSpread();
         canShoot = true;
     }
 
@@ -21,6 +19,7 @@ public class Shotgun_StandardV2 : ShotgunV2
         muzzleFlash.Play();
         for (int i = 0; i < raycastCount; i++)
         {
+            if(!fixedPattern) GenerateRandomSpread();
             Physics.Raycast(bulletExit.position,cam.transform.forward+raycastAngles[i], out RaycastHit hit, float.PositiveInfinity);
             if(hit.collider.TryGetComponent<enemyFramework>(out enemyFramework ef))
                 ef.ChangeHealth(-damage*Player.damageMultiplier);

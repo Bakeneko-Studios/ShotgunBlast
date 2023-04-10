@@ -1,11 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class ShotgunV2 : GunV2
 {
     public int raycastCount;
-    [SerializeField] protected List<Vector3> raycastAngles;
+    public bool fixedPattern;
+    [SerializeField] protected Vector3[] raycastAngles;
     public float cameraShakeDuration = 0.3f;
     public float cameraShakeMagnitude = 0.6f;
     protected IEnumerator ReloadSingle()
@@ -25,12 +25,13 @@ public abstract class ShotgunV2 : GunV2
         canShoot=true;
         ArmManager.isBusy=false;
     }
-    protected Vector3 RandomDirection()
+    protected void GenerateRandomSpread()
     {
-        Vector3 v = new Vector3(
+        raycastAngles = new Vector3[raycastCount];
+        for (int i = 0; i < raycastAngles.Length; i++)
+            raycastAngles[i] =  new Vector3(
                 Random.Range(-spreadAngle.x,spreadAngle.x),
                 Random.Range(-spreadAngle.y,spreadAngle.y),
                 Random.Range(-spreadAngle.z,spreadAngle.z));
-        return v;
     }
 }
