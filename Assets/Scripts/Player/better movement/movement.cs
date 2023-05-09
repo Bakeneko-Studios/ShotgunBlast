@@ -63,6 +63,16 @@ public class movement : MonoBehaviour
 
     void Update()
     {
+        //point the shit correctly
+        RaycastHit middleCast;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out middleCast))
+        {
+            rightHand.transform.LookAt(middleCast.point);
+            Debug.Log(middleCast.point);
+        }
+
+
+
         vl = rb.velocity;
         velocity = vl.magnitude;
         nvvelocity = Mathf.Sqrt(vl.x*vl.x+vl.z*vl.z);

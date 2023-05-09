@@ -662,7 +662,7 @@ MonoBehaviour:
   playerInAttackRange: 0
   viewAngle: 194
   cashDrop: {fileID: 2489159260555744067, guid: 211b0fab35b011d49955990cca33554f, type: 3}
-  minLoot: 50
+  minLoot: 60
   maxLoot: 100
   dead: 0
 --- !u!114 &1048855356467435116
@@ -692,7 +692,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d22f9981cdde34d459bb00369fce1a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bladeDamage: 10
+  bladeDamage: 60
   blades:
   - {fileID: 9192812494153949661, guid: bab1f142abeff6542a972b6cfff15504, type: 3}
   attackDuration: 0.5

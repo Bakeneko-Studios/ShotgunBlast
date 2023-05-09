@@ -735,7 +735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d22f9981cdde34d459bb00369fce1a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bladeDamage: 10
+  bladeDamage: 60
   blades:
   - {fileID: 1998973708}
   attackDuration: 0.5

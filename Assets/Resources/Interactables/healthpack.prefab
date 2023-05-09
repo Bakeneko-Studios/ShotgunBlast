@@ -113,3 +113,4 @@ MonoBehaviour:
   amt: 30
   duration: 3
   ticks: 3
+  destroyOnPickup: 1
