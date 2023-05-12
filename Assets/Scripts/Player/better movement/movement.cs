@@ -63,6 +63,7 @@ public class movement : MonoBehaviour
 
     void Update()
     {
+        
         //point the shit correctly
         RaycastHit middleCast;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out middleCast))
@@ -184,6 +185,16 @@ public class movement : MonoBehaviour
             transform.Translate(Vector3.up*(yScale-crouchScale));
             transform.localScale = new Vector3(transform.localScale.x,yScale,transform.localScale.z);
         }
+        //AutoJump when seeing stairs (wip buggy)
+        if (true/*(Input.GetKeyDown(UserSettings.keybinds["forward"]) || Input.GetKeyDown(UserSettings.keybinds["backward"]) || Input.GetKeyDown(UserSettings.keybinds["left"]) || Input.GetKeyDown(UserSettings.keybinds["right"]))*/ && canMove)
+        {
+            if (Physics.Raycast(transform.position - new Vector3(0, 0.8f, 0), transform.TransformDirection(Vector3.forward), 2) && grounded && !Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), 6) && !Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(0, 1, 1)), 3))
+            {
+                rb.AddForce(transform.up * 1.5f, ForceMode.Impulse);
+            }
+        }
+        //As you can see, in the if statement above, a bunch of stuff has been turned into annotations.
+        //This is because I wanted to fix the bug that you hop around like a lunatic on the stairs, but I cant get the input stuff to work.
     }
     void FixedUpdate()
     {
@@ -199,6 +210,7 @@ public class movement : MonoBehaviour
             else rb.AddForce(direction*speed*10f,ForceMode.Force);
             if(!onSlope()) rb.AddForce(Vector3.up*gravity,ForceMode.Force);
         }
+        
     }
     IEnumerator impactForce(float time)
     {
