@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -49,6 +50,27 @@ public class movement : MonoBehaviour
     private float yScale;
     public float maxSlopeAngle;
 
+    //angle calculator
+    private float angleCalc(float x, float y)
+    {
+        float angle;
+        if (x >= 0 && y >= 0)
+        {
+            angle = math.atan(y / x);
+        }else if(x < 0 && y >= 0)
+        {
+            angle = 180f + math.atan(y / x);
+        }else if(x >= 0 && y < 0)
+        {
+            angle = math.atan(y / x);
+        }
+        else
+        {
+            angle = 180f + math.atan(y / x);
+        }
+        return angle;
+    }
+
     private void Awake()
     {
         instance=this;
@@ -65,11 +87,17 @@ public class movement : MonoBehaviour
     {
         
         //point the shit correctly
+        
+        //hashtag Bill trying to make the gun stop teleporting when looking at trapdoor but melting his brain in the process and ending up annotating all the code he wrote
         RaycastHit middleCast;
+        //RaycastHit origCast;
+        //Vector3 delta_rotation;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out middleCast))
         {
+            //Physics.Raycast(rightHand.transform.position, rightHand.transform.forward, out origCast);
+            //delta_rotation = new Vector3(math.sin(angleCalc(middleCast.point.z - origCast.point.z, middleCast.point.x - origCast.point.x)), math.sin(angleCalc(middleCast.point.z - origCast.point.z, middleCast.point.y - origCast.point.y)), 0);
             rightHand.transform.LookAt(middleCast.point);
-            Debug.Log(middleCast.point);
+            //Debug.Log(middleCast.point);
         }
 
 
