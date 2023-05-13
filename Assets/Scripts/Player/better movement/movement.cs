@@ -50,6 +50,34 @@ public class movement : MonoBehaviour
     private float yScale;
     public float maxSlopeAngle;
 
+    //idk what the c# absolute value function is so wrote one myself
+    private float absolute_value(float n)
+    {
+        float result;
+        if(n >= 0)
+        {
+            result = n;
+        }
+        else
+        {
+            result = -n;
+        }
+        return result;
+    }
+    private int absolute_value(int n)
+    {
+        int result;
+        if (n >= 0)
+        {
+            result = n;
+        }
+        else
+        {
+            result = -n;
+        }
+        return result;
+    }
+
     //angle calculator
     private float angleCalc(float x, float y)
     {
@@ -66,7 +94,7 @@ public class movement : MonoBehaviour
         }
         else
         {
-            angle = 180f + math.atan(y / x);
+            angle = (180f + math.atan(y / x)) - 360f;
         }
         return angle;
     }
@@ -78,9 +106,10 @@ public class movement : MonoBehaviour
     }
     void Start()
     {
-        rb=GetComponent<Rigidbody>();
+        rb =GetComponent<Rigidbody>();
         yScale=transform.localScale.y;
         cam=Camera.main.transform;
+        rightHand.transform.TransformDirection(1, 0, 0);
     }
 
     void Update()
@@ -89,14 +118,40 @@ public class movement : MonoBehaviour
         //point the shit correctly
         
         //hashtag Bill trying to make the gun stop teleporting when looking at trapdoor but melting his brain in the process and ending up annotating all the code he wrote
+
+
+        //F**KING RELATIVE ANGLES AND ABSOLUTE POINTS I AM NOT LOOKING AT THIS SH*T AGAIN ANYTIME SOON
+
         RaycastHit middleCast;
         //RaycastHit origCast;
-        //Vector3 delta_rotation;
+        //float delta_x_angle;
+        //float delta_y_angle;
+        //RaycastHit newCast;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out middleCast))
         {
             //Physics.Raycast(rightHand.transform.position, rightHand.transform.forward, out origCast);
+            //delta_x_angle = angleCalc(middleCast.point.z - origCast.point.z, middleCast.point.x - origCast.point.x);
+            //delta_y_angle = angleCalc(middleCast.point.z - origCast.point.z, middleCast.point.y - origCast.point.y);
+            if (true/*absolute_value(delta_x_angle) / 3f < 5f && absolute_value(delta_y_angle) / 3f < 5f*/)
+            {
+                rightHand.transform.LookAt(middleCast.point);
+            }
+            else
+            {
+                
+                //Physics.Raycast(rightHand.transform.position, Vector3.forward, out newCast);
+                //rightHand.transform.RotateAround(rightHand.transform.position, Vector3.up, delta_x_angle / 3f);
+                //rightHand.transform.RotateAround(rightHand.transform.position, Vector3.forward, delta_y_angle / 3f);
+                //rightHand.transform.LookAt(new Vector3(math.sin(angleCalc(origCast.point.z, origCast.point.y) - delta_y_angle / 3f), math.sin(angleCalc(origCast.point.z, origCast.point.x) - delta_x_angle / 3f), 0));
+
+                //rightHand.transform.Rotate(delta_y_angle / 3f, delta_x_angle / 3f, 0f, Space.World);
+                //Physics.Raycast(rightHand.transform.position, rightHand.transform.forward, out newCast);
+                //rightHand.transform.LookAt(new Vector3(newCast.point.x, 0, 0));
+                //rightHand.transform.LookAt(new Vector3(newCast.point.x, newCast.point.y, 0));
+                //rightHand.transform.Rotate(new Vector3(0, math.sin(delta_x_angle / 3f), math.sin(delta_y_angle / 3f)));
+            }
             //delta_rotation = new Vector3(math.sin(angleCalc(middleCast.point.z - origCast.point.z, middleCast.point.x - origCast.point.x)), math.sin(angleCalc(middleCast.point.z - origCast.point.z, middleCast.point.y - origCast.point.y)), 0);
-            rightHand.transform.LookAt(middleCast.point);
+            //rightHand.transform.LookAt(middleCast.point);
             //Debug.Log(middleCast.point);
         }
 
