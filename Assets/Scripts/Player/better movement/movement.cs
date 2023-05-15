@@ -49,6 +49,7 @@ public class movement : MonoBehaviour
     public float crouchScale;
     private float yScale;
     public float maxSlopeAngle;
+    private bool canStair = false;
 
     //idk what the c# absolute value function is so wrote one myself
     private float absolute_value(float n)
@@ -268,16 +269,23 @@ public class movement : MonoBehaviour
             transform.Translate(Vector3.up*(yScale-crouchScale));
             transform.localScale = new Vector3(transform.localScale.x,yScale,transform.localScale.z);
         }
+        //canStair detection
+        if(Physics.Raycast(transform.position, Vector3.down, 2f, ground, QueryTriggerInteraction.Ignore))
+        {
+            canStair = true;
+        }
+        else
+        {
+            canStair = false;
+        }
         //AutoJump when seeing stairs (wip buggy)
-        if (true/*(Input.GetKeyDown(UserSettings.keybinds["forward"]) || Input.GetKeyDown(UserSettings.keybinds["backward"]) || Input.GetKeyDown(UserSettings.keybinds["left"]) || Input.GetKeyDown(UserSettings.keybinds["right"]))*/ && canMove)
+        if ((Input.GetKey(UserSettings.keybinds["forward"]) || Input.GetKey(UserSettings.keybinds["backward"]) || Input.GetKey(UserSettings.keybinds["left"]) || Input.GetKey(UserSettings.keybinds["right"])) && canStair)
         {
             if (Physics.Raycast(transform.position - new Vector3(0, 0.8f, 0), transform.TransformDirection(Vector3.forward), 2) && grounded && !Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), 6) && !Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(0, 1, 1)), 3))
             {
                 rb.AddForce(transform.up * 1.5f, ForceMode.Impulse);
             }
         }
-        //As you can see, in the if statement above, a bunch of stuff has been turned into annotations.
-        //This is because I wanted to fix the bug that you hop around like a lunatic on the stairs, but I cant get the input stuff to work.
     }
     void FixedUpdate()
     {
