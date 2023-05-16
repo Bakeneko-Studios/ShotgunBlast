@@ -100,6 +100,30 @@ public class movement : MonoBehaviour
         return angle;
     }
 
+    private bool isGroundedOrMaybeNotGroundedIDontActuallyKnowNorCareLOL()
+    {
+        bool result;
+        if(
+            Physics.Raycast(transform.position, Vector3.down, height * 0.5f + 0.2f, ground, QueryTriggerInteraction.Ignore) ||
+            Physics.Raycast(transform.position + new Vector3(0.5f, 0f, 0.5f), Vector3.down, height * 0.5f + 0.2f, ground, QueryTriggerInteraction.Ignore) ||
+            Physics.Raycast(transform.position + new Vector3(0.5f, 0f, 0f), Vector3.down, height * 0.5f + 0.2f, ground, QueryTriggerInteraction.Ignore) ||
+            Physics.Raycast(transform.position + new Vector3(0.5f, 0f, -0.5f), Vector3.down, height * 0.5f + 0.2f, ground, QueryTriggerInteraction.Ignore) ||
+            Physics.Raycast(transform.position + new Vector3(0f, 0f, 0.5f), Vector3.down, height * 0.5f + 0.2f, ground, QueryTriggerInteraction.Ignore) ||
+            Physics.Raycast(transform.position + new Vector3(0f, 0f, -0.5f), Vector3.down, height * 0.5f + 0.2f, ground, QueryTriggerInteraction.Ignore) ||
+            Physics.Raycast(transform.position + new Vector3(-0.5f, 0f, 0.5f), Vector3.down, height * 0.5f + 0.2f, ground, QueryTriggerInteraction.Ignore) ||
+            Physics.Raycast(transform.position + new Vector3(-0.5f, 0f, 0f), Vector3.down, height * 0.5f + 0.2f, ground, QueryTriggerInteraction.Ignore) ||
+            Physics.Raycast(transform.position + new Vector3(-0.5f, 0f, -0.5f), Vector3.down, height * 0.5f + 0.2f, ground, QueryTriggerInteraction.Ignore)
+            )
+        {
+            result = true;
+        }
+        else
+        {
+            result = false;
+        }
+        return result;
+    }
+
     private void Awake()
     {
         instance=this;
@@ -163,7 +187,9 @@ public class movement : MonoBehaviour
         nvvelocity = Mathf.Sqrt(vl.x*vl.x+vl.z*vl.z);
         yvelocity = vl.y;
         bool wasGrounded = grounded;
-        grounded = Physics.Raycast(transform.position,Vector3.down,height*0.5f+0.2f,ground,QueryTriggerInteraction.Ignore);
+        grounded = isGroundedOrMaybeNotGroundedIDontActuallyKnowNorCareLOL();
+        //Physics.Raycast(transform.position, Vector3.down, height * 0.5f + 0.2f, ground, QueryTriggerInteraction.Ignore);
+        //Physics.BoxCast(transform.position - Vector3.up * height * 0.5f, new Vector3(1f, 10f, 1f), transform.rotation.eulerAngles, transform.rotation, 10f, ground, QueryTriggerInteraction.Ignore);
         Player.playerStatus = (grounded?Player.contact.ground:Player.contact.air);
 
         // if(!wasGrounded&&grounded)
@@ -279,7 +305,7 @@ public class movement : MonoBehaviour
             canStair = false;
         }
         //AutoJump when seeing stairs (wip buggy)
-        if ((Input.GetKey(UserSettings.keybinds["forward"]) || Input.GetKey(UserSettings.keybinds["backward"]) || Input.GetKey(UserSettings.keybinds["left"]) || Input.GetKey(UserSettings.keybinds["right"])) && canStair)
+        if ((Input.GetKey(UserSettings.keybinds["forward"]) || Input.GetKey(UserSettings.keybinds["back"]) || Input.GetKey(UserSettings.keybinds["left"]) || Input.GetKey(UserSettings.keybinds["right"])) && canStair && !onSlope())
         {
             if (Physics.Raycast(transform.position - new Vector3(0, 0.8f, 0), transform.TransformDirection(Vector3.forward), 2) && grounded && !Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), 6) && !Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(0, 1, 1)), 3))
             {
