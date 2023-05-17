@@ -42,6 +42,7 @@ public class PauseScreen : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Player.paused=true;
         Time.timeScale = 0;;
+        movement.instance.enabled = false;
         mainPanel.SetActive(true);
         ScreenFlash.instance.TermiateallAnimations();
         HUD.instance.gameObject.SetActive(false); //might add an animaiton here
@@ -69,6 +70,7 @@ public class PauseScreen : MonoBehaviour
         else
         {
             Time.timeScale = 1f;
+            movement.instance.enabled = true;
             mainPanel.SetActive(false);
             HUD.instance.gameObject.SetActive(true);
             saveVar();

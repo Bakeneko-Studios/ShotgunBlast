@@ -69,21 +69,11 @@ public class controlsSettings : MonoBehaviour
         UserSettings.keybinds["pause"] = KeyCode.Escape; //reenable escape
     }
 
-    // float buttonScale = 50f;
-    // float buttonPosx = 217.4f;  
     public void updateButtonText(string action,string newInput,bool select) {
         foreach (Transform button in keyBindPanel) {
             if(button.name == action) {
                 TextMeshProUGUI childtext = button.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
                 childtext.text = newInput;
-                //dynamicButtons
-                // float len = newInput.Length;
-                // if (len != 1) { //astetic touch
-                //     len = (len + 1f) / 2f;
-                // }
-                // RectTransform buttonRTF = (button.GetChild(0) as RectTransform);
-                // buttonRTF.sizeDelta = new Vector2(buttonScale * len ,buttonScale);
-                // buttonRTF.localPosition = new Vector2(buttonPosx + buttonScale*len/2, buttonRTF.localPosition.y);
                 if (select) EventSystem.current.SetSelectedGameObject(button.GetChild(0).gameObject);
             } 
         }
