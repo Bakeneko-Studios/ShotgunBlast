@@ -52,7 +52,10 @@ public abstract class GunV2 : MonoBehaviour
 
         while(time<1)
         {
-            trail.transform.position = Vector3.Lerp(pos, hit.point, time);
+            float t = Mathf.Clamp01(time / Vector3.Distance(pos, hit.point) * 40);
+            trail.transform.position = Vector3.Lerp(pos, hit.point, t);
+            //trail.transform.position = Vector3.Slerp();
+            //trail.transform.position = Vector3.MoveTowards(pos, hit.point, 0.00001f);
             time += Time.deltaTime/trail.time;
             yield return null;
         }

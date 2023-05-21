@@ -51,7 +51,10 @@ public class movement : MonoBehaviour
     public float maxSlopeAngle;
     private bool canStair = false;
 
+
     //idk what the c# absolute value function is so wrote one myself
+    //math.abs(n);
+    
     private float absolute_value(float n)
     {
         float result;
