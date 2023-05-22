@@ -312,7 +312,7 @@ public class movement : MonoBehaviour
         {
             if (Physics.Raycast(transform.position - new Vector3(0, 0.8f, 0), transform.TransformDirection(Vector3.forward), 2) && grounded && !Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), 6) && !Physics.Raycast(transform.position, transform.TransformDirection(new Vector3(0, 1, 1)), 3))
             {
-                rb.AddForce(transform.up * 1.5f, ForceMode.Impulse);
+                //rb.AddForce(transform.up * 1.5f, ForceMode.Impulse);
             }
         }
     }
