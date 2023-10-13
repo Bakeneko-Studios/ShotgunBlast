@@ -94,6 +94,11 @@ public class PauseScreen : MonoBehaviour
         mainPanel.SetActive(false);
         if(thatPanel==settingsController.gameObject) settingsController.settingsButton(settingsController.subPanels[0]);
     }
+    public void quitPauseGame()
+    {
+        Application.Quit();
+    }
+
 
     // public void refreshHealthBar() {
     //     if(Player.GetComponent<playerHealth>() != null) {
@@ -115,6 +120,6 @@ public class PauseScreen : MonoBehaviour
     }
 
     public void leaveGame() {
-        SceneManager.LoadScene(0);
+        Application.Quit();
     }
 }

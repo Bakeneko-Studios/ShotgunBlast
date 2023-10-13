@@ -22,7 +22,7 @@ public class DialogueBox : MonoBehaviour
         eventSystem.SetSelectedGameObject(bar.transform.GetChild(0).gameObject);
         mv = movement.instance;
         mv.enabled = false;
-        Cursor.lockState = CursorLockMode.None;
+        //Cursor.lockState = CursorLockMode.None;
     }
 
     public void NextLine() {

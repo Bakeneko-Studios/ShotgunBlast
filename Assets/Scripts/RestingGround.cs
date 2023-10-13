@@ -14,5 +14,6 @@ public class RestingGround : MonoBehaviour
         // GameObject player = Instantiate(prefabPlayer);
         // player.transform.position = SpawnHere.position;
         GameObject.Instantiate(player,SpawnHere.position,Quaternion.identity);
+        Debug.Log("heheheha");
     }
 }

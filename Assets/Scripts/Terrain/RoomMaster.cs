@@ -95,7 +95,13 @@ public class RoomMaster : MonoBehaviour
                     if (waveSpawned && !waveCleared)
                     {
                         GameObject[] remEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-                        enemyRem = remEnemies.Length;
+                        int countedEnemies = 0;
+                        foreach (GameObject countedEnemy in remEnemies)
+                        {
+                            if (countedEnemy.GetComponent<enemyFramework>().isCounted)
+                                countedEnemies++;
+                        }
+                        enemyRem = countedEnemies;
                         if (enemyRem == 0)
                         {
                             currentWave+=1;

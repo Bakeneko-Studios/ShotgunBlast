@@ -21,4 +21,8 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene("LoadingScreen");
         LoadingScreen.SceneToLoad = SceneName;
     }
+    public void quitGame()
+    {
+        Application.Quit();
+    }
 }

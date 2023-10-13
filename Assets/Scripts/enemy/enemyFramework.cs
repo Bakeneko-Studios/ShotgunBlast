@@ -22,6 +22,7 @@ public class enemyFramework : MonoBehaviour
     public float empResistance = 0f;
     [SerializeField] private bool stunned;
     public float stunTime = 5f;
+    public bool isCounted=true;
 
     public GameObject healthBar;
     public GameObject empHealthBar;
